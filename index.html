@@ -1,299 +1,141 @@
 <!doctype html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CVE-2025-20281 — Security Report</title>
-
-  <style>
-    :root{
-      --rose-base: #191724;       /* Rose Pine background */
-      --panel: rgba(255,255,255,0.03);
-      --text: #e6eef6;           /* plain readable text */
-      --muted: #98a0b0;
-      --accent-code: #ebbcba;    /* rose pine color for codeblocks */
-      --max-w: 960px;
-      --radius: 10px;
-      --gap: 20px;
-      --shadow: 0 6px 20px rgba(0,0,0,0.45);
-    }
-
-    /* Reset & base */
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;background:var(--rose-base);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.5}
-    a{color:var(--text); text-decoration:underline}
-    a:hover{color:var(--accent-code)}
-
-    /* Layout */
-    .site{min-height:100vh;display:flex;flex-direction:column}
-    header{height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-bottom:1px solid rgba(255,255,255,0.03);background:transparent}
-    .brand{font-weight:600;font-size:16px}
-    .hamburger{width:40px;height:40px;border:0;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer}
-    .hamburger .bar{width:20px;height:2px;background:var(--text);border-radius:2px;box-shadow:0 6px 0 var(--text),0 -6px 0 var(--text)}
-    .container{width:100%;max-width:var(--max-w);margin:18px auto;padding:0 16px}
-
-    /* Sidebar (minimal) */
-    .layout{display:flex;gap:var(--gap)}
-    nav{width:260px;flex:0 0 260px;padding:16px;background:var(--panel);border-radius:var(--radius);box-shadow:var(--shadow)}
-    nav h4{margin:0 0 12px;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.6px}
-    nav a{display:block;padding:8px 6px;color:var(--text);text-decoration:none;border-radius:6px;font-size:14px}
-    nav a:hover{background:rgba(255,255,255,0.02);color:var(--accent-code)}
-
-    /* Main content */
-    main{flex:1;padding:16px;background:transparent}
-    article{background:var(--panel);padding:28px;border-radius:var(--radius);box-shadow:var(--shadow)}
-    h1{margin:0 0 8px;font-size:26px;color:var(--text)}
-    .subtitle{color:var(--muted);margin-bottom:18px}
-    .meta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px;color:var(--muted);font-size:13px}
-
-    section{margin-top:28px}
-    h2{font-size:18px;margin-bottom:12px;color:var(--text)}
-    p{margin-bottom:12px;color:var(--text)}
-
-    /* TL;DR block as explicit quote */
-    .tldr{background:rgba(255,255,255,0.02);border-left:4px solid var(--accent-code);padding:12px 14px;border-radius:6px;margin-bottom:14px}
-    .tldr strong{color:var(--accent-code);font-weight:700}
-    .tldr a{color:var(--text);text-decoration:underline}
-
-    /* Code blocks */
-    pre{background:#0f1114;border:1px solid rgba(255,255,255,0.03);padding:12px;border-radius:8px;overflow:auto;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;font-size:13px;color:var(--accent-code)}
-    code.inline{background:rgba(255,255,255,0.02);padding:2px 6px;border-radius:4px;color:var(--text);font-family:ui-monospace,monospace}
-
-    /* Diagram placeholder (simple SVG) */
-    .diagram{margin:14px 0;padding:12px;border-radius:8px;background:#0f1114;border:1px solid rgba(255,255,255,0.03)}
-    svg{max-width:100%;height:auto;display:block}
-
-    /* Footnotes */
-    .footnotes{margin-top:26px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.03);color:var(--muted);font-size:13px}
-    .footnotes a{color:var(--text)}
-
-    /* Responsive: collapse nav on small screens */
-    @media (max-width:880px){
-      .layout{flex-direction:column}
-      nav{width:100%;order:2}
-      main{order:1}
-      .hamburger{display:block}
-    }
-
-    @media (min-width:881px){
-      .hamburger{display:none}
-    }
-  </style>
+  <title>Arthsome — Security Research</title>
+  <meta name="description" content="Vulnerability analysis, threat research, and incident response by Arthsome." />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23eb6f92'/><text y='22' x='6' font-size='18' font-family='monospace' font-weight='bold' fill='white'>A</text></svg>" />
 </head>
 <body>
-  <div class="site">
-    <header>
-      <div class="brand">Arthsome</div>
-      <button class="hamburger" aria-label="Toggle navigation" id="hamburger">
-        <span class="bar" aria-hidden="true"></span>
-      </button>
-    </header>
 
-    <div class="container">
-      <div class="layout">
-        <nav id="sidebar" aria-label="Navigation">
-          <h4>Profile</h4>
-          <div><strong>Arthsome</strong></div>
-          <div style="color:var(--muted);font-size:13px;margin-top:6px">Security researcher — vulnerability analysis and incident response</div>
-
-          <h4 style="margin-top:18px">Pages</h4>
-          <a href="#summary">Executive summary</a>
-          <a href="#analysis">Technical analysis</a>
-          <a href="#detection">Detection</a>
-          <a href="#forensics">Forensics</a>
-          <a href="#mitigation">Mitigation</a>
-          <a href="#references">References</a>
-        </nav>
-
-        <main>
-          <article>
-            <h1>CVE-2025-20281</h1>
-            <div class="subtitle">Unauthenticated remote code execution in Cisco Identity Services Engine (ISE). This report is defensive and does not contain exploit payloads.</div>
-
-            <div class="meta">
-              <div>CVSS: 10.0</div>
-              <div>Impact: Critical</div>
-              <div>Scope: Network</div>
-            </div>
-
-            <section id="summary">
-              <h2>Executive summary</h2>
-
-              <div class="tldr">
-                <strong>TL;DR:</strong>
-                <span> CVE-2025-20281 permits unauthenticated remote command execution via the ISE management API. See <a href="#analysis">technical analysis</a>, <a href="#detection">detection</a>, and <a href="#mitigation">mitigation</a>.</span>
-              </div>
-
-              <p>Immediate actions: verify ISE versions, apply vendor patches, restrict management API access to trusted networks, and run the detection queries in this document.</p>
-
-              <h3>Immediate priorities</h3>
-              <ol>
-                <li>Confirm affected builds in your environment.</li>
-                <li>Apply official patches from Cisco.</li>
-                <li>Restrict management-plane access and monitor API logs.</li>
-              </ol>
-            </section>
-
-            <section id="analysis">
-              <h2>Technical analysis</h2>
-
-              <div class="tldr">
-                <strong>TL;DR:</strong>
-                <span> Input validation failure leads to unsafe use of user-supplied data in a shell-invoked context within the management API. See <a href="#detection">detection</a> for indicators.</span>
-              </div>
-
-              <p>The vulnerable endpoint processes user input and, in some code paths, passes that input to a local script executed with elevated privileges. When input is concatenated into shell commands without sanitization or parameterization, an attacker can execute arbitrary commands. In containerized deployments the attacker may attempt container escape techniques to reach the host.</p>
-
-              <p>Component note: observed references include <code class="inline">enableStrongSwanTunnel</code> and <code class="inline">configureStrongSwan.sh</code>. Consult vendor advisory for exact function names and patched builds.</p>
-
-              <div class="diagram" aria-hidden="true">
-                <!-- Lightweight, minimal SVG diagram -->
-                <svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Attack flow diagram">
-                  <rect x="12" y="20" width="120" height="50" rx="6" fill="#11121a" stroke="#444" />
-                  <text x="72" y="52" fill="#dfe8f2" font-size="13" text-anchor="middle" font-family="Inter">Attacker</text>
-
-                  <line x1="132" y1="45" x2="260" y2="45" stroke="#7a6b6b" stroke-width="2" marker-end="url(#a)"/>
-
-                  <defs>
-                    <marker id="a" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-                      <path d="M0,0 L6,3 L0,6 z" fill="#7a6b6b"></path>
-                    </marker>
-                  </defs>
-
-                  <rect x="260" y="12" width="160" height="66" rx="6" fill="#0e0f13" stroke="#444" />
-                  <text x="340" y="40" fill="#dfe8f2" font-size="13" text-anchor="middle" font-family="Inter">ISE Management</text>
-                  <text x="340" y="58" fill="#98a0b0" font-size="12" text-anchor="middle" font-family="Inter">API handler</text>
-
-                  <line x1="420" y1="45" x2="520" y2="45" stroke="#7a6b6b" stroke-width="2" marker-end="url(#a)"/>
-
-                  <rect x="520" y="12" width="170" height="66" rx="6" fill="#0e0f13" stroke="#444" />
-                  <text x="605" y="40" fill="#dfe8f2" font-size="13" text-anchor="middle" font-family="Inter">Shell Invocation</text>
-                  <text x="605" y="58" fill="#98a0b0" font-size="12" text-anchor="middle" font-family="Inter">Local script (root)</text>
-
-                  <line x1="605" y1="78" x2="605" y2="120" stroke="#7a6b6b" stroke-dasharray="4 4"/>
-
-                  <rect x="480" y="120" width="250" height="64" rx="6" fill="#0e0f13" stroke="#444" />
-                  <text x="605" y="150" fill="#dfe8f2" font-size="13" text-anchor="middle" font-family="Inter">Host compromise (persistence, exfiltration)</text>
-                </svg>
-              </div>
-            </section>
-
-            <section id="detection">
-              <h2>Detection</h2>
-
-              <div class="tldr">
-                <strong>TL;DR:</strong>
-                <span> Monitor for POST requests containing method names and new executable files in temporary directories. Use the YARA/Sigma/IDS examples below.</span>
-              </div>
-
-              <h3>YARA (file-level)</h3>
-              <pre>rule ISE_Management_API_Indicator {
-  meta:
-    author = "Arthsome"
-    date = "2026-02-10"
-  strings:
-    $s1 = "enableStrongSwanTunnel"
-    $s2 = "configureStrongSwan.sh"
-  condition:
-    any of ($s*)
-}</pre>
-
-              <h3>Sigma (SIEM)</h3>
-              <pre>title: ISE suspicious management POSTs
-id: ise-unauth-post
-logsource:
-  product: webserver
-detection:
-  selection:
-    RequestMethod: POST
-    RequestUri|contains:
-      - "enableStrongSwanTunnel"
-      - "configureStrongSwan"
-  condition: selection
-level: high</pre>
-
-              <h3>Host hunting</h3>
-              <ul>
-                <li>Find recent files: <code class="inline">find /tmp /var/tmp -type f -mtime -1 -ls</code></li>
-                <li>Check process trees: <code class="inline">ps auxww</code>, <code class="inline">pstree -p</code></li>
-                <li>Check cgroup changes: inspect <code class="inline">/sys/fs/cgroup</code></li>
-              </ul>
-            </section>
-
-            <section id="forensics">
-              <h2>Forensics</h2>
-
-              <div class="tldr">
-                <strong>TL;DR:</strong>
-                <span>Collect logs, memory image, process lists, and filesystem snapshots. Preserve chain-of-custody. See collection commands below.</span>
-              </div>
-
-              <h3>Collection commands (defensive)</h3>
-              <pre># capture process list
-ps auxww > /tmp/ps_aux.txt
-pstree -p > /tmp/pstree.txt
-
-# open sockets
-ss -tulpn > /tmp/ss_tulpn.txt
-
-# recent files
-find /tmp /var/tmp /opt/CSCOcpm -type f -mtime -7 -ls > /tmp/recent_files.txt</pre>
-            </section>
-
-            <section id="mitigation">
-              <h2>Mitigation</h2>
-
-              <div class="tldr">
-                <strong>TL;DR:</strong>
-                <span>Apply vendor patches immediately. Restrict management API to admin-only networks and centralize logging.</span>
-              </div>
-
-              <ol>
-                <li>Apply Cisco patches (consult vendor advisory for exact builds).</li>
-                <li>If compromise confirmed, rebuild from trusted images instead of in-place cleanup.</li>
-                <li>Restrict management-plane access by IP allow-listing and network segmentation.</li>
-                <li>Enable centralized logging and alerting for the detection rules above.</li>
-              </ol>
-            </section>
-
-            <section id="references">
-              <h2>References</h2>
-              <ul>
-                <li><a href="https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-ise-unauth-rce-ZAd2GnJ6" target="_blank" rel="noopener">Cisco Security Advisory</a></li>
-                <li><a href="https://www.zerodayinitiative.com/blog/2025/7/24/cve-2025-20281-cisco-ise-api-unauthenticated-remote-code-execution-vulnerability" target="_blank" rel="noopener">Zero Day Initiative</a></li>
-                <li><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank" rel="noopener">CWE-78: Command Injection</a></li>
-              </ul>
-            </section>
-
-            <div class="footnotes">
-              <div>[1] CWE-78: Improper Neutralization of Special Elements used in an OS Command — <a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank" rel="noopener">MITRE</a></div>
-              <div style="margin-top:8px">Suggested asset path for images (placeholders): <code>/assets/</code>. Example filenames: <code>architecture.png</code>, <code>attack_flow.png</code>, <code>forensics_timeline.png</code>.</div>
-            </div>
-          </article>
-        </main>
+<!-- ── Header ──────────────────────────────────────────────────────────────── -->
+<header class="site-header">
+  <div class="inner">
+    <a href="index.html" class="brand" style="text-decoration:none">
+      <div class="brand-icon">
+        <svg viewBox="0 0 16 16"><path d="M8 1L1 13h2.5L8 4l4.5 9H15L8 1zm-1.5 8h3L8 6.5 6.5 9z"/></svg>
       </div>
+      Arthsome
+    </a>
+
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="posts/index.html">Posts</a></li>
+      <li><a href="categories/index.html">Categories</a></li>
+      <li><a href="about/index.html">About</a></li>
+    </ul>
+
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+        <rect y="3" width="20" height="2" rx="1"/><rect y="9" width="20" height="2" rx="1"/><rect y="15" width="20" height="2" rx="1"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- ── Main ────────────────────────────────────────────────────────────────── -->
+<main>
+  <div class="page-wrapper">
+
+    <!-- Hero -->
+    <section class="hero fade-up">
+      <div class="hero-content">
+        <div class="hero-badge">Active Research</div>
+        <h1 class="hero-title">
+          Security<br>Research<br><span>& Analysis</span>
+        </h1>
+        <p class="hero-desc">
+          Independent vulnerability analysis, reverse engineering, and incident
+          response documentation. Reports are published for defensive purposes only.
+        </p>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="num">1</div>
+          <div class="label">CVEs Published</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">10.0</div>
+          <div class="label">Highest CVSS</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recent Posts -->
+    <section class="fade-up delay-2">
+      <div class="section-head">
+        <h2 class="section-title">Recent Posts</h2>
+        <a href="posts/index.html" class="view-all">All Posts →</a>
+      </div>
+
+      <div class="post-list">
+
+        <!-- Post: CVE-2025-20281 -->
+        <a class="post-card" href="posts/cve-2025-20281/index.html">
+          <div>
+            <div class="post-card-meta">
+              <a class="category-pill cve" href="categories/security-research/index.html" onclick="event.stopPropagation()">Security Research</a>
+              <span class="tag-severity critical">Critical</span>
+              <span class="tag-type">CVE Report</span>
+              <span class="tag-type">RCE</span>
+              <span class="post-date">2026-02-10</span>
+            </div>
+            <div class="post-card-title">CVE-2025-20281 — Unauthenticated RCE in Cisco ISE</div>
+            <div class="post-card-excerpt">
+              Input validation failure in the Cisco Identity Services Engine management API allows an unauthenticated attacker to execute arbitrary commands with elevated privileges. CVSS 10.0 — patch immediately.
+            </div>
+          </div>
+          <div class="post-card-right">
+            <div class="cvss-badge critical">
+              <span class="cvss-label">CVSS</span>
+              <span class="cvss-val">10.0</span>
+            </div>
+            <span class="arrow-link">→</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Discipline Tags -->
+    <section style="margin-top:56px" class="fade-up delay-3">
+      <div class="section-head">
+        <h2 class="section-title">Research Areas</h2>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">
+        <span class="tag-type" style="padding:8px 16px;font-size:12px">Vulnerability Analysis</span>
+        <span class="tag-type" style="padding:8px 16px;font-size:12px">Network Security</span>
+        <span class="tag-type" style="padding:8px 16px;font-size:12px">Incident Response</span>
+        <span class="tag-type" style="padding:8px 16px;font-size:12px">Threat Intelligence</span>
+        <span class="tag-type" style="padding:8px 16px;font-size:12px">Forensics</span>
+        <span class="tag-type" style="padding:8px 16px;font-size:12px">Detection Engineering</span>
+        <span class="tag-type" style="padding:8px 16px;font-size:12px">YARA / Sigma</span>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- ── Footer ──────────────────────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="inner">
+    <span class="footer-brand">Arthsome</span>
+    <span class="footer-copy">Security research published for defensive purposes only.</span>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="posts/index.html">Posts</a>
+      <a href="categories/index.html">Categories</a>
+      <a href="about/index.html">About</a>
     </div>
   </div>
+</footer>
 
-  <script>
-    // Minimal sidebar toggle for small screens
-    (function(){
-      const hb = document.getElementById('hamburger');
-      const sidebar = document.getElementById('sidebar');
-      hb.addEventListener('click', () => {
-        const isVisible = sidebar.style.display === 'block';
-        sidebar.style.display = isVisible ? '' : 'block';
-      });
-
-      // Hide sidebar on outside click (mobile)
-      document.addEventListener('click', (e) => {
-        if (window.innerWidth <= 880) {
-          if (!e.target.closest('#sidebar') && !e.target.closest('#hamburger')) {
-            sidebar.style.display = '';
-          }
-        }
-      });
-    })();
-  </script>
+<script>
+  document.getElementById('nav-toggle').addEventListener('click', function(){
+    document.getElementById('nav-links').classList.toggle('open');
+  });
+</script>
 </body>
 </html>
