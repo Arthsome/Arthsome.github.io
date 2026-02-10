@@ -1,74 +1,286 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Security Report - CVE-2025-20281</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-            color: #333;
-        }
-        h1, h2, h3 {
-            color: #2c3e50;
-        }
-        pre {
-            background-color: #f5f5f5;
-            padding: 10px;
-            border: 1px solid #ccc;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-        .diagram {
-            text-align: center;
-            margin: 20px 0;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CVE-2025-20281 — Comprehensive Professional Security Report</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1220; --panel:#0f1720; --muted:#9aa6b2; --accent:#56b6ff;
+      --max-w:1100px;
+      color-scheme: dark;
+    }
+    html,body{height:100%; margin:0; background:linear-gradient(180deg,#071021,#071824); color:#e6f0f6; font-family:Inter,system-ui,Segoe UI,Roboto,Arial;}
+    .container{max-width:var(--max-w); margin:28px auto; padding:20px;}
+    header{display:flex; align-items:center; gap:16px; margin-bottom:18px;}
+    header h1{margin:0; font-size:1.45rem;}
+    header p{margin:0; color:var(--muted); font-size:0.95rem;}
+    .panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:18px; border-radius:10px; border:1px solid rgba(255,255,255,0.03); box-shadow:0 8px 30px rgba(0,0,0,0.6);} 
+    nav{display:flex; gap:12px; flex-wrap:wrap; margin:12px 0;}
+    nav a{color:var(--accent); text-decoration:none; font-weight:600;}
+    h2{margin-top:0; color:#eaf6ff;}
+    p.lead{color:var(--muted);} 
+    pre{background:#07121a; padding:12px; border-radius:8px; overflow:auto; font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace; font-size:0.9rem; color:#cfeefc;}
+    .two-col{display:grid; grid-template-columns:1fr 360px; gap:16px;}
+    .meta{color:var(--muted); font-size:0.9rem;}
+    ul{margin:8px 0 8px 20px}
+    .section-gap{margin-top:18px}
+    footer{color:var(--muted); text-align:center; font-size:0.85rem; margin-top:18px}
+    .placeholder{display:block; border:2px dashed rgba(255,255,255,0.04); border-radius:8px; padding:12px; color:var(--muted); text-align:center; margin:10px 0}
+    @media (max-width:980px){ .two-col{grid-template-columns:1fr} }
+  </style>
 </head>
 <body>
-    <h1>Complete Professional Security Report on CVE-2025-20281</h1>
-    <h2>Introduction</h2>
-    <p>This report provides a detailed technical analysis of the security vulnerability identified by CVE-2025-20281. It covers the impact, affected systems, and recommendations for mitigation.</p>
-    <h2>Vulnerability Overview</h2>
-    <p>CVE-2025-20281 is a critical vulnerability that affects multiple software systems and could lead to severe security breaches.</p>
-    
-    <h2>Impact</h2>
-    <p>The vulnerability can allow attackers to execute arbitrary code, resulting in unauthorized access to sensitive data.</p>
-    
-    <h2>Affected Systems</h2>
-    <ul>
-        <li>System A</li>
-        <li>System B</li>
-        <li>System C</li>
-    </ul>
-    <h2>Technical Analysis</h2>
-    <h3>Exploit Details</h3>
-    <p>The exploit takes advantage of ...</p>
-    <pre><code>function vulnerableFunction() {
-    // vulnerable code here
-}</code></pre>
-    <h3>Mitigation Strategies</h3>
-    <p>To mitigate the risk associated with this vulnerability, the following strategies are recommended:</p>
-    <ul>
-        <li>Update affected systems to the latest versions.</li>
-        <li>Implement network segmentation.</li>
-        <li>Regular security audits and vulnerability assessments.</li>
-    </ul>
-    <h2>Diagrams</h2>
-    <div class="diagram">
-        <img src="path/to/diagram1.png" alt="Diagram 1">
-    </div>
-    <div class="diagram">
-        <img src="path/to/diagram2.png" alt="Diagram 2">
-    </div>
-    <h2>Conclusion</h2>
-    <p>In conclusion, CVE-2025-20281 poses a significant risk to affected systems. Organizations must take immediate action to mitigate this threat.</p>
-    <h2>References</h2>
-    <p>Further reading and references can be found at...</p>
+  <div class="container">
+    <header>
+      <div class="panel" style="flex:1">
+        <h1>CVE-2025-20281 — Comprehensive Professional Security Report</h1>
+        <p class="lead">Defender-oriented, detailed analysis for incident response, detection, mitigation, and verification. This report intentionally excludes exploit code and stepwise exploit payloads. It is written for SOCs, IR teams, and security engineers.</p>
+        <div class="meta" style="margin-top:8px">
+          CVSS v3: 10.0 (Critical) • Affected: Cisco ISE 3.3 / 3.4 &amp; ISE-PIC • Last updated: 2026-02-10
+        </div>
+      </div>
+    </header>
+
+    <nav>
+      <a href="#summary">Summary</a>
+      <a href="#scope">Scope & Affected</a>
+      <a href="#analysis">Technical Analysis</a>
+      <a href="#attackflow">Attack Flow (diagram)</a>
+      <a href="#detection">Detection & Rules</a>
+      <a href="#forensics">Forensics</a>
+      <a href="#irp">IR Playbook</a>
+      <a href="#mitigation">Mitigation</a>
+      <a href="#references">References</a>
+    </nav>
+
+    <section id="summary" class="panel section-gap">
+      <h2>Executive summary</h2>
+      <p class="lead">CVE-2025-20281 is an unauthenticated, network-exploitable vulnerability in Cisco Identity Services Engine (ISE) family that enables remote command execution in the management API handler. In many common deployments the service runs with elevated privileges (root) or inside privileged containers, which enables full appliance or host compromise. Active exploitation and public reports have been observed. Immediate remediation and detection effort are required.</p>
+
+      <strong>Immediate priorities (ordered):</strong>
+      <ol>
+        <li>Verify affected versions in your environment.</li>
+        <li>Apply vendor patches immediately where possible (see Mitigation).</li>
+        <li>Isolate management interfaces from untrusted networks (ACLs/firewall/WAF).</li>
+        <li>Hunt using the detection rules in this report and collect evidence if suspicious activity is found.</li>
+      </ol>
+    </section>
+
+    <section id="scope" class="panel section-gap">
+      <h2>Scope — affected products and versions</h2>
+      <ul>
+        <li>Cisco Identity Services Engine (ISE) 3.3 — affected builds (see vendor advisory)</li>
+        <li>Cisco ISE 3.4 — affected builds (see vendor advisory)</li>
+        <li>ISE Passive Identity Connector (ISE-PIC) components in impacted releases</li>
+      </ul>
+
+      <p class="lead">Note: always consult the vendor advisory for exact build numbers and patched releases. If you run appliances from Cisco or managed instances, coordinate with your vendor/service provider.</p>
+    </section>
+
+    <section id="analysis" class="panel section-gap">
+      <h2>Technical analysis (defender-focused)</h2>
+
+      <h3>Nature of the vulnerability (high level, non-exploit)</h3>
+      <p>At a high level, the vulnerability is caused by insufficient validation of user-controlled input processed by a management API. The service deserializes and/or uses user-controlled data in a context that ends up passed to a local system script or command. When input reaches a shell invocation without proper sanitization, an attacker can cause arbitrary command execution. The risk is amplified by privileged execution context and by deployment patterns where the vulnerable process runs in a privileged container.</p>
+
+      <h3>Why this matters</h3>
+      <ul>
+        <li>No authentication required to reach the vulnerable call in many deployments — low barrier to exploitation.</li>
+        <li>Execution context often results in high privileges (root or equivalent), allowing full appliance compromise.</li>
+        <li>Attackers can achieve persistence, data exfiltration, and lateral movement once the host is compromised.</li>
+      </ul>
+
+      <h3>Safe architecture notes</h3>
+      <ul>
+        <li>ISE is a management/control-plane appliance; compromise gives control over network access policies and telemetry.</li>
+        <li>Privileged containers are common in ISE; reduce container privileges where possible and follow vendor hardening guidance.</li>
+      </ul>
+
+      <div class="placeholder">
+        IMAGE PLACEHOLDER: architecture.png — suggested content: "ISE logical deployment diagram showing management plane, API endpoint, network zones (management, admin, trusted), and potential attacker path." Recommended size: 1200×600px. Put in /assets/architecture.png
+      </div>
+    </section>
+
+    <section id="attackflow" class="panel section-gap">
+      <h2>Attack flow (conceptual diagram)</h2>
+      <p class="lead">Below is a conceptual flow of the attack — useful for board-level and engineering explanations.</p>
+
+      <!-- Mermaid diagram could be embedded here, but we include placeholder PNG info as requested -->
+      <div class="placeholder">
+        IMAGE PLACEHOLDER: attack_flow.png — suggested content: "Sequence diagram or flowchart: Attacker → Management API (unauthenticated request) → API handler (unsafe input) → system script execution → root context → optional container escape → host compromise." Recommended size: 1200×700px. Put in /assets/attack_flow.png
+      </div>
+
+      <p class="lead">Keep diagrams non-actionable: show components and high-level flow without payloads or low-level exploit details.</p>
+    </section>
+
+    <section id="detection" class="panel section-gap">
+      <h2>Detection — safe, actionable rules & SIEM queries</h2>
+      <p class="lead">The rules below are tuned to detect suspicious activity related to this class of vulnerability: management API requests referencing internal method names, creation of suspicious scripts, or anomalous process trees. Use as starting points and tune for your environment.</p>
+
+      <h3>YARA (forensic / file-level)</h3>
+      <pre>
+rule ISE_Management_API_Indication
+{
+  meta:
+    author = "Arthsome"
+    description = "Detect references to management API method names or script names commonly associated with ISE management handlers (defensive)."
+    date = "2026-02-10"
+  strings:
+    $m1 = "enableStrongSwanTunnel"
+    $m2 = "configureStrongSwan.sh"
+    $m3 = "DescriptionRegistrationListener"
+  condition:
+    any of ($m*)
+}
+      </pre>
+
+      <h3>Sigma (generic SIEM rule example)</h3>
+      <pre>
+title: Suspicious ISE Management API POSTs
+id: e8f4-ise-api-post-unauth
+status: experimental
+description: Detect POST requests to ISE management endpoints containing management method strings.
+logsource:
+  product: webserver
+detection:
+  selection:
+    EventID: 200
+    RequestMethod: POST
+    (RequestUri|contains|all):
+      - "enableStrongSwanTunnel"
+      - "configureStrongSwan"
+  condition: selection
+level: high
+      </pre>
+
+      <h3>Suricata / IDS (network)</h3>
+      <pre>
+# Suricata example - alert on HTTPS POSTs (if TLS-inspection available) or HTTP POSTs to management API
+alert http any any -> $HOME_NET 443 (msg:"ISE mgmt API - suspicious POST to management method"; content:"enableStrongSwanTunnel"; nocase; http_method; sid:1001001; rev:1;)
+      </pre>
+
+      <h3>Splunk example (web access logs)</h3>
+      <pre>
+index=web sourcetype=access_combined (uri_path="/admin/api/" OR uri_query="*enableStrongSwanTunnel*")
+| stats count by clientip, uri_path, useragent, _time
+| where count &gt; 0
+| sort - count
+      </pre>
+
+      <h3>Host-based detections (file/process)</h3>
+      <ul>
+        <li>New or modified scripts under /tmp, /var/tmp, /opt/CSCOcpm with execution permissions shortly after suspicious API requests.</li>
+        <li>Unexpected children of the management process (e.g., java -> /bin/sh -> unexpected network tools).</li>
+        <li>Modification to cgroup release_agent or write to /sys/fs/cgroup related files.</li>
+      </ul>
+
+      <details>
+        <summary>Hunting checklist (quick)</summary>
+        <ol>
+          <li>Search webserver/application logs for POST requests containing method names listed above.</li>
+          <li>List recently modified files in /tmp, /var/tmp and application directories.</li>
+          <li>Collect process trees and inspect parent-child relationships for the management stack.</li>
+          <li>Check outbound network connections from the appliance to unknown IPs.</li>
+        </ol>
+      </details>
+    </section>
+
+    <section id="forensics" class="panel section-gap">
+      <h2>Forensics — evidence to collect and preservation steps</h2>
+      <p class="lead">Collecting and preserving evidence must be done carefully — follow internal chain-of-custody policies. Do not execute unknown binaries on live systems; collect images/snapshots for offline analysis.</p>
+
+      <h3>Priority artifacts</h3>
+      <ul>
+        <li>Management / application logs (API access logs, audit logs, webserver logs).</li>
+        <li>System logs: /var/log/messages, /var/log/syslog, journalctl output.</li>
+        <li>Process lists and parent-child trees: ps auxww; pstree -p.</li>
+        <li>Open sockets and connections: ss -tulpn ; netstat -anp.</li>
+        <li>Filesystem changes (recent files under /tmp, /var/tmp, /opt/CSCOcpm): find /tmp -type f -mtime -1 -ls</li>
+        <li>Container metadata: docker ps -a ; docker inspect &lt;container&gt; (if containers are used).</li>
+        <li>Configuration files relevant to ISE and any custom scripts.</li>
+      </ul>
+
+      <h3>Useful collection commands (defensive — collect only)</h3>
+      <pre>
+# Capture process info
+ps auxww > /tmp/ps_aux.txt
+pstree -p > /tmp/pstree.txt
+
+# Open sockets
+ss -tulpn > /tmp/ss_tulpn.txt
+
+# Recently modified files under tmp and app dirs
+find /tmp /var/tmp /opt/CSCOcpm -type f -mtime -7 -ls &gt; /tmp/recent_files.txt
+
+# System logs (journal)
+journalctl -u <ise-service-name> --since "2026-02-01" &gt; /tmp/ise_journal.txt
+      </pre>
+
+      <div class="placeholder">
+        IMAGE PLACEHOLDER: forensics_timeline.png — suggested content: "Filesystem and timeline visualization showing when suspicious files were created, correlating with suspicious API requests." Recommended size: 1000×600px. Put in /assets/forensics_timeline.png
+      </div>
+    </section>
+
+    <section id="irp" class="panel section-gap">
+      <h2>Incident response playbook (step-by-step for SOC/IR teams)</h2>
+
+      <ol>
+        <li><strong>Detection & validation:</strong> Confirm suspicious API requests using SIEM, IDS, and application logs. Mark affected hosts and capture timestamps.</li>
+        <li><strong>Contain:</strong> If active exploitation is suspected, immediately restrict network access to the appliance (management VLAN only) and block attacker source IPs via firewall. Avoid rebooting or altering volatile evidence unless necessary for safety.</li>
+        <li><strong>Preserve evidence:</strong> Collect logs, process lists, open connections, and filesystem snapshots (as listed in Forensics). If possible, take snapshots or disk images for offline analysis.</li>
+        <li><strong>Eradicate & remediate:</strong> Do not rely on in-place cleanup if compromise is confirmed. Rebuild the appliance from a trusted image or perform an in-place hardening & patching only after full analysis ensures no backdoors remain.</li>
+        <li><strong>Recovery:</strong> Restore services in a controlled manner, rotate credentials, and verify monitoring is in place before returning to production traffic.</li>
+        <li><strong>Post-incident:</strong> Conduct a root-cause analysis, apply lessons learned, and run environment-wide hunts for lateral movement or artifacts.</li>
+      </ol>
+    </section>
+
+    <section id="mitigation" class="panel section-gap">
+      <h2>Mitigation & hardening</h2>
+
+      <h3>Primary remediation</h3>
+      <ol>
+        <li><strong>Apply vendor patches immediately.</strong> Use official Cisco advisories for exact patched builds (ISE 3.3 Patch 7 / 3.4 Patch 2 or later, according to vendor guidance).</li>
+        <li><strong>Rebuild compromised appliances.</strong> If compromise is confirmed, rebuild from trusted images and avoid re-using compromised instances.</li>
+      </ol>
+
+      <h3>Defensive configurations</h3>
+      <ul>
+        <li>Restrict management API access by IP allow-listing and network segmentation (management VLAN only).</li>
+        <li>Use least privilege for containers and processes; avoid privileged containers where possible.</li>
+        <li>Enable and centralize detailed logging of API calls, command executions, and file changes.</li>
+        <li>Deploy WAF rules to drop requests targeting management method strings as a temporary compensating control.</li>
+      </ul>
+
+      <h3>Verification after remediation</h3>
+      <ol>
+        <li>Validate that patched versions are installed and service restarts cleanly.</li>
+        <li>Run the detection rules described in this report and verify no residual suspicious activity.</li>
+        <li>Rotate all sensitive credentials and keys that were stored on the appliance.</li>
+      </ol>
+
+      <div class="placeholder">
+        IMAGE PLACEHOLDER: mitigation_diagram.png — suggested content: "Network diagram showing management plane isolation, firewall/WAF rules, and monitoring pipeline (SIEM/IDS) placement." Recommended size: 1000×600px. Put in /assets/mitigation_diagram.png
+      </div>
+    </section>
+
+    <section id="references" class="panel section-gap">
+      <h2>References</h2>
+      <ul>
+        <li><a href="https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-ise-unauth-rce-ZAd2GnJ6" target="_blank" rel="noopener noreferrer">Cisco Security Advisory — ISE unauthenticated RCE</a></li>
+        <li><a href="https://www.zerodayinitiative.com/blog/2025/7/24/cve-2025-20281-cisco-ise-api-unauthenticated-remote-code-execution-vulnerability" target="_blank" rel="noopener noreferrer">Zero Day Initiative — technical write-up</a></li>
+        <li><a href="https://www.bleepingcomputer.com/news/security/exploit-available-for-critical-cisco-ise-bug-exploited-in-attacks/" target="_blank" rel="noopener noreferrer">BleepingComputer — public reporting</a></li>
+        <li><a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener noreferrer">CISA — Known Exploited Vulnerabilities Catalog</a></li>
+      </ul>
+
+      <p class="lead">If you want the report converted to additional pages (detection-rules.md, ir-playbook.md, forensic-checklist.md) or to add detailed test harnesses for verification (non-exploit), say which pages and I'll produce them.</p>
+    </section>
+
+    <footer>
+      <p>Prepared for: Arthsome — This report is intentionally defensive. It excludes exploit payloads and stepwise attack recipes. PNG placeholders and recommended content names/locations are included above. Suggested asset path: <code>/assets/</code>. Example filenames: <code>attack_flow.png</code>, <code>architecture.png</code>, <code>forensics_timeline.png</code>, <code>mitigation_diagram.png</code>, <code>detection_workflow.png</code>.</p>
+    </footer>
+  </div>
 </body>
 </html>
