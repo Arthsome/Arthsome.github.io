@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Categories — Arthsome</title>
+  <meta name="description" content="Browse security research by category." />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23eb6f92'/><text y='22' x='6' font-size='18' font-family='monospace' font-weight='bold' fill='white'>A</text></svg>" />
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a href="../index.html" class="brand" style="text-decoration:none">
+      <div class="brand-icon"><svg viewBox="0 0 16 16" fill="white"><path d="M8 1L1 13h2.5L8 4l4.5 9H15L8 1zm-1.5 8h3L8 6.5 6.5 9z"/></svg></div>
+      Arthsome
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../posts/index.html">Posts</a></li>
+      <li><a href="index.html" class="active">Categories</a></li>
+      <li><a href="../about/index.html">About</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><rect y="3" width="20" height="2" rx="1"/><rect y="9" width="20" height="2" rx="1"/><rect y="15" width="20" height="2" rx="1"/></svg>
+    </button>
+  </div>
+</header>
+<main>
+  <div class="page-wrapper">
+    <div class="archive-header fade-up">
+      <h1>Categories</h1>
+      <p>Research is organised into two categories. Pick one to browse, or visit <a href="../posts/index.html">All Posts</a> for everything in chronological order.</p>
+    </div>
+    <div class="categories-grid fade-up delay-1" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr))">
+      <a class="category-card" href="security-research/index.html" style="--cat-color:var(--rose);--cat-bg:rgba(235,111,146,0.1)">
+        <div class="category-icon">🔴</div>
+        <div>
+          <div class="category-card-name">Security Research</div>
+          <div class="category-card-desc">CVE analyses, vulnerability reports, threat intelligence, and broader security investigations. Each post includes detection artefacts (YARA, Sigma, Suricata) and mitigation guidance.</div>
+        </div>
+        <div class="category-card-footer">
+          <span class="post-count">1 post</span>
+          <span style="color:var(--rose);font-size:16px">→</span>
+        </div>
+      </a>
+      <a class="category-card" href="writeups/index.html" style="--cat-color:var(--iris);--cat-bg:rgba(196,167,231,0.1)">
+        <div class="category-icon">📝</div>
+        <div>
+          <div class="category-card-name">Writeups &amp; Walkthroughs</div>
+          <div class="category-card-desc">Step-by-step technical writeups — CTF solutions, penetration testing exercises, lab walkthroughs, and methodology notes for learning and reference.</div>
+        </div>
+        <div class="category-card-footer">
+          <span class="post-count">0 posts</span>
+          <span style="color:var(--iris);font-size:16px">→</span>
+        </div>
+      </a>
+    </div>
+    <section style="margin-top:56px" class="fade-up delay-2">
+      <div class="section-head">
+        <h2 class="section-title">All Recent Posts</h2>
+        <a href="../posts/index.html" class="view-all">View All →</a>
+      </div>
+      <div class="post-list">
+        <a class="post-card" href="../posts/cve-2025-20281/index.html">
+          <div>
+            <div class="post-card-meta">
+              <a class="category-pill cve" href="security-research/index.html" onclick="event.stopPropagation()">Security Research</a>
+              <span class="tag-severity critical">Critical</span>
+              <span class="post-date">10 Feb 2026</span>
+            </div>
+            <div class="post-card-title">CVE-2025-20281 — Unauthenticated RCE in Cisco ISE</div>
+            <div class="post-card-excerpt">Input validation failure in the Cisco ISE management API allows unauthenticated command execution with elevated privileges. CVSS 10.0.</div>
+          </div>
+          <div class="post-card-right">
+            <div class="cvss-badge critical"><span class="cvss-label">CVSS</span><span class="cvss-val">10.0</span></div>
+            <span class="arrow-link">→</span>
+          </div>
+        </a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="inner">
+    <span class="footer-brand">Arthsome</span>
+    <span class="footer-copy">Security research published for defensive purposes only.</span>
+    <div class="footer-links">
+      <a href="../index.html">Home</a>
+      <a href="../posts/index.html">Posts</a>
+      <a href="index.html">Categories</a>
+      <a href="../about/index.html">About</a>
+    </div>
+  </div>
+</footer>
+<script>document.getElementById('nav-toggle').addEventListener('click',function(){document.getElementById('nav-links').classList.toggle('open');});</script>
+</body>
+</html>
