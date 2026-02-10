@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About — Arthsome</title>
+  <meta name="description" content="Arthsome — cybersecurity enthusiast and independent security researcher." />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23eb6f92'/><text y='22' x='6' font-size='18' font-family='monospace' font-weight='bold' fill='white'>A</text></svg>" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="inner">
+    <a href="../index.html" class="brand" style="text-decoration:none">
+      <div class="brand-icon"><svg viewBox="0 0 16 16" fill="white"><path d="M8 1L1 13h2.5L8 4l4.5 9H15L8 1zm-1.5 8h3L8 6.5 6.5 9z"/></svg></div>
+      Arthsome
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../posts/index.html">Posts</a></li>
+      <li><a href="../categories/index.html">Categories</a></li>
+      <li><a href="index.html" class="active">About</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><rect y="3" width="20" height="2" rx="1"/><rect y="9" width="20" height="2" rx="1"/><rect y="15" width="20" height="2" rx="1"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+  <div class="page-wrapper">
+
+    <div class="profile-card fade-up">
+      <div class="avatar">A</div>
+      <div>
+        <div class="profile-name">Arthsome</div>
+        <div class="profile-handle">Cybersecurity Enthusiast</div>
+        <p class="profile-bio" style="margin-top:12px">Hey, I'm Arthsome — a cybersecurity enthusiast with an interest in vulnerability research, CTF challenges, and anything offensive/defensive security. I write about what I learn, break, and find along the way. All research is published for educational and defensive purposes only.</p>
+      </div>
+    </div>
+
+    <div class="content-block fade-up delay-1">
+      <h2>Interests</h2>
+      <div class="skills-grid" style="margin-top:16px">
+        <span class="skill-tag">Vulnerability Research</span>
+        <span class="skill-tag">CTF Challenges</span>
+        <span class="skill-tag">Penetration Testing</span>
+        <span class="skill-tag">Malware Analysis</span>
+        <span class="skill-tag">Detection Engineering</span>
+        <span class="skill-tag">Digital Forensics</span>
+        <span class="skill-tag">Threat Intelligence</span>
+        <span class="skill-tag">Network Security</span>
+      </div>
+    </div>
+
+    <div class="content-block fade-up delay-2">
+      <h2>Disclosure Policy</h2>
+      <p>CVE reports and vulnerability analyses are published only after an official vendor patch or responsible disclosure process is complete. No exploit code or working payloads are ever included. If something I've published looks problematic, reach out before filing a takedown.</p>
+    </div>
+
+    <div class="content-block fade-up delay-3">
+      <h2>How to Add New Posts</h2>
+      <p>This blog is a plain static site on GitHub Pages — no build tool or framework required. To publish a new post, create a folder under <code>posts/your-slug/</code>, write an <code>index.html</code> based on the CVE post template, set the correct category pill (<code>category-pill cve</code> or <code>category-pill writeup</code>), then add a post card to <code>posts/index.html</code>, the relevant category page, and optionally the homepage. Push to <code>main</code> and GitHub Pages deploys automatically.</p>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="inner">
+    <span class="footer-brand">Arthsome</span>
+    <span class="footer-copy">Security research published for defensive purposes only.</span>
+    <div class="footer-links">
+      <a href="../index.html">Home</a>
+      <a href="../posts/index.html">Posts</a>
+      <a href="../categories/index.html">Categories</a>
+      <a href="index.html">About</a>
+    </div>
+  </div>
+</footer>
+
+<script>document.getElementById('nav-toggle').addEventListener('click',function(){document.getElementById('nav-links').classList.toggle('open');});</script>
+</body>
+</html>
