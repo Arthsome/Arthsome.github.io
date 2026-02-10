@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Writeups &amp; Walkthroughs — Arthsome</title>
+  <meta name="description" content="CTF writeups, penetration testing walkthroughs, and lab solutions by Arthsome." />
+  <link rel="stylesheet" href="../../assets/css/main.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23eb6f92'/><text y='22' x='6' font-size='18' font-family='monospace' font-weight='bold' fill='white'>A</text></svg>" />
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a href="../../index.html" class="brand" style="text-decoration:none">
+      <div class="brand-icon"><svg viewBox="0 0 16 16" fill="white"><path d="M8 1L1 13h2.5L8 4l4.5 9H15L8 1zm-1.5 8h3L8 6.5 6.5 9z"/></svg></div>
+      Arthsome
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../../posts/index.html">Posts</a></li>
+      <li><a href="../index.html" class="active">Categories</a></li>
+      <li><a href="../../about/index.html">About</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><rect y="3" width="20" height="2" rx="1"/><rect y="9" width="20" height="2" rx="1"/><rect y="15" width="20" height="2" rx="1"/></svg>
+    </button>
+  </div>
+</header>
+<main>
+  <div class="page-wrapper">
+    <div class="cat-archive-header fade-up">
+      <div class="cat-archive-icon" style="background:rgba(196,167,231,0.12)">📝</div>
+      <div>
+        <nav style="font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-bottom:10px">
+          <a href="../index.html" style="color:var(--muted)">Categories</a>
+          <span style="margin:0 6px">›</span>
+          <span>Writeups &amp; Walkthroughs</span>
+        </nav>
+        <h1 class="cat-archive-title" style="color:var(--iris)">Writeups &amp; Walkthroughs</h1>
+        <p class="cat-archive-desc">Step-by-step technical writeups covering CTF challenges, HackTheBox and TryHackMe machines, penetration testing exercises, and methodology notes. Focused on learning, knowledge-sharing, and documenting problem-solving approaches.</p>
+      </div>
+    </div>
+
+    <!-- Empty state -->
+    <div class="fade-up delay-1" style="padding:56px 24px;text-align:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)">
+      <div style="font-size:36px;margin-bottom:16px">📂</div>
+      <div style="font-family:var(--font-brand);font-size:1.15rem;font-weight:700;color:var(--text);margin-bottom:8px">No posts yet</div>
+      <p style="color:var(--subtle);font-size:0.95rem;max-width:420px;margin:0 auto">Writeups and walkthroughs will appear here as they are published. Check back soon, or follow along on the <a href="../../posts/index.html">All Posts</a> page.</p>
+    </div>
+
+    <div style="margin-top:28px;padding:24px 28px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)" class="fade-up delay-2">
+      <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Adding a Post to This Category</div>
+      <p style="color:var(--subtle);font-size:0.92rem;line-height:1.7">Create a folder under <code style="font-family:var(--font-mono);font-size:0.85em;background:var(--overlay);padding:2px 5px;border-radius:3px">posts/your-slug/</code>, write an <code style="font-family:var(--font-mono);font-size:0.85em;background:var(--overlay);padding:2px 5px;border-radius:3px">index.html</code> using the CVE post template, then swap the category badge to <code style="font-family:var(--font-mono);font-size:0.85em;background:var(--overlay);padding:2px 5px;border-radius:3px">category-pill writeup</code> and add the post card to this page and to <code style="font-family:var(--font-mono);font-size:0.85em;background:var(--overlay);padding:2px 5px;border-radius:3px">posts/index.html</code>.</p>
+    </div>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="inner">
+    <span class="footer-brand">Arthsome</span>
+    <span class="footer-copy">Security research published for defensive purposes only.</span>
+    <div class="footer-links">
+      <a href="../../index.html">Home</a>
+      <a href="../../posts/index.html">Posts</a>
+      <a href="../index.html">Categories</a>
+      <a href="../../about/index.html">About</a>
+    </div>
+  </div>
+</footer>
+<script>document.getElementById('nav-toggle').addEventListener('click',function(){document.getElementById('nav-links').classList.toggle('open');});</script>
+</body>
+</html>
