@@ -767,6 +767,74 @@ article.post { min-width: 0; }
   color: var(--text-3);
 }
 
+/* ─── Syntax Highlighting ──────────────────────────────────────────────────── */
+.post-body pre code .comment { color: #6b7280; font-style: italic; }
+.post-body pre code .keyword { color: #f472b6; }
+.post-body pre code .string { color: #a5f3fc; }
+.post-body pre code .function { color: #93c5fd; }
+.post-body pre code .number { color: #fbbf24; }
+.post-body pre code .operator { color: #f9a8d4; }
+.post-body pre code .variable { color: #c4b5fd; }
+.post-body pre code .class { color: #86efac; }
+.post-body pre code .property { color: #fcd34d; }
+.post-body pre code .punctuation { color: #9ca3af; }
+.post-body pre code .builtin { color: #67e8f9; }
+.post-body pre code .constant { color: #fca5a5; }
+.post-body pre code .attr-name { color: #fcd34d; }
+.post-body pre code .attr-value { color: #a5f3fc; }
+.post-body pre code .tag { color: #f472b6; }
+
+/* ─── Images & Figures ─────────────────────────────────────────────────────── */
+.post-body figure {
+  margin: 24px 0;
+}
+.post-body figure img {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.post-body figcaption {
+  font-size: 12px;
+  color: var(--text-3);
+  text-align: center;
+  margin-top: 8px;
+  font-style: italic;
+}
+.post-body .img-row {
+  display: flex;
+  gap: 12px;
+  margin: 24px 0;
+}
+.post-body .img-row img {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+/* ─── Diagram Box ──────────────────────────────────────────────────────────── */
+.diagram-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin: 24px 0;
+  overflow-x: auto;
+}
+.diagram-box svg {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ─── Blockquote ───────────────────────────────────────────────────────────── */
+.post-body blockquote {
+  border-left: 2px solid var(--border-hi);
+  padding-left: 16px;
+  margin: 20px 0;
+  color: var(--text-2);
+  font-style: italic;
+}
+
 /* ─── Responsive ───────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .article-layout { grid-template-columns: 1fr; }
