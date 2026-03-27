@@ -19,25 +19,25 @@
     <meta name="twitter:image" content="https://arthsome.github.io/assets/img/wht-shellcode/02-spectral-noise.png">
     <style>
         :root {
-            --bg: #0d1117;
-            --surface: #161b22;
-            --surface-2: #1c2333;
-            --border: #30363d;
-            --text: #c9d1d9;
-            --text-muted: #8b949e;
-            --heading: #e6edf3;
-            --accent: #58a6ff;
-            --accent-dim: #1f6feb;
-            --green: #3fb950;
-            --red: #f85149;
-            --orange: #d29922;
-            --purple: #bc8cff;
-            --terminal-bg: #0a0e14;
-            --terminal-green: #00ff41;
-            --terminal-red: #ff3333;
-            --terminal-yellow: #ffcc00;
-            --terminal-blue: #00aaff;
-            --terminal-dim: #555555;
+            --bg: #09090b;
+            --surface: #0f0f12;
+            --surface-2: #151518;
+            --border: #1e1e23;
+            --text: #e4e4e7;
+            --text-muted: #5a5a65;
+            --heading: #e4e4e7;
+            --accent: #a1a1aa;
+            --accent-dim: rgba(161,161,170,0.08);
+            --green: #a1a1aa;
+            --red: #a1a1aa;
+            --orange: #71717a;
+            --purple: #a1a1aa;
+            --terminal-bg: #09090b;
+            --terminal-green: #a1a1aa;
+            --terminal-red: #71717a;
+            --terminal-yellow: #e4e4e7;
+            --terminal-blue: #a1a1aa;
+            --terminal-dim: #3a3a42;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -73,16 +73,16 @@
             align-items: center;
         }
         .meta .tag {
-            background: var(--accent-dim);
-            color: var(--accent);
+            background: transparent;
+            color: var(--text-muted);
             padding: 0.15rem 0.6rem;
             border-radius: 3px;
             font-size: 0.8rem;
             font-weight: 600;
         }
         .meta .severity {
-            background: rgba(188, 140, 255, 0.15);
-            color: var(--purple);
+            background: var(--surface);
+            color: var(--text-muted);
             padding: 0.15rem 0.6rem;
             border-radius: 3px;
             font-size: 0.8rem;
@@ -131,13 +131,13 @@
             font-size: 0.85rem;
             color: var(--text);
         }
-        .keyword { color: #ff7b72; }
-        .string { color: #a5d6ff; }
-        .comment { color: #8b949e; font-style: italic; }
-        .type { color: #d2a8ff; }
-        .func { color: #d2a8ff; }
-        .number { color: #79c0ff; }
-        .param { color: #ffa657; }
+        .keyword { color: #c4b5fd; }
+        .string { color: #a1a1aa; }
+        .comment { color: #4a4a55; font-style: italic; }
+        .type { color: #e4e4e7; }
+        .func { color: #e4e4e7; }
+        .number { color: #c4b5fd; }
+        .param { color: #a1a1aa; }
         ul, ol { margin-bottom: 0.85rem; padding-left: 1.6rem; }
         li { margin-bottom: 0.3rem; }
         table {
@@ -155,17 +155,21 @@
         td { background: var(--bg); }
         .info-box {
             background: var(--surface);
-            border-left: 3px solid var(--accent);
+            border-left: 2px solid var(--border);
             padding: 1rem 1.2rem;
             margin-bottom: 1rem;
-            border-radius: 0 6px 6px 0;
+            border-radius: 0 4px 4px 0;
+            color: #71717a;
+            font-size: 0.92rem;
         }
         .warning-box {
-            background: rgba(210, 153, 34, 0.08);
-            border-left: 3px solid var(--orange);
+            background: var(--surface);
+            border-left: 2px solid var(--border);
             padding: 1rem 1.2rem;
             margin-bottom: 1rem;
-            border-radius: 0 6px 6px 0;
+            border-radius: 0 4px 4px 0;
+            color: #71717a;
+            font-size: 0.92rem;
         }
         .math-block {
             background: var(--surface);
@@ -223,12 +227,12 @@
 </head>
 <body>
 <div class="container">
-<nav style="font-family:'SF Mono','Fira Code',Consolas,monospace;font-size:0.8rem;color:#8b949e;margin-bottom:1.5rem">
-    <a href="../../index.html" style="color:#8b949e">Home</a>
-    <span style="margin:0 6px;color:#30363d">/</span>
-    <a href="../index.html" style="color:#8b949e">Posts</a>
-    <span style="margin:0 6px;color:#30363d">/</span>
-    <span style="color:#58a6ff">WHT Shellcode Obfuscation</span>
+<nav style="font-family:'SF Mono','Fira Code',Consolas,monospace;font-size:0.75rem;color:#5a5a65;margin-bottom:1.5rem">
+    <a href="../../index.html" style="color:#5a5a65">Home</a>
+    <span style="margin:0 6px;color:#2a2a32">/</span>
+    <a href="../index.html" style="color:#5a5a65">Posts</a>
+    <span style="margin:0 6px;color:#2a2a32">/</span>
+    <span style="color:#a1a1aa">WHT Shellcode Obfuscation</span>
 </nav>
 <header>
     <h1>Payload Obfuscation via Walsh-Hadamard Transform</h1>
@@ -341,7 +345,7 @@
     <h3>The FWHT Butterfly</h3>
     <p>The entire transform is three nested loops. The outer loop doubles the butterfly span at each stage. The inner loops apply the <code>u + v</code> / <code>u - v</code> butterfly to each pair:</p>
 
-<pre><div style="display:flex;align-items:center;justify-content:space-between;padding:6px 14px;background:#1c2333;border-bottom:1px solid #30363d"><span style="font-family:monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#8b949e">C</span></div><code><span class="keyword">void</span> <span class="func">fwht</span>(<span class="keyword">int</span>* <span class="param">a</span>, <span class="keyword">int</span> <span class="param">n</span>) {
+<pre><div style="display:flex;align-items:center;justify-content:space-between;padding:6px 14px;background:#0f0f12;border-bottom:1px solid #1e1e23"><span style="font-family:monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#3a3a42">C</span></div><code><span class="keyword">void</span> <span class="func">fwht</span>(<span class="keyword">int</span>* <span class="param">a</span>, <span class="keyword">int</span> <span class="param">n</span>) {
   <span class="keyword">for</span> (<span class="keyword">int</span> len = <span class="number">1</span>; len &lt; n; len &lt;&lt;= <span class="number">1</span>) {
     <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i += len &lt;&lt; <span class="number">1</span>) {
       <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; len; j++) {
@@ -359,7 +363,7 @@
     <h3>Spectral Scramble and Unscramble</h3>
     <p>The keyed permutation shuffles spectral coefficients using Fisher-Yates with a deterministic PRNG. The unscramble function replays the swap sequence in reverse:</p>
 
-<pre><div style="display:flex;align-items:center;justify-content:space-between;padding:6px 14px;background:#1c2333;border-bottom:1px solid #30363d"><span style="font-family:monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#8b949e">C</span></div><code><span class="keyword">void</span> <span class="func">spectral_scramble</span>(<span class="keyword">int</span>* <span class="param">a</span>, <span class="keyword">int</span> <span class="param">n</span>, <span class="keyword">unsigned int</span> <span class="param">key</span>) {
+<pre><div style="display:flex;align-items:center;justify-content:space-between;padding:6px 14px;background:#0f0f12;border-bottom:1px solid #1e1e23"><span style="font-family:monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#3a3a42">C</span></div><code><span class="keyword">void</span> <span class="func">spectral_scramble</span>(<span class="keyword">int</span>* <span class="param">a</span>, <span class="keyword">int</span> <span class="param">n</span>, <span class="keyword">unsigned int</span> <span class="param">key</span>) {
   <span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) {
     key = key * <span class="number">1664525u</span> + <span class="number">1013904223u</span>;
     <span class="keyword">unsigned int</span> j = key % (i + <span class="number">1</span>);
@@ -383,7 +387,7 @@
     <h3>Encode / Decode Flow</h3>
     <p>The full obfuscation pipeline in <code>main()</code>:</p>
 
-<pre><div style="display:flex;align-items:center;justify-content:space-between;padding:6px 14px;background:#1c2333;border-bottom:1px solid #30363d"><span style="font-family:monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#8b949e">C</span></div><code><span class="comment">// === ENCODE (offline, in your builder) ===</span>
+<pre><div style="display:flex;align-items:center;justify-content:space-between;padding:6px 14px;background:#0f0f12;border-bottom:1px solid #1e1e23"><span style="font-family:monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#3a3a42">C</span></div><code><span class="comment">// === ENCODE (offline, in your builder) ===</span>
 <span class="keyword">unsigned int</span> key = <span class="number">0xCAFEBABE</span>;
 
 <span class="comment">// pad to next power of 2, copy bytes into int array</span>
@@ -419,20 +423,20 @@
 
     <div class="terminal-svg">
         <svg width="100%" height="180" viewBox="0 0 780 180" xmlns="http://www.w3.org/2000/svg" style="display:block;">
-            <rect width="780" height="180" rx="8" fill="#0a0e14"/>
-            <rect width="780" height="32" rx="8" fill="#1a1f2b"/>
-            <rect y="24" width="780" height="8" fill="#1a1f2b"/>
-            <circle cx="18" cy="16" r="6" fill="#ff5f57"/>
-            <circle cx="38" cy="16" r="6" fill="#febc2e"/>
-            <circle cx="58" cy="16" r="6" fill="#28c840"/>
-            <text x="390" y="20" text-anchor="middle" fill="#8b949e" font-family="monospace" font-size="12">Compilation</text>
-            <text y="58" font-family="'SF Mono','Fira Code',Consolas,monospace" font-size="13">
-                <tspan x="16" fill="#00ff41">$</tspan><tspan fill="#ccc"> x86_64-w64-mingw32-gcc hack.c -o hack.exe \</tspan>
-                <tspan x="16" dy="20" fill="#ccc">  -s -ffunction-sections -fdata-sections \</tspan>
-                <tspan x="16" dy="20" fill="#ccc">  -fmerge-all-constants -static-libgcc</tspan>
-                <tspan x="16" dy="28" fill="#555">hack.c: no warnings, no errors</tspan>
-                <tspan x="16" dy="24" fill="#00ff41">$</tspan><tspan fill="#ccc"> file hack.exe</tspan>
-                <tspan x="16" dy="20" fill="#555">hack.exe: PE32+ executable (console) x86-64, stripped</tspan>
+            <rect width="780" height="180" rx="4" fill="#09090b"/>
+            <rect width="780" height="28" rx="4" fill="#0f0f12"/>
+            <rect y="24" width="780" height="4" fill="#0f0f12"/>
+            <circle cx="16" cy="14" r="4" fill="#2a2a32"/>
+            <circle cx="30" cy="14" r="4" fill="#2a2a32"/>
+            <circle cx="44" cy="14" r="4" fill="#2a2a32"/>
+            <text x="390" y="18" text-anchor="middle" fill="#5a5a65" font-family="monospace" font-size="11">Compilation</text>
+            <text y="52" font-family="'SF Mono','Fira Code',Consolas,monospace" font-size="13">
+                <tspan x="16" fill="#a1a1aa">$</tspan><tspan fill="#71717a"> x86_64-w64-mingw32-gcc hack.c -o hack.exe \</tspan>
+                <tspan x="16" dy="20" fill="#71717a">  -s -ffunction-sections -fdata-sections \</tspan>
+                <tspan x="16" dy="20" fill="#71717a">  -fmerge-all-constants -static-libgcc</tspan>
+                <tspan x="16" dy="28" fill="#3a3a42">hack.c: no warnings, no errors</tspan>
+                <tspan x="16" dy="24" fill="#a1a1aa">$</tspan><tspan fill="#71717a"> file hack.exe</tspan>
+                <tspan x="16" dy="20" fill="#3a3a42">hack.exe: PE32+ executable (console) x86-64, stripped</tspan>
             </text>
         </svg>
     </div>
@@ -441,40 +445,40 @@
 
     <div class="terminal-svg">
         <svg width="100%" height="520" viewBox="0 0 780 520" xmlns="http://www.w3.org/2000/svg" style="display:block;">
-            <rect width="780" height="520" rx="8" fill="#0a0e14"/>
-            <rect width="780" height="32" rx="8" fill="#1a1f2b"/>
-            <rect y="24" width="780" height="8" fill="#1a1f2b"/>
-            <circle cx="18" cy="16" r="6" fill="#ff5f57"/>
-            <circle cx="38" cy="16" r="6" fill="#febc2e"/>
-            <circle cx="58" cy="16" r="6" fill="#28c840"/>
-            <text x="390" y="20" text-anchor="middle" fill="#8b949e" font-family="monospace" font-size="12">hack.exe — Runtime Output</text>
-            <text y="56" font-family="'SF Mono','Fira Code',Consolas,monospace" font-size="12.5">
-                <tspan x="16" fill="#00aaff">=== Walsh-Hadamard Transform payload obfuscation ===</tspan>
-                <tspan x="16" dy="22" fill="#ccc">original payload (285 bytes):</tspan>
-                <tspan x="16" dy="18" fill="#555">fc 48 81 e4 f0 ff ff ff e8 d0 00 00 00 41 51 41</tspan>
-                <tspan x="16" dy="16" fill="#555">50 52 51 56 48 31 d2 65 48 8b 52 60 3e 48 8b 52</tspan>
-                <tspan x="16" dy="16" fill="#555">...</tspan>
-                <tspan x="16" dy="22" fill="#ccc">padded length: 512 (next power of 2)</tspan>
-                <tspan x="16" dy="18" fill="#ccc">key: 0xcafebabe</tspan>
-                <tspan x="16" dy="22" fill="#00ff41">[+] forward WHT complete.</tspan>
-                <tspan x="16" dy="18" fill="#00ff41">[+] spectral permutation applied (key=0xcafebabe).</tspan>
-                <tspan x="16" dy="22" fill="#ccc">obfuscated spectral data (first 16 coefficients):</tspan>
-                <tspan x="16" dy="18" fill="#ffcc00">[  0]     1801</tspan>
-                <tspan x="16" dy="16" fill="#ffcc00">[  1]    -1585</tspan>
-                <tspan x="16" dy="16" fill="#ffcc00">[  2]    -1799</tspan>
-                <tspan x="16" dy="16" fill="#ffcc00">[  3]     -663</tspan>
-                <tspan x="16" dy="16" fill="#ffcc00">[  4]    -1985</tspan>
-                <tspan x="16" dy="16" fill="#ffcc00">[  5]     2635</tspan>
-                <tspan x="16" dy="16" fill="#555">... (496 more coefficients)</tspan>
-                <tspan x="16" dy="22" fill="#00ff41">[+] spectral unscramble complete.</tspan>
-                <tspan x="16" dy="18" fill="#00ff41">[+] inverse WHT complete.</tspan>
-                <tspan x="16" dy="18" fill="#00ff41">[+] normalization complete (divide by 512).</tspan>
-                <tspan x="16" dy="22" fill="#ccc">restored payload (285 bytes):</tspan>
-                <tspan x="16" dy="18" fill="#555">fc 48 81 e4 f0 ff ff ff e8 d0 00 00 00 41 51 41</tspan>
-                <tspan x="16" dy="16" fill="#555">50 52 51 56 48 31 d2 65 48 8b 52 60 3e 48 8b 52</tspan>
-                <tspan x="16" dy="16" fill="#555">...</tspan>
-                <tspan x="16" dy="22" fill="#00ff41">integrity check: PASS</tspan>
-                <tspan x="16" dy="22" fill="#00aaff">executing restored payload...</tspan>
+            <rect width="780" height="520" rx="4" fill="#09090b"/>
+            <rect width="780" height="28" rx="4" fill="#0f0f12"/>
+            <rect y="24" width="780" height="4" fill="#0f0f12"/>
+            <circle cx="16" cy="14" r="4" fill="#2a2a32"/>
+            <circle cx="30" cy="14" r="4" fill="#2a2a32"/>
+            <circle cx="44" cy="14" r="4" fill="#2a2a32"/>
+            <text x="390" y="18" text-anchor="middle" fill="#5a5a65" font-family="monospace" font-size="11">hack.exe — Runtime Output</text>
+            <text y="50" font-family="'SF Mono','Fira Code',Consolas,monospace" font-size="12.5">
+                <tspan x="16" fill="#e4e4e7">=== Walsh-Hadamard Transform payload obfuscation ===</tspan>
+                <tspan x="16" dy="22" fill="#a1a1aa">original payload (285 bytes):</tspan>
+                <tspan x="16" dy="18" fill="#3a3a42">fc 48 81 e4 f0 ff ff ff e8 d0 00 00 00 41 51 41</tspan>
+                <tspan x="16" dy="16" fill="#3a3a42">50 52 51 56 48 31 d2 65 48 8b 52 60 3e 48 8b 52</tspan>
+                <tspan x="16" dy="16" fill="#3a3a42">...</tspan>
+                <tspan x="16" dy="22" fill="#71717a">padded length: 512 (next power of 2)</tspan>
+                <tspan x="16" dy="18" fill="#71717a">key: 0xcafebabe</tspan>
+                <tspan x="16" dy="22" fill="#a1a1aa">[+] forward WHT complete.</tspan>
+                <tspan x="16" dy="18" fill="#a1a1aa">[+] spectral permutation applied (key=0xcafebabe).</tspan>
+                <tspan x="16" dy="22" fill="#71717a">obfuscated spectral data (first 16 coefficients):</tspan>
+                <tspan x="16" dy="18" fill="#e4e4e7">[  0]     1801</tspan>
+                <tspan x="16" dy="16" fill="#e4e4e7">[  1]    -1585</tspan>
+                <tspan x="16" dy="16" fill="#e4e4e7">[  2]    -1799</tspan>
+                <tspan x="16" dy="16" fill="#e4e4e7">[  3]     -663</tspan>
+                <tspan x="16" dy="16" fill="#e4e4e7">[  4]    -1985</tspan>
+                <tspan x="16" dy="16" fill="#e4e4e7">[  5]     2635</tspan>
+                <tspan x="16" dy="16" fill="#3a3a42">... (496 more coefficients)</tspan>
+                <tspan x="16" dy="22" fill="#a1a1aa">[+] spectral unscramble complete.</tspan>
+                <tspan x="16" dy="18" fill="#a1a1aa">[+] inverse WHT complete.</tspan>
+                <tspan x="16" dy="18" fill="#a1a1aa">[+] normalization complete (divide by 512).</tspan>
+                <tspan x="16" dy="22" fill="#a1a1aa">restored payload (285 bytes):</tspan>
+                <tspan x="16" dy="18" fill="#3a3a42">fc 48 81 e4 f0 ff ff ff e8 d0 00 00 00 41 51 41</tspan>
+                <tspan x="16" dy="16" fill="#3a3a42">50 52 51 56 48 31 d2 65 48 8b 52 60 3e 48 8b 52</tspan>
+                <tspan x="16" dy="16" fill="#3a3a42">...</tspan>
+                <tspan x="16" dy="22" fill="#e4e4e7">integrity check: PASS</tspan>
+                <tspan x="16" dy="22" fill="#a1a1aa">executing restored payload...</tspan>
             </text>
         </svg>
     </div>
@@ -488,17 +492,13 @@
 
 <h2>Why This Evades Detection</h2>
 <section>
-    <p>The comparison table shows where classical obfuscation leaks artifacts and where WHT does not:</p>
+    <p>Where classical obfuscation leaks artifacts, WHT leaves nothing:</p>
 
-    <table>
-        <tr><th>Detection Vector</th><th>AES / ChaCha / XOR</th><th>DFT (Fourier)</th><th>WHT (This Approach)</th></tr>
-        <tr><td>Crypto-constants in binary</td><td style="color:#f85149">S-boxes, round constants</td><td style="color:#3fb950">None</td><td style="color:#3fb950">None</td></tr>
-        <tr><td>Math library imports</td><td style="color:#3fb950">None</td><td style="color:#f85149">sin(), cos() via -lm</td><td style="color:#3fb950">None</td></tr>
-        <tr><td>Floating point operations</td><td style="color:#3fb950">None</td><td style="color:#f85149">double complex[]</td><td style="color:#3fb950">None (integer-only)</td></tr>
-        <tr><td>Encrypted blob entropy</td><td style="color:#f85149">~8.0 (max entropy)</td><td style="color:#d29922">~7.5 (high entropy)</td><td style="color:#d29922">Variable (int range)</td></tr>
-        <tr><td>Data type in memory</td><td style="color:#f85149">unsigned char[] (suspicious)</td><td style="color:#d29922">double complex[] (unusual)</td><td style="color:#3fb950">int[] (normal app data)</td></tr>
-        <tr><td>Precision loss</td><td style="color:#3fb950">None</td><td style="color:#d29922">Possible (float rounding)</td><td style="color:#3fb950">None (exact)</td></tr>
-    </table>
+    <p><strong style="color:#e4e4e7">AES / ChaCha / XOR</strong> ships S-boxes and round constants in the binary. Any decent YARA rule catches those. Entropy of the encrypted blob sits near 8.0 (maximum), which is itself a heuristic signal. The data lives in memory as <code>unsigned char[]</code>, which is exactly what shellcode scanners look for.</p>
+
+    <p><strong style="color:#a1a1aa">DFT (Fourier)</strong> avoids crypto-constants, but links <code>-lm</code> for <code>sin()</code>/<code>cos()</code>. The output is <code>double complex[]</code>, an unusual data type that stands out in memory. Float rounding means reconstruction is approximate, not exact.</p>
+
+    <p><strong style="color:#e4e4e7">WHT (this approach)</strong> has no crypto-constants, no math library imports, no floating point. The output is <code>int[]</code>, the most common data type in any C program. Reconstruction is exact. The only detection surface is behavioral (VirtualAlloc + callback execution).</p>
 
     <p>The obfuscated payload lives in memory as <code>int[]</code>. That is the most common data type in any C program. Heuristic engines scanning for encrypted shellcode blobs (high-entropy byte arrays, suspicious imports) see nothing. The decode loop uses <code>+</code>, <code>-</code>, and <code>/</code>. Those operators appear in every business application ever written.</p>
 
@@ -523,7 +523,7 @@
     <h3>YARA Rule</h3>
     <p>The following YARA rule targets the structural pattern of WHT-based obfuscation. It matches the butterfly loop structure and the combination with memory allocation APIs:</p>
 
-<pre><div style="display:flex;align-items:center;justify-content:space-between;padding:6px 14px;background:#1c2333;border-bottom:1px solid #30363d"><span style="font-family:monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#8b949e">YARA</span></div><code><span class="keyword">rule</span> <span class="func">WHT_Shellcode_Obfuscation</span> {
+<pre><div style="display:flex;align-items:center;justify-content:space-between;padding:6px 14px;background:#0f0f12;border-bottom:1px solid #1e1e23"><span style="font-family:monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#3a3a42">YARA</span></div><code><span class="keyword">rule</span> <span class="func">WHT_Shellcode_Obfuscation</span> {
     <span class="keyword">meta</span>:
         description = <span class="string">"Detects Walsh-Hadamard Transform butterfly pattern near shellcode execution"</span>
         author      = <span class="string">"Arthsome"</span>
@@ -552,7 +552,7 @@
 }</code></pre>
 
     <h3>Sigma Rule</h3>
-<pre><div style="display:flex;align-items:center;justify-content:space-between;padding:6px 14px;background:#1c2333;border-bottom:1px solid #30363d"><span style="font-family:monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#8b949e">SIGMA</span></div><code><span class="param">title</span>: Potential WHT-Based Shellcode Obfuscation
+<pre><div style="display:flex;align-items:center;justify-content:space-between;padding:6px 14px;background:#0f0f12;border-bottom:1px solid #1e1e23"><span style="font-family:monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#3a3a42">SIGMA</span></div><code><span class="param">title</span>: Potential WHT-Based Shellcode Obfuscation
 <span class="param">status</span>: experimental
 <span class="param">description</span>: <span class="string">Detects arithmetic-heavy process behavior followed by RWX allocation</span>
 <span class="param">logsource</span>:
@@ -572,21 +572,13 @@
 
 <h2>DFT vs WHT: A Comparison</h2>
 <section>
-    <p>cocomelonc <a href="https://cocomelonc.github.io/malware/2026/03/05/malware-cryptography-44.html">documented the DFT approach</a>: <code>sin()</code>/<code>cos()</code> converting shellcode into complex frequency-domain noise. WHT does the same domain transformation through a different mathematical path:</p>
+    <p>cocomelonc <a href="https://cocomelonc.github.io/malware/2026/03/05/malware-cryptography-44.html">documented the DFT approach</a>: <code>sin()</code>/<code>cos()</code> converting shellcode into complex frequency-domain noise. WHT does the same domain transformation through a different mathematical path.</p>
 
-    <table>
-        <tr><th>Property</th><th>DFT</th><th>WHT</th></tr>
-        <tr><td>Basis functions</td><td>Sinusoidal (continuous)</td><td>Walsh (binary, +1/-1)</td></tr>
-        <tr><td>Output type</td><td>double complex[]</td><td>int[]</td></tr>
-        <tr><td>Arithmetic</td><td>Floating point (sin, cos)</td><td>Integer only (+, -)</td></tr>
-        <tr><td>Library deps</td><td>math.h (-lm)</td><td>None</td></tr>
-        <tr><td>Precision</td><td>Approximate (float rounding)</td><td>Exact (perfect reconstruction)</td></tr>
-        <tr><td>Complexity</td><td>O(N log N) or O(N&sup2;)</td><td>O(N log N)</td></tr>
-        <tr><td>Keying</td><td>Phase shift (continuous)</td><td>Spectral permutation (combinatorial)</td></tr>
-        <tr><td>Self-inverse</td><td>No (separate IDFT needed)</td><td>Yes (same function)</td></tr>
-    </table>
+    <p><strong>DFT</strong> uses sinusoidal basis functions, outputs <code>double complex[]</code>, needs <code>math.h</code> (<code>-lm</code>), and reconstruction is approximate due to float rounding. It requires a separate IDFT function for decoding. Keying works through a continuous phase shift.</p>
 
-    <p>DFT produces complex-valued output that looks like signal processing data. WHT gives you zero library deps, exact reconstruction, smaller code. You could <strong>stack them</strong>: WHT first, then DFT. An analyst would need to reverse both transforms in the right order.</p>
+    <p><strong>WHT</strong> uses Walsh basis functions (+1/&minus;1 only), outputs <code>int[]</code>, needs zero library deps, and reconstruction is exact. The same function handles both encode and decode (self-inverse). Keying works through combinatorial spectral permutation, giving N! keyspace instead of a continuous parameter.</p>
+
+    <p>Both run in O(N log N). You could <strong>stack them</strong>: WHT first, then DFT. An analyst would need to reverse both transforms in the right order.</p>
 </section>
 
 <h2>Limitations</h2>
@@ -611,13 +603,13 @@
     </ol>
 </section>
 
-<div style="margin-top:3rem;padding:1rem 1.2rem;background:#161b22;border:1px solid #30363d;border-radius:6px;font-size:0.88rem;color:#8b949e">
-    <strong style="color:#d29922">Disclaimer.</strong> This research is published for defensive and educational purposes. The technique is documented so that detection engineers, threat hunters, and incident responders can identify and respond to transform-based obfuscation in the wild. Do not use this against systems you do not own or have explicit authorization to test.
+<div style="margin-top:3rem;padding:1rem 1.2rem;background:#0f0f12;border:1px solid #1e1e23;border-radius:4px;font-size:0.88rem;color:#5a5a65">
+    <strong style="color:#71717a">Disclaimer.</strong> This research is published for defensive and educational purposes. The technique is documented so that detection engineers, threat hunters, and incident responders can identify and respond to transform-based obfuscation in the wild. Do not use this against systems you do not own or have explicit authorization to test.
 </div>
 
-<nav style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid #30363d;display:flex;justify-content:space-between;font-size:0.85rem">
-    <a href="../index.html" style="color:#58a6ff">&larr; All Posts</a>
-    <a href="../../index.html" style="color:#8b949e">Home</a>
+<nav style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid #1e1e23;display:flex;justify-content:space-between;font-size:0.85rem">
+    <a href="../index.html" style="color:#a1a1aa">&larr; All Posts</a>
+    <a href="../../index.html" style="color:#5a5a65">Home</a>
 </nav>
 
 </div>
