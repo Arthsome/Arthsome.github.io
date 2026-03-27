@@ -345,7 +345,7 @@
     <h3>The FWHT Butterfly</h3>
     <p>The entire transform is three nested loops. The outer loop doubles the butterfly span at each stage. The inner loops apply the <code>u + v</code> / <code>u - v</code> butterfly to each pair:</p>
 
-<pre><div style="display:flex;align-items:center;justify-content:space-between;padding:6px 14px;background:#151518;border-bottom:1px solid #232329"><span style="font-family:monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#a1a1aa">C</span></div><code><span class="keyword">void</span> <span class="func">fwht</span>(<span class="keyword">int</span>* <span class="param">a</span>, <span class="keyword">int</span> <span class="param">n</span>) {
+<div style="display:flex;align-items:center;padding:6px 14px;background:#151518;border:1px solid #232329;border-bottom:none;border-radius:4px 4px 0 0;margin-top:0.5rem"><span style="font-family:monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#a1a1aa">C</span></div><pre style="border-radius:0 0 4px 4px;margin-top:0"><code><span class="keyword">void</span> <span class="func">fwht</span>(<span class="keyword">int</span>* <span class="param">a</span>, <span class="keyword">int</span> <span class="param">n</span>) {
   <span class="keyword">for</span> (<span class="keyword">int</span> len = <span class="number">1</span>; len &lt; n; len &lt;&lt;= <span class="number">1</span>) {
     <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i += len &lt;&lt; <span class="number">1</span>) {
       <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; len; j++) {
@@ -363,7 +363,7 @@
     <h3>Spectral Scramble and Unscramble</h3>
     <p>The keyed permutation shuffles spectral coefficients using Fisher-Yates with a deterministic PRNG. The unscramble function replays the swap sequence in reverse:</p>
 
-<pre><div style="display:flex;align-items:center;justify-content:space-between;padding:6px 14px;background:#151518;border-bottom:1px solid #232329"><span style="font-family:monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#a1a1aa">C</span></div><code><span class="keyword">void</span> <span class="func">spectral_scramble</span>(<span class="keyword">int</span>* <span class="param">a</span>, <span class="keyword">int</span> <span class="param">n</span>, <span class="keyword">unsigned int</span> <span class="param">key</span>) {
+<div style="display:flex;align-items:center;padding:6px 14px;background:#151518;border:1px solid #232329;border-bottom:none;border-radius:4px 4px 0 0;margin-top:0.5rem"><span style="font-family:monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#a1a1aa">C</span></div><pre style="border-radius:0 0 4px 4px;margin-top:0"><code><span class="keyword">void</span> <span class="func">spectral_scramble</span>(<span class="keyword">int</span>* <span class="param">a</span>, <span class="keyword">int</span> <span class="param">n</span>, <span class="keyword">unsigned int</span> <span class="param">key</span>) {
   <span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) {
     key = key * <span class="number">1664525u</span> + <span class="number">1013904223u</span>;
     <span class="keyword">unsigned int</span> j = key % (i + <span class="number">1</span>);
@@ -387,7 +387,7 @@
     <h3>Encode / Decode Flow</h3>
     <p>The full obfuscation pipeline in <code>main()</code>:</p>
 
-<pre><div style="display:flex;align-items:center;justify-content:space-between;padding:6px 14px;background:#151518;border-bottom:1px solid #232329"><span style="font-family:monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#a1a1aa">C</span></div><code><span class="comment">// === ENCODE (offline, in your builder) ===</span>
+<div style="display:flex;align-items:center;padding:6px 14px;background:#151518;border:1px solid #232329;border-bottom:none;border-radius:4px 4px 0 0;margin-top:0.5rem"><span style="font-family:monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#a1a1aa">C</span></div><pre style="border-radius:0 0 4px 4px;margin-top:0"><code><span class="comment">// === ENCODE (offline, in your builder) ===</span>
 <span class="keyword">unsigned int</span> key = <span class="number">0xCAFEBABE</span>;
 
 <span class="comment">// pad to next power of 2, copy bytes into int array</span>
@@ -523,7 +523,7 @@
     <h3>YARA Rule</h3>
     <p>The following YARA rule targets the structural pattern of WHT-based obfuscation. It matches the butterfly loop structure and the combination with memory allocation APIs:</p>
 
-<pre><div style="display:flex;align-items:center;justify-content:space-between;padding:6px 14px;background:#151518;border-bottom:1px solid #232329"><span style="font-family:monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#a1a1aa">YARA</span></div><code><span class="keyword">rule</span> <span class="func">WHT_Shellcode_Obfuscation</span> {
+<div style="display:flex;align-items:center;padding:6px 14px;background:#151518;border:1px solid #232329;border-bottom:none;border-radius:4px 4px 0 0;margin-top:0.5rem"><span style="font-family:monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#a1a1aa">YARA</span></div><pre style="border-radius:0 0 4px 4px;margin-top:0"><code><span class="keyword">rule</span> <span class="func">WHT_Shellcode_Obfuscation</span> {
     <span class="keyword">meta</span>:
         description = <span class="string">"Detects Walsh-Hadamard Transform butterfly pattern near shellcode execution"</span>
         author      = <span class="string">"Arthsome"</span>
@@ -552,7 +552,7 @@
 }</code></pre>
 
     <h3>Sigma Rule</h3>
-<pre><div style="display:flex;align-items:center;justify-content:space-between;padding:6px 14px;background:#151518;border-bottom:1px solid #232329"><span style="font-family:monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#a1a1aa">SIGMA</span></div><code><span class="param">title</span>: Potential WHT-Based Shellcode Obfuscation
+<div style="display:flex;align-items:center;padding:6px 14px;background:#151518;border:1px solid #232329;border-bottom:none;border-radius:4px 4px 0 0;margin-top:0.5rem"><span style="font-family:monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#a1a1aa">SIGMA</span></div><pre style="border-radius:0 0 4px 4px;margin-top:0"><code><span class="param">title</span>: Potential WHT-Based Shellcode Obfuscation
 <span class="param">status</span>: experimental
 <span class="param">description</span>: <span class="string">Detects arithmetic-heavy process behavior followed by RWX allocation</span>
 <span class="param">logsource</span>:
