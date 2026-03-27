@@ -8,7 +8,7 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Payload Obfuscation via Walsh-Hadamard Transform">
     <meta property="og:description" content="WHT-based shellcode obfuscation using integer-only spectral permutation. No sin/cos, no crypto-constants, no math library.">
-    <meta property="og:image" content="https://arthsome.github.io/assets/img/wht-shellcode/02-spectral-noise.png">
+    <meta property="og:image" content="https://arthsome.github.io/assets/img/wht-shellcode/03-spectral-analysis.png">
     <meta property="og:url" content="https://arthsome.github.io/posts/wht-shellcode-obfuscation/">
     <meta property="og:site_name" content="Arthsome">
     <meta property="article:published_time" content="2026-03-27T00:00:00+00:00">
@@ -16,7 +16,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Payload Obfuscation via Walsh-Hadamard Transform">
     <meta name="twitter:description" content="WHT-based shellcode obfuscation using integer-only spectral permutation. No sin/cos, no crypto-constants, no math library.">
-    <meta name="twitter:image" content="https://arthsome.github.io/assets/img/wht-shellcode/02-spectral-noise.png">
+    <meta name="twitter:image" content="https://arthsome.github.io/assets/img/wht-shellcode/03-spectral-analysis.png">
     <style>
         :root {
             --bg: #09090b;
@@ -247,9 +247,9 @@
 </header>
 
 <section>
-    <p>If you want to hide shellcode in memory, the usual playbook is classical encryption: AES, ChaCha20, XOR cascades, block ciphers like Speck or Mars. They all work. They also all leave the same footprint. S-boxes, round constants, bitwise rotation patterns, distinctive XOR structures. EDR vendors have been training on these artifacts for years. If your binary ships with an AES S-box or a Speck round function, it gets flagged before it ever runs.</p>
+    <p>If you want to hide shellcode in memory, the usual playbook is classical encryption: AES, ChaCha20, XOR cascades, block ciphers like Speck or Mars. They all work. They also all leave the same forensic footprint. A binary containing the AES S-box (<code>63 7c 77 7b f2 6b 6f c5 ...</code>) or Speck's rotation constants gets flagged before it ever runs. EDR vendors have been training on these byte-level signatures for years.</p>
 
-    <p>I wanted to try something different. The <strong>Walsh-Hadamard Transform (WHT)</strong> is a signal processing primitive that converts data into spectral coefficients using only addition and subtraction. The entire computation stays in integer arithmetic. The output is an array of signed integers that looks indistinguishable from telemetry data or audio samples.</p>
+    <p>I wanted to try something different. The <strong>Walsh-Hadamard Transform (WHT)</strong> is a signal processing primitive that converts data into spectral coefficients using only addition and subtraction. A shellcode prologue like <code>fc 48 81 e4 f0 ff ff ff</code> becomes a sequence of signed integers like <code>+1801, &minus;1585, &minus;1799, &minus;663</code> after transformation. The entire computation stays in integer arithmetic, and the output is indistinguishable from scientific measurement data.</p>
 
     <p>What makes WHT interesting here:</p>
     <ul>
@@ -293,8 +293,8 @@
     <p>At each stage, pairs of elements are combined using this butterfly. After log<sub>2</sub>(N) stages, the transform is complete. The algorithm runs in O(N log N) time.</p>
 
     <figure>
-        <img src="../../assets/img/wht-shellcode/03-butterfly.png" alt="WHT butterfly operation diagram for N=8 showing three stages of pair-wise addition and subtraction">
-        <figcaption>Fig 1. The FWHT butterfly network for N=8. Green arrows show data flow; dashed red lines indicate the cross-connections where subtraction occurs.</figcaption>
+        <img src="../../assets/img/wht-shellcode/04-butterfly-values.png" alt="WHT butterfly operation for N=8 with actual integer values at each stage, showing three decomposition stages">
+        <figcaption>Fig 1. The FWHT butterfly network for N=8 with actual payload values propagated through each stage. Straight arrows carry the sum (u + v), cross-connections carry the difference (u &minus; v). The input vector x[n] transforms into spectral coefficients X[k] after log<sub>2</sub>(8) = 3 stages.</figcaption>
     </figure>
 
     <h3>The Self-Inverse Property</h3>
@@ -307,34 +307,34 @@
     <p>Same function for encode and decode. Just divide by N after the second pass. One function instead of two. Half the code footprint versus algorithms that need separate encrypt/decrypt routines.</p>
 
     <figure>
-        <img src="../../assets/img/wht-shellcode/01-original-bytes.png" alt="Bar chart of original shellcode byte values showing recognizable patterns">
-        <figcaption>Fig 2. Original payload byte values. The non-uniform distribution and visible patterns (clusters of 0x41, 0x48, 0x3e) are strong indicators for heuristic engines.</figcaption>
+        <img src="../../assets/img/wht-shellcode/01-hexdump-comparison.png" alt="Three-panel hex dump showing original payload bytes, WHT spectral coefficients, and restored payload with byte-for-byte match">
+        <figcaption>Fig 2. Full encode-decode hex dump. Top: original x64 payload (<code>fc 48 81 e4 f0 ff ...</code>) with recognizable PE prologue patterns. Middle: spectral coefficients after WHT + keyed permutation, now signed integers with values like +1801, &minus;1585. Bottom: restored payload after inverse permutation, inverse WHT, and normalization. Byte-for-byte match confirmed.</figcaption>
     </figure>
 
     <figure>
-        <img src="../../assets/img/wht-shellcode/02-spectral-noise.png" alt="Bar chart of WHT spectral coefficients showing noise-like distribution">
-        <figcaption>Fig 3. After WHT + spectral permutation. Signed integers, no recognizable structure. An int array of scientific-looking values does not trigger shellcode heuristics.</figcaption>
+        <img src="../../assets/img/wht-shellcode/02-pipeline-flow.png" alt="Full obfuscation pipeline showing payload through padding, forward WHT, spectral permutation, and reverse decode path">
+        <figcaption>Fig 3. The complete WHT obfuscation pipeline. The encode path (top) transforms <code>unsigned char[]</code> through zero-padding, forward WHT, and keyed spectral permutation. The decode path (bottom, dashed) reverses each step at runtime using the same WHT function.</figcaption>
     </figure>
 </section>
 
 <h2>Spectral Permutation Keying</h2>
 <section>
-    <p>WHT alone is deterministic. Anyone who knows the algorithm can reverse it. So after the forward transform, we shuffle the spectral coefficients with a <strong>seeded permutation</strong>. The shuffle acts as our key.</p>
+    <p>WHT alone is deterministic. Anyone who knows the algorithm can reverse it. To introduce key-dependence, we apply a <strong>seeded permutation</strong> to the spectral coefficients after the forward transform. The coefficient at index 0 might move to index 47; index 1 to index 203. Without the seed, the inverse permutation maps coefficients to wrong positions, and the subsequent inverse WHT produces garbage.</p>
 
-    <p>The permutation is a Fisher-Yates shuffle driven by a Linear Congruential Generator (LCG). The LCG parameters (multiplier 1664525, increment 1013904223) come from Numerical Recipes and produce a full-period sequence for any 32-bit seed.</p>
+    <p>The permutation uses a Fisher-Yates shuffle driven by a Linear Congruential Generator (LCG). The LCG parameters (<code>multiplier=1664525</code>, <code>increment=1013904223</code>) come from Numerical Recipes and produce a full-period sequence for any 32-bit seed. For our demo, the seed <code>0xCAFEBABE</code> generates a specific permutation of the 512 spectral coefficients.</p>
 
     <p>Without the correct key, the inverse permutation produces a wrong coefficient ordering, and the subsequent inverse WHT outputs garbage data:</p>
 
     <figure>
-        <img src="../../assets/img/wht-shellcode/04-key-comparison.png" alt="Side by side comparison showing correct key restores original bytes while wrong key produces garbage">
-        <figcaption>Fig 4. Correct key (0xCAFEBABE) restores the original payload perfectly. Wrong key (0xDEADBEEF) produces uncorrelated noise.</figcaption>
+        <img src="../../assets/img/wht-shellcode/05-key-sensitivity.png" alt="Four-panel figure showing key sensitivity analysis with correct vs wrong key restoration and byte-level heatmaps of original vs obfuscated data">
+        <figcaption>Fig 4. Key sensitivity analysis. Top left: restoration with the correct key (0xCAFEBABE) reproduces the original byte sequence exactly. Top right: a single-bit difference in the key (0xDEADBEEF) produces uncorrelated output. Bottom: byte-level heatmaps with hex overlay, showing the structural patterns in the original payload (left) versus the uniform distribution after WHT + permutation (right).</figcaption>
     </figure>
 
-    <p>Keyspace: N! permutations. For our 512-byte padded payload, that is 512! possible orderings. Roughly 10<sup>1166</sup>, or about 3,876 bits of entropy. Over 15x the key bits of AES-256.</p>
+    <p>The combinatorial keyspace is N! permutations. For our 512-element padded signal, that yields 512! possible orderings, approximately 10<sup>1166</sup>. In information-theoretic terms, this corresponds to ~3,876 bits of entropy, exceeding AES-256 by a factor of 15x in effective key length. Brute-forcing the permutation directly is computationally infeasible; the practical attack surface is the 32-bit LCG seed, which we discuss in the Limitations section.</p>
 
     <figure>
-        <img src="../../assets/img/wht-shellcode/05-entropy-heatmap.png" alt="Entropy heatmap showing original payload has visible patterns while obfuscated version appears uniform">
-        <figcaption>Fig 5. Byte-level heatmaps. Top: original payload with visible structural patterns. Bottom: after WHT + permutation, the byte distribution appears uniform.</figcaption>
+        <img src="../../assets/img/wht-shellcode/03-spectral-analysis.png" alt="Four-panel spectral analysis showing coefficient stem plot, magnitude spectrum, byte frequency distribution, and autocorrelation comparison">
+        <figcaption>Fig 5. Spectral analysis of the obfuscated output. Top left: coefficient values in the permuted spectral domain. Top right: magnitude spectrum sorted by rank, showing the energy distribution across coefficients. Bottom left: byte frequency histogram comparing the original payload against the low-byte projection of the spectral output. Bottom right: autocorrelation functions, demonstrating that the structural correlation present in the original shellcode (<code>0x48</code>, <code>0x3e</code> repeats) is eliminated after transformation.</figcaption>
     </figure>
 </section>
 
