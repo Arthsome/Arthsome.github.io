@@ -784,14 +784,17 @@ sup a { font-family: var(--font-mono); font-size: 0.75em; font-weight: 600; }
   .site-footer .inner { grid-template-columns: 1fr; gap: 28px; padding: 36px 18px 44px; }
 }
 /* ─── Particle portrait (hero) ─────────────────────────────────────────── */
-.hero-portrait { display: flex; flex-direction: column; gap: 0; align-self: start; }
+.hero-portrait { display: flex; flex-direction: column; gap: 0; align-self: start; position: relative; }
+.hero-portrait::before {
+  content: ""; position: absolute; inset: 0 0 -8% -4%; background: var(--acid); z-index: 0; pointer-events: none;
+}
 .portrait-frame {
   position: relative; aspect-ratio: 4 / 5; overflow: hidden;
   border: 1px solid var(--ink); background: #fff;
   cursor: crosshair; touch-action: pan-y;
   width: min(100%, 420px); max-width: 100%;
 }
-.hero .portrait-frame { width: min(100%, 460px); }
+.hero .portrait-frame { width: min(100%, 460px); position: relative; z-index: 1; }
 @media (max-width: 640px) {
   .portrait-frame { width: min(100%, 360px); margin: 0 auto; }
   .hero-title { font-size: clamp(34px, 10vw, 42px); }
@@ -892,6 +895,8 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 .fv-row b { font-weight: 600; color: var(--ink); }
 .fv-acid b { color: var(--acid-ink); }
 .fv-foot { font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); margin-top: 14px; }
+.fv-tech { margin-top: 14px; border-top: 1px dashed var(--line); padding-top: 12px; display: none; }
+.feat-visual:hover .fv-tech { display: block; }
 /* Dark stage (Section 04 — immersive full-bleed interruption) */
 .stage { margin: 72px 0 0; background: #141714; color: #f2f4ea; border-top: 1px solid #262b22; }
 .stage.dark { background: #141714; color: #f2f4ea; }
