@@ -20,7 +20,7 @@
   if (!gl) return; // fallback <img> remains visible
 
   var label = host.querySelector(".liquid-label");
-  var chapters = ["circuit board · evidence surface", "industrial mesh · mechanism", "infrastructure · detection"];
+  var chapters = ["hex dump comparison", "obfuscation pipeline", "key sensitivity"];
 
   var VERT = "attribute vec2 p;varying vec2 vUv;void main(){vUv=p*0.5+0.5;gl_Position=vec4(p,0.0,1.0);}";
   var FRAG =
@@ -117,9 +117,9 @@
     });
   }
 
-  var texA = "assets/img/research/pcb-circuit.webp";
-  var texB = "assets/img/research/mesh-industrial.webp";
-  var texC = "assets/img/research/server-rack.webp";
+  var texA = "assets/img/wht-shellcode/01-hexdump-comparison.png";
+  var texB = "assets/img/wht-shellcode/02-pipeline-flow.png";
+  var texC = "assets/img/wht-shellcode/05-key-sensitivity.png";
   var texD = "assets/img/textures/fractal-noise-large.webp";
 
   var ready = false;

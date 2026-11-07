@@ -32,31 +32,39 @@
 <main id="main">
   <div class="page-wrapper">
 
-    <section class="hero">
-      <div class="hero-copy reveal">
-        <div class="hero-kicker"><span class="eyebrow">Research · Projects · About</span></div><div class="wordmark" aria-label="Arthsome"><span class="wm-name">ARTHSOME</span><span class="wm-reg">®</span></div>
-        <h1 class="hero-title" aria-label="Investigating the boundaries of systems."><span class="mask-line"><span style="--d:0ms">Investigating</span></span><span class="mask-line"><span style="--d:110ms">the <span class="accent">boundaries</span></span></span><span class="mask-line"><span style="--d:220ms">of systems.</span></span></h1>
-        <p class="hero-desc">Independent vulnerability analysis, reverse engineering, and incident response documentation. Every analysis is published after a vendor patch or responsible disclosure, with detection artefacts and mitigation steps defenders can use on day one.</p>
-        <div class="hero-actions">
-          <a href="posts/index.html" class="btn btn-primary">Read the research <span class="arrow ui-ico" aria-hidden="true"><svg width="16" height="16"><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></span></a>
-          <a href="about/index.html" class="btn btn-ghost">About the researcher</a>
-        </div>
+    <!-- ═══ FORENSIC HERO · asymmetric, viewport-dominant ═══ -->
+    <section class="hero hero--forensic">
+      <div class="hero-masthead reveal">
+        <span class="hm-strip">Independent research log</span>
+        <span class="hm-strip">Vol. 01 — Field notes</span>
+        <span class="hm-strip">Defensive purpose only</span>
       </div>
-      <div class="hero-portrait reveal reveal-delay-1">
-        <div class="portrait-frame" id="portraitFrame" data-portrait="assets/img/portrait/crystal.png" aria-label="Particle crystal of Arthsome. Move pointer or drag across it.">
-          <img class="portrait-fallback" src="assets/img/portrait/crystal.png" alt="Acid-lime crystal" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
-          <canvas id="portraitCanvas" width="640" height="800"></canvas>
-          <span class="portrait-scan" aria-hidden="true"></span>
+      <div class="hero-wordmark reveal" aria-label="Arthsome"><span class="hero-wm-name">ARTHSOME</span><span class="hero-wm-reg">®</span></div>
+      <div class="hero-grid">
+        <div class="hero-copy reveal">
+          <div class="hero-kicker"><span class="eyebrow">Research · Projects · About</span></div>
+          <h1 class="hero-title" aria-label="Investigating the boundaries of systems.">
+            <span class="mask-line line-lg"><span style="--d:0ms">Investigating</span></span><span class="mask-line line-md"><span style="--d:110ms">the <span class="accent">boundaries</span></span></span><span class="mask-line line-xl"><span style="--d:220ms">of systems.</span></span>
+          </h1>
+          <p class="hero-desc">Independent vulnerability analysis, reverse engineering, and incident response documentation. Every analysis is published after a vendor patch or responsible disclosure, with detection artefacts and mitigation steps defenders can use on day one.</p>
+          <div class="hero-actions">
+            <a href="posts/index.html" class="btn btn-primary">Read the research <span class="arrow ui-ico" aria-hidden="true"><svg width="16" height="16"><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></span></a>
+            <a href="about/index.html" class="btn btn-ghost">About the researcher</a>
+          </div>
+          <div class="hero-footnote">
+            <span>EST. 2026</span><span aria-hidden="true">·</span><span>ACTIVE RECORD: 02 ANALYSES</span><span aria-hidden="true">·</span><span>SCROLL TO EXPLORE ↓</span>
+          </div>
         </div>
-        <div class="portrait-meta glass"><span>Fig. 01 — <span class="pm-acid">Particle crystal</span></span><span>04:05 · Halftone/Corrupt</span></div>
+        <figure class="hero-figure reveal reveal-delay-1">
+          <div class="hero-fig-acid" aria-hidden="true"></div>
+          <img class="hero-fig-img" src="assets/img/wht-shellcode/03-spectral-analysis.png" alt="Walsh spectrum analysis from the WHT obfuscation technique note" width="2394" height="1267" fetchpriority="high" />
+          <img class="hero-fig-ghost" src="assets/img/wht-shellcode/03-spectral-analysis.png" alt="" aria-hidden="true" />
+          <figcaption class="hero-fig-cap">
+            <span>FIG. 01 — SPECTRAL ANALYSIS</span>
+            <span>EWHT · N = 1024 · INTEGER ONLY</span>
+          </figcaption>
+        </figure>
       </div>
-    </section>
-
-    <section class="hero-meta reveal" aria-label="Research metadata">
-      <span class="hm-item">Independent security researcher</span><span class="hm-sep">/</span>
-      <span class="hm-item">CVE analysis</span><span class="hm-sep">/</span>
-      <span class="hm-item">Vulnerability research</span><span class="hm-sep">/</span>
-      <span class="hm-item hm-scroll">Scroll to explore <span aria-hidden="true">↓</span></span>
     </section>
 
     <nav class="dock" aria-label="Explore directories">
@@ -82,171 +90,98 @@
       <div class="dock-bubble glass" id="dockBubble" hidden><span class="db-idx">01</span><span class="db-name">Research</span><span class="db-desc">—</span><span class="db-go ui-ico">Explore <svg><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></span></div>
     </nav>
 
-    <div class="stats-strip reveal" role="list" aria-label="Research snapshot">
-      <div class="stat"><div class="stat-value">02<span class="stat-mark">.</span></div><div class="stat-label">Published analyses, from CVE deep dive to evasion technique</div></div>
-      <div class="stat"><div class="stat-value">01<span class="stat-mark">.</span></div><div class="stat-label">CVE report with detection rules, SIEM queries, and remediation</div></div>
-      <div class="stat"><div class="stat-value">100<span class="stat-mark">%</span></div><div class="stat-label">Defensive purpose. No working payloads, ever</div></div>
-      <div class="stat"><div class="stat-value">08<span class="stat-mark">.</span></div><div class="stat-label">Disciplines covered, from vuln research to forensics</div></div>
+    <div class="evidence-strip reveal" aria-label="Research snapshot">
+      <div class="ev-item"><b>02</b><span>published analyses</span></div>
+      <div class="ev-item"><b>01</b><span>CVE report with detection rules</span></div>
+      <div class="ev-item"><b>100%</b><span>defensive purpose — no working payloads</span></div>
+      <div class="ev-item"><b>08</b><span>disciplines, vuln research to forensics</span></div>
     </div>
 
-    <section class="section feat-sec">
+    <!-- ═══ SELECTED RESEARCH · EVIDENCE BOARD ═══ -->
+    <section class="section board-sec" data-board>
       <div class="section-head reveal">
         <div>
           <span class="eyebrow">Selected research</span>
-          <h2 class="section-title">One analysis, complete.</h2>
-          <p class="section-lede">One publication receives full width. Everything else is an index entry. No invented metrics; every claim links to evidence.</p>
+          <h2 class="section-title board-title">The evidence board.</h2>
+          <p class="section-lede">Select a publication. The figure, its forensic metadata, and the technical thread switch together — nothing here is decorative, every label traces to the article.</p>
         </div>
       </div>
-      <a class="featured reveal" href="posts/cve-2025-20281/index.html">
-        <div class="feat-copy">
-          <div class="post-card-meta"><span class="tag-severity critical">Featured</span><span class="tag-type">CVE</span><span class="tag-type">RCE</span><span class="post-date">2026-02-10</span></div>
-          <h3 class="feat-title">CVE-2025-20281 — Unauthenticated RCE in Cisco ISE</h3>
-          <p class="feat-desc">Input validation failure in the Cisco ISE management API allows unauthenticated command execution with elevated privileges. CVSS 10.0.</p>
-          <p class="feat-meta">Classification: Critical · CWE-862 Missing Authorization · Evidence-backed · Disclosure: post-patch only</p>
-          <span class="feat-link">Read the full analysis <span class="ui-ico" aria-hidden="true"><svg><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></span></span>
+
+      <div class="board reveal">
+        <div class="board-rail">
+          <button type="button" class="board-entry is-active" data-entry="wht" aria-pressed="true">
+            <span class="be-idx">01</span>
+            <span class="be-main">
+              <span class="be-tags"><span class="tag-type">Technique</span><span class="tag-type">EWHT</span></span>
+              <span class="be-title">Payload obfuscation via Walsh&ndash;Hadamard transform</span>
+              <span class="be-meta">2026-03-27 · 5 figures · YARA + Sigma inside</span>
+            </span>
+            <span class="be-open">Read <span class="ui-ico" aria-hidden="true"><svg><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></span></span>
+          </button>
+          <button type="button" class="board-entry" data-entry="cve" aria-pressed="false">
+            <span class="be-idx">02</span>
+            <span class="be-main">
+              <span class="be-tags"><span class="tag-severity critical">Critical</span><span class="tag-type">CVE-2025-20281</span></span>
+              <span class="be-title">Unauthenticated RCE in Cisco ISE</span>
+              <span class="be-meta">2026-02-10 · CVSS 10.0 · post-patch disclosure</span>
+            </span>
+            <span class="be-open">Read <span class="ui-ico" aria-hidden="true"><svg><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></span></span>
+          </button>
+          <div class="board-note">Hover or select to preview. CVE is shown as verified data only — no invented imagery.</div>
         </div>
-        <div class="feat-visual glass glass--media">
-          <div class="fv-media">
-            <img class="fv-photo" src="assets/img/research/pcb-circuit.webp" alt="Dusty circuit board macro — research evidence surface" width="960" height="1440" loading="lazy" />
-            <span class="fv-chip">Fig. 01 · evidence surface</span>
+
+        <div class="board-panel">
+          <div class="board-fig">
+            <img id="boardImg" src="assets/img/wht-shellcode/03-spectral-analysis.png" alt="Spectral analysis figure from the WHT technique note" width="2394" height="1267" />
+            <span id="boardChip" class="board-chip">FIG. 03 — SPECTRAL ANALYSIS</span>
+            <span class="board-fig-dim" id="boardDim">2394 × 1267 · PNG</span>
           </div>
-          <div class="fv-body">
-            <div class="fv-label">Admission path</div>
-            <div class="fv-row"><span>01</span><b>Unauth request</b></div>
-            <div class="fv-row"><span>02</span><b>Management API · role check missing</b></div>
-            <div class="fv-row fv-acid"><span>03</span><b>Elevated command execution</b></div>
-            <div class="fv-foot">Evidence-led · Detection rules inside</div>
-            <div class="fv-tech" hidden>
-              <div class="fv-label">Technical thread</div>
-              <div class="fv-row"><span>CWE</span><b>862 · Missing Authorization</b></div>
-              <div class="fv-row"><span>Fix</span><b>RBAC enforcement on management API</b></div>
-              <div class="fv-row"><span>Detect</span><b>Detection rules · SIEM queries</b></div>
+          <div class="board-fig-rail" role="tablist" aria-label="WHT figures">
+            <button type="button" class="bf-btn" data-fig="0" aria-pressed="false">01 <span>hexdump</span></button>
+            <button type="button" class="bf-btn" data-fig="1" aria-pressed="false">02 <span>pipeline</span></button>
+            <button type="button" class="bf-btn is-active" data-fig="2" aria-pressed="true">03 <span>spectral</span></button>
+            <button type="button" class="bf-btn" data-fig="3" aria-pressed="false">04 <span>butterfly</span></button>
+            <button type="button" class="bf-btn" data-fig="4" aria-pressed="false">05 <span>key</span></button>
+          </div>
+          <div class="board-body">
+            <div class="board-head">
+              <span class="board-label" id="boardLabel">Mechanism</span>
+              <a class="board-cta" id="boardCta" href="posts/wht-shellcode-obfuscation/index.html">Open the technique note</a>
+            </div>
+            <div id="boardRows">
+              <div class="fv-row"><span>01</span><b>Input · shellcode bytes</b></div>
+              <div class="fv-row"><span>02</span><b>Transform · Walsh&ndash;Hadamard</b></div>
+              <div class="fv-row"><span>03</span><b>Permute · spectral key</b></div>
+              <div class="fv-row"><span>04</span><b>Output · permuted bytes</b></div>
+            </div>
+            <div class="board-foot" id="boardFoot">Integer-only butterfly · no S-boxes · no crypto constants · no math library</div>
+            <div class="board-tech" id="boardTech">
+              <span class="board-label">Implementation</span>
+              <div class="fv-row"><span>Integer-only</span><b>Butterfly, no S-boxes</b></div>
+              <div class="fv-row"><span>Detection</span><b>YARA + Sigma inside</b></div>
+              <div class="fv-row"><span>MITRE</span><b>T1027 / T1055</b></div>
             </div>
           </div>
         </div>
-      </a>
-    </section>
-    <section class="section">
-      <div class="section-head reveal">
-        <div>
-          <span class="eyebrow">Domains</span>
-          <h2 class="section-title">What I actually work on</h2>
-          <p class="section-lede">Four lanes, one standard: publish only when the finding is verified, the fix is shipped, and a defender can detect the risk without re-running the attack.</p>
-        </div>
-      </div>
-      <div class="layers reveal">
-        <div class="layer">
-          <span class="layer-idx">01</span>
-          <span class="layer-name">Vulnerability Analysis</span>
-          <span class="layer-desc">Root-cause writeups for disclosed CVEs: the broken invariant, the exact endpoint or code path, and why the patch holds.</span>
-          <span class="layer-arrow ui-ico" aria-hidden="true"><svg><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></span>
-        </div>
-        <div class="layer">
-          <span class="layer-idx">02</span>
-          <span class="layer-name">Detection Engineering</span>
-          <span class="layer-desc">Suricata rules, Sigma and SIEM queries, and audit-log checks shipped with every report, so detection lands with the disclosure.</span>
-          <span class="layer-arrow ui-ico" aria-hidden="true"><svg><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></span>
-        </div>
-        <div class="layer">
-          <span class="layer-idx">03</span>
-          <span class="layer-name">Reverse Engineering</span>
-          <span class="layer-desc">Disassembly and behavioural analysis of binaries and obfuscation techniques, from transform-based evasion to shellcode delivery.</span>
-          <span class="layer-arrow ui-ico" aria-hidden="true"><svg><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></span>
-        </div>
-        <div class="layer">
-          <span class="layer-idx">04</span>
-          <span class="layer-name">Incident Response</span>
-          <span class="layer-desc">Forensic and threat-intelligence notes that help responders validate scope, hunt for the pattern, and close the loop.</span>
-          <span class="layer-arrow ui-ico" aria-hidden="true"><svg><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></span>
-        </div>
       </div>
     </section>
 
-    <section class="section">
-      <div class="section-head reveal">
-        <div>
-          <span class="eyebrow">Index</span>
-          <h2 class="section-title">Recent posts</h2>
-          <p class="section-lede">The two published analyses. Open either for the full writeup, figures, and detection artefacts.</p>
-        </div>
-        <a href="posts/index.html" class="view-all">All posts &rarr;</a>
-      </div>
-
-      <div class="post-list reveal">
-        <a class="post-card" href="posts/wht-shellcode-obfuscation/index.html">
-          <span class="post-card-idx">01</span>
-          <div>
-            <div class="post-card-meta">
-              <span class="tag-severity medium">Technique</span>
-              <span class="tag-type">Obfuscation</span>
-              <span class="tag-type">Signal Processing</span>
-              <span class="tag-type">Evasion</span>
-              <span class="post-date">2026-03-27</span>
-            </div>
-            <div class="post-card-title">Payload Obfuscation via Walsh&ndash;Hadamard Transform</div>
-            <div class="post-card-excerpt">Using the Fast Walsh&ndash;Hadamard Transform with spectral permutation keying to hide shellcode in integer noise. No floating point, no crypto-constants, no math library.</div>
-          </div>
-          <span class="post-card-arrow ui-ico" aria-hidden="true"><svg><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></span>
-        </a>
-        <a class="post-card" href="posts/cve-2025-20281/index.html">
-          <span class="post-card-idx">02</span>
-          <div>
-            <div class="post-card-meta">
-              <span class="tag-severity critical">Critical</span>
-              <span class="tag-type">CVE</span>
-              <span class="tag-type">RCE</span>
-              <span class="tag-type">Cisco ISE</span>
-              <span class="post-date">2026-02-10</span>
-            </div>
-            <div class="post-card-title">CVE-2025-20281 &mdash; Unauthenticated RCE in Cisco ISE</div>
-            <div class="post-card-excerpt">Input validation failure in the Cisco ISE management API allows unauthenticated command execution with elevated privileges. CVSS 10.0.</div>
-          </div>
-          <span class="post-card-arrow ui-ico" aria-hidden="true"><svg><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></span>
-        </a>
-      </div>
-    </section>
-
-    <section class="section proj-sec">
-      <div class="section-head reveal">
-        <div>
-          <span class="eyebrow">Projects</span>
-          <h2 class="section-title">Checked-out experiments.</h2>
-          <p class="section-lede">Only real repositories. One featured, the rest as index lines — status included, no invented claims.</p>
-        </div>
-      </div>
-      <a class="proj-feat reveal" href="https://github.com/Arthsome/oh-my-pi">
-        <div class="pf-copy">
-          <div class="post-card-meta"><span class="tag-severity medium">Featured</span><span class="tag-type">Coding agent</span><span class="post-date">2026-10-26</span></div>
-          <h3 class="feat-title">oh-my-pi</h3>
-          <p class="feat-desc">⌥ Coding agent with the IDE wired in. Built by Stencil Labs.</p>
-          <p class="feat-meta">github.com/Arthsome/oh-my-pi ↗</p>
-        </div>
-        <div class="pf-visual glass"><div class="fv-label">repo preview</div><div class="fv-row"><span>↳</span><b>IDE integration</b></div><div class="fv-row fv-acid"><span>●</span><b>Active · public</b></div></div>
-      </a>
-      <div class="proj-list reveal">
-        <a class="proj-row" href="https://github.com/Arthsome/hyp011-live-poc"><span class="pl-idx">01</span><span class="pl-name">hyp011-live-poc</span><span class="pl-lang">PoC fixture · adapter-github write-path</span><span class="pl-date">2026-10-11</span><span aria-hidden="true">↗</span></a>
-        <a class="proj-row" href="https://github.com/Arthsome/turbo-token-exfil"><span class="pl-idx">02</span><span class="pl-name">turbo-token-exfil</span><span class="pl-lang">PoC · remoteCache vs account token</span><span class="pl-date">2026-10-08</span><span aria-hidden="true">↗</span></a>
-        <a class="proj-row" href="https://github.com/Arthsome/skills-deref-poc"><span class="pl-idx">03</span><span class="pl-name">skills-deref-poc</span><span class="pl-lang">PoC · skills symlink-deref in CI</span><span class="pl-date">2026-10-07</span><span aria-hidden="true">↗</span></a>
-        <a class="proj-row" href="https://github.com/Arthsome/chime-health-check"><span class="pl-idx">04</span><span class="pl-name">chime-health-check</span><span class="pl-lang">Python</span><span class="pl-date">2026-03-02</span><span aria-hidden="true">↗</span></a>
-      </div>
-    </section>
-  </div>
-
-    <section class="stage dark reveal" aria-label="Technical stage">
-      <div class="stage-inner">
-        <div class="stage-head">
+    <!-- ═══ SIGNATURE CHAPTER · liquid evidence banner + inside the research ═══ -->
+    <section class="stage dark reveal" aria-label="Inside the research">
+      <div class="liquid-stage" data-liquid>
+        <img class="liquid-fallback" src="assets/img/wht-shellcode/01-hexdump-comparison.png" alt="WHT research figures — hex dump comparison, pipeline flow, and key sensitivity — with liquid distortion as you scroll." />
+        <canvas class="liquid-canvas" aria-hidden="true"></canvas>
+        <div class="liquid-head">
           <span class="eyebrow light">Inside the research</span>
-          <h2 class="stage-title">EWHT obfuscation, dissected.<br><span class="dim">Signal processing as an evasion surface.</span></h2>
+          <h2 class="stage-title">Evidence, processed.<br><span class="dim">Signal processing as an evasion surface.</span></h2>
         </div>
+        <div class="liquid-frame">
+          <span class="liquid-label">chapter 01 — hex dump comparison</span>
+          <span class="liquid-meta">scroll-linked displacement · webgl</span>
+        </div>
+      </div>
+      <div class="stage-inner">
         <div class="stage-grid">
-          <div class="liquid-stage" data-liquid>
-            <img class="liquid-fallback" src="assets/img/research/pcb-circuit.webp" alt="Research evidence imagery: a dusty circuit board, industrial mesh, and server infrastructure crossfade with liquid distortion as you scroll." loading="lazy" />
-            <canvas class="liquid-canvas" aria-hidden="true"></canvas>
-            <div class="liquid-frame">
-              <span class="liquid-label">chapter 01 — circuit board · evidence surface</span>
-              <span class="liquid-meta">scroll-linked displacement · webgl</span>
-            </div>
-          </div>
           <div class="stage-code">
             <div class="sc-label">evidence // spectral permute</div>
             <pre><code><span class="keyword">void</span> <span class="function">fwht</span>(int *x, int n) {
@@ -257,7 +192,7 @@
         x[i + j] = a + b; x[i + j + h] = a - b;
       }
 }</code></pre>
-            <p class="stage-note">Integer-only butterfly. No S-boxes, no crypto constants, no math library. <a href="posts/wht-shellcode-obfuscation/index.html">Full technique note ↗</a></p>
+            <p class="stage-note">Integer-only butterfly. No S-boxes, no crypto constants, no math library. <a href="posts/wht-shellcode-obfuscation/index.html">Full technique note <span class="ui-ico" aria-hidden="true"><svg><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></span></a></p>
           </div>
           <div class="stage-visual">
             <div class="sv-label">architecture — transform-based obfuscation</div>
@@ -291,10 +226,71 @@
         </div>
       </div>
     </section>
+
+    <!-- ═══ DOMAINS · TYPOGRAPHIC INDEX ═══ -->
+    <section class="section dom-sec">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Domains</span>
+          <h2 class="section-title">What I actually work on</h2>
+          <p class="section-lede">Four lanes, one standard: publish only when the finding is verified, the fix is shipped, and a defender can detect the risk without re-running the attack.</p>
+        </div>
+      </div>
+      <ol class="dom-index reveal">
+        <li class="dom-row row-a">
+          <span class="dom-num">01</span>
+          <span class="dom-name">Vulnerability Analysis</span>
+          <span class="dom-desc">Root-cause writeups for disclosed CVEs: the broken invariant, the exact endpoint or code path, and why the patch holds.</span>
+        </li>
+        <li class="dom-row row-b">
+          <span class="dom-num">02</span>
+          <span class="dom-name">Detection Engineering</span>
+          <span class="dom-desc">Suricata rules, Sigma and SIEM queries, and audit-log checks shipped with every report, so detection lands with the disclosure.</span>
+        </li>
+        <li class="dom-row row-c">
+          <span class="dom-num">03</span>
+          <span class="dom-name">Reverse Engineering</span>
+          <span class="dom-desc">Disassembly and behavioural analysis of binaries and obfuscation techniques, from transform-based evasion to shellcode delivery.</span>
+        </li>
+        <li class="dom-row row-d">
+          <span class="dom-num">04</span>
+          <span class="dom-name">Incident Response</span>
+          <span class="dom-desc">Forensic and threat-intelligence notes that help responders validate scope, hunt for the pattern, and close the loop.</span>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ═══ PROJECTS · CURATED ARCHIVE ═══ -->
+    <section class="section proj-sec">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Projects</span>
+          <h2 class="section-title">Checked-out experiments.</h2>
+          <p class="section-lede">Only real repositories. One featured, the rest as index entries — status included, no invented claims.</p>
+        </div>
+      </div>
+      <a class="proj-feat reveal" href="https://github.com/Arthsome/oh-my-pi">
+        <span class="pf-idx">★</span>
+        <span class="pf-main">
+          <span class="pf-name">oh-my-pi</span>
+          <span class="pf-desc">⌥ Coding agent with the IDE wired in. Built by Stencil Labs.</span>
+        </span>
+        <span class="pf-meta">Coding agent · 2026-10-26 · Active</span>
+        <span class="pf-arrow ui-ico" aria-hidden="true"><svg><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></span>
+      </a>
+      <ol class="proj-index reveal">
+        <li><a class="proj-row" href="https://github.com/Arthsome/hyp011-live-poc"><span class="pl-idx">01</span><span class="pl-name">hyp011-live-poc</span><span class="pl-meta">PoC fixture · adapter-github write-path · 2026-10-11</span><span class="pf-arrow ui-ico" aria-hidden="true"><svg><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></span></a></li>
+        <li><a class="proj-row" href="https://github.com/Arthsome/turbo-token-exfil"><span class="pl-idx">02</span><span class="pl-name">turbo-token-exfil</span><span class="pl-meta">PoC · remoteCache vs account token · 2026-10-08</span><span class="pf-arrow ui-ico" aria-hidden="true"><svg><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></span></a></li>
+        <li><a class="proj-row" href="https://github.com/Arthsome/skills-deref-poc"><span class="pl-idx">03</span><span class="pl-name">skills-deref-poc</span><span class="pl-meta">PoC · skills symlink-deref in CI · 2026-10-07</span><span class="pf-arrow ui-ico" aria-hidden="true"><svg><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></span></a></li>
+        <li><a class="proj-row" href="https://github.com/Arthsome/chime-health-check"><span class="pl-idx">04</span><span class="pl-name">chime-health-check</span><span class="pl-meta">Python · 2026-03-02</span><span class="pf-arrow ui-ico" aria-hidden="true"><svg><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></span></a></li>
+      </ol>
+    </section>
+  </div>
 </main>
 
 <footer class="site-footer">
   <div class="footer-ending" role="img" aria-label="Arthsome — wordmark ending">
+    <span class="fe-kicker">Fin — end of transmission</span>
     <span class="fe-word">ARTHSOME<span class="fe-reg">®</span></span>
     <span class="fe-tag">Investigating the boundaries of systems.</span>
   </div>
@@ -325,9 +321,8 @@
     </div>
   </div>
 </footer>
-<script src="assets/js/portrait.js" defer></script>
-<script src="assets/js/research-preview.js" defer></script>
 <script src="assets/js/dock.js" defer></script>
+<script src="assets/js/research-preview.js" defer></script>
 <script>
 (function(){
   var t=document.getElementById('nav-toggle'),n=document.getElementById('nav-links');
@@ -336,13 +331,11 @@
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&n.classList.contains('open')){n.classList.remove('open');t.setAttribute('aria-expanded','false');t.focus();}});}
   var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.remove('out-view');e.target.classList.add('in-view');}else{e.target.classList.remove('in-view');e.target.classList.add('out-view');}});},{threshold:0.12,rootMargin:'0px 0px -6% 0px'}):null;
   document.querySelectorAll('.reveal').forEach(function(el){if(io){io.observe(el);}else{el.classList.add('in-view');}});
-  // hero title lines: replay with scroll
   var hero=document.querySelector('.hero'); if(hero){hero.classList.add('in-view');}
   var bar=document.getElementById('reading-progress');
   if(bar){var on=function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;bar.style.width=(m>0?(h.scrollTop/m)*100:0)+'%';};window.addEventListener('scroll',on,{passive:true});on();}
 })();
 </script>
-<script src="assets/js/inspect-cursor.js" defer></script>
 <script src="assets/js/liquid-stage.js" defer></script>
 </body>
 </html>

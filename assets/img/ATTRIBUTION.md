@@ -4,29 +4,23 @@ All assets in `assets/img/` are self-hosted (no hotlinks). Sources below.
 
 ## Textures & icons — MOTION/LAB (CC0 1.0 Universal)
 
-- **Grain-noise texture pack** — `assets/img/textures/`
-  Film grain, halftone dots, fractal noise, scanlines, dust/speckle,
-  brushed metal, paper fibre. Procedurally generated, seamless 1024×1024 WebP.
-  Source: https://motionlab.one/assets/packs/grain-noise-textures-12/
-  License: CC0 1.0 — no attribution required; included here for provenance.
-- **Line icon set (48 SVG, 24px grid, 1.5px stroke, currentColor)** —
-  `assets/img/ui/` (sprite.svg + individual files).
-  Source: https://motionlab.one/assets/packs/line-icons-48/
-  License: CC0 1.0.
+Retained after the forensic-editorial redesign (decorative layers removed):
 
-## Photography — Pexels License
+- **Fractal noise displacement map** — `assets/img/textures/fractal-noise-large.webp`
+  (used by the WebGL liquid stage). Rest of the grain pack was evaluated and
+  removed as decorative. Pack: https://motionlab.one/assets/packs/grain-noise-textures-12/
+  License: CC0 1.0 — included for provenance.
+- **Line icon sprite** — `assets/img/ui/sprite.svg` (48 icons, 24px grid,
+  1.5px stroke, currentColor). Individual files removed; sprite only.
+  Pack: https://motionlab.one/assets/packs/line-icons-48/ — License: CC0 1.0.
 
-Optimized to WebP (max-width 1600px) for web delivery; originals unchanged in source.
+## Photography (removed)
 
-- `assets/img/research/pcb-circuit.webp` — dusty circuit board macro.
-  Jakub Pabis. https://www.pexels.com/photo/close-up-of-a-dusty-computer-circuit-board-36169778/
-- `assets/img/research/mesh-industrial.webp` — industrial metal mesh.
-  Jonathan Borba. https://www.pexels.com/photo/close-up-of-industrial-metal-mesh-pattern-36346048/
-- `assets/img/research/server-rack.webp` — server infrastructure.
-  Panumas Nikhomkhai. https://www.pexels.com/photo/server-rack-in-modern-data-center-37605910/
-
-Pexels License: free to use for personal/commercial projects; no attribution
-required, provided here for provenance.
+Pexels stock photos (circuit board / mesh / server) were downloaded and
+tested, then removed — the homepage now uses the site's own WHT article
+figures (`assets/img/wht-shellcode/`, MIT-licensed research artefacts from
+posts/wht-shellcode-obfuscation) as the primary visual material. Stock
+originals: Pexels (Jakub Pabis, Jonathan Borba, Panumas Nikhomkhai).
 
 ## Liquid distortion effect
 
