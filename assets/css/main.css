@@ -855,4 +855,97 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 @media (prefers-reduced-motion: reduce) {
   .reveal, .mask-line > span { opacity: 1 !important; transform: none !important; filter: none !important; animation: none !important; }
 }
-
+/* ─── Editorial wordmark ────────────────────────────────────────────────── */
+.wordmark { margin: 14px 0 6px; line-height: 1; }
+.wm-name { font-family: var(--font-display); font-weight: 800; font-size: clamp(44px, 6vw, 72px); letter-spacing: -0.04em; color: var(--ink); }
+.wm-reg { font-size: 20px; vertical-align: super; color: var(--acid-ink); font-weight: 700; }
+/* Hero metadata strip */
+.hero-meta { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--line); margin-top: 28px; }
+.hm-item { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+.hm-sep { color: var(--acid-ink); }
+.hm-scroll { color: var(--ink); }
+/* Featured (Section 02 — asymmetric 2/3) */
+.featured { display: grid; grid-template-columns: 1.6fr 1fr; gap: 0; border: 1px solid var(--line); margin-top: 28px; text-decoration: none; color: inherit; }
+.featured:hover { border-color: var(--ink); }
+.feat-copy { padding: 32px 32px 36px; }
+.feat-title { font-family: var(--font-display); font-size: clamp(28px, 3.2vw, 40px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; margin: 14px 0 12px; color: var(--ink); }
+.feat-desc { font-size: 16px; color: var(--ink-2); line-height: 1.65; max-width: 56ch; }
+.feat-meta { font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); margin-top: 16px; }
+.feat-link { display: inline-block; margin-top: 18px; font-weight: 700; color: var(--ink); border-bottom: 3px solid var(--acid); padding-bottom: 2px; }
+.feat-visual { border-left: 1px solid var(--line); padding: 24px; position: relative; }
+.fv-label,.sc-label,.sv-label { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 14px; }
+.fv-row { display: flex; gap: 14px; padding: 12px 0; border-top: 1px dashed var(--line); font-size: 14px; }
+.fv-row span { font-family: var(--font-mono); color: var(--ink-3); }
+.fv-row b { font-weight: 600; color: var(--ink); }
+.fv-acid b { color: var(--acid-ink); }
+.fv-foot { font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); margin-top: 14px; }
+/* Dark stage (Section 04 — immersive interruption) */
+.stage { margin: 72px 0 0; border-top: 4px solid var(--ink); }
+.stage.dark { background: #141714; color: #f2f4ea; }
+.stage-inner { padding: 56px 0 64px; }
+.eyebrow.light { color: #aab1a3; }
+.eyebrow.light::before { background: var(--acid); }
+.stage-title { font-family: var(--font-display); font-size: clamp(32px, 4.5vw, 52px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; margin-top: 14px; }
+.stage-title .dim { color: #9aa392; }
+.stage-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 32px; margin-top: 36px; }
+.stage-code { border: 1px solid #33382e; background: #101210; padding: 22px; }
+.stage-code pre { background: transparent; border: none; padding: 0; margin: 0; }
+.stage-code pre code { font-size: 13px; line-height: 1.6; color: #e6e9dd; background: transparent; border: none; }
+.stage-note { font-size: 14px; color: #c9cec0; margin-top: 16px; line-height: 1.6; }
+.stage-note a { color: var(--acid); }
+.stage-visual { border: 1px solid #33382e; background: #0c0d0b; padding: 22px; }
+.stage-visual svg { width: 100%; height: auto; display: block; }
+.sv-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.sv-grid span { font-family: var(--font-mono); font-size: 11px; color: var(--acid); border: 1px solid #33382e; padding: 6px 8px; text-transform: uppercase; letter-spacing: 0.06em; }
+/* Projects (Section 06) */
+.proj-feat { display: grid; grid-template-columns: 1.4fr 1fr; border: 1px solid var(--line); margin-top: 28px; text-decoration: none; color: inherit; }
+.proj-feat:hover { border-color: var(--ink); }
+.pf-copy { padding: 28px 30px 30px; }
+.pf-visual { border-left: 1px solid var(--line); padding: 22px; }
+.proj-list { border-top: 1px solid var(--line); margin-top: 24px; }
+.proj-row { display: grid; grid-template-columns: 48px 1.2fr 1.6fr 96px 18px; gap: 16px; align-items: baseline; padding: 16px 6px; border-bottom: 1px solid var(--line); text-decoration: none; color: inherit; }
+.proj-row:hover { background: var(--paper); }
+.pl-idx { font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); }
+.pl-name { font-family: var(--font-display); font-weight: 600; font-size: 16px; color: var(--ink); word-break: break-all; }
+.pl-lang { font-size: 13px; color: var(--ink-3); }
+.pl-date { font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); text-align: right; }
+/* ─── Folder dock ─────────────────────────────────────────────────────────── */
+.dock { margin-top: 44px; border: 1px solid var(--line); padding: 18px 20px 14px; position: relative; }
+.dock-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 14px; }
+.dock-rail { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.dock-item { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 18px 8px 14px; border: 1px solid var(--line); text-decoration: none; color: var(--ink); min-height: 120px; justify-content: flex-start; transform: scale(var(--s, 1)); transition: transform 260ms cubic-bezier(0.22,1,0.36,1), border-color 200ms; }
+.dock-item:hover, .dock-item:focus-visible { border-color: var(--ink); }
+.dock-item:focus-visible { outline: 2px solid var(--acid-mid); outline-offset: 2px; }
+.dock-icon svg { width: 56px; height: 44px; display: block; }
+.fld-back { fill: var(--paper); stroke: var(--ink); stroke-width: 2; }
+.fld-front { fill: var(--acid); stroke: var(--ink); stroke-width: 2; }
+.fld-doc { fill: #fff; stroke: var(--ink); stroke-width: 1.5; transition: transform 260ms cubic-bezier(0.22,1,0.36,1); }
+.dock-item:hover .fld-doc, .dock-item:focus-visible .fld-doc, .dock-item.active .fld-doc { transform: translateY(-4px); }
+.dock-label-txt { font-weight: 700; font-size: 14.5px; font-family: var(--font-display); }
+.dock-idx { font-family: var(--font-mono); font-size: 10px; color: var(--acid-ink); letter-spacing: 0.1em; }
+/* Liquid-glass bubble — shared, anchored to active item */
+.dock-bubble { position: absolute; left: 20px; right: 20px; bottom: calc(100% + 12px); padding: 14px 16px; display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; transform: translateY(6px); opacity: 0; pointer-events: none; transition: opacity 220ms, transform 220ms; }
+.dock-bubble.show { opacity: 1; transform: translateY(0); }
+.db-idx { font-family: var(--font-mono); font-size: 11px; color: var(--acid-ink); }
+.db-name { font-family: var(--font-display); font-weight: 700; font-size: 15px; }
+.db-desc { font-size: 13.5px; color: var(--ink-2); }
+.db-go { margin-left: auto; font-size: 12px; font-weight: 700; }
+@media (max-width: 960px) {
+  .featured, .proj-feat, .stage-grid { grid-template-columns: 1fr; }
+  .feat-visual, .pf-visual { border-left: none; border-top: 1px solid var(--line); }
+  .proj-row { grid-template-columns: 40px 1fr 18px; }
+  .pl-lang, .pl-date { display: none; }
+}
+@media (max-width: 640px) {
+  .dock-rail { grid-template-columns: 1fr 1fr; }
+  .dock-item { min-height: 132px; padding: 16px 8px; }
+  .dock-bubble { position: relative; bottom: auto; margin-top: 12px; order: 2; }
+  .dock { display: flex; flex-direction: column; }
+  .dock-bubble { display: flex; }
+  .featured, .proj-feat { display: block; }
+}
+@media (pointer: coarse) { .dock-item { min-height: 132px; } }
+@media (prefers-reduced-motion: reduce) { .dock-item, .fld-doc { transition: none; } }
+/* ─── View transitions: smooth same-origin page changes ──────────────── */
+@view-transition { navigation: auto; }
+::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation-duration: 0.24s; }

@@ -34,8 +34,8 @@
 
     <section class="hero">
       <div class="hero-copy reveal">
-        <div class="hero-kicker"><span class="eyebrow">Independent security research · v8k2xf</span></div>
-        <h1 class="hero-title" aria-label="Security research, written to be acted on."><span class="mask-line"><span style="--d:0ms">Security research,</span></span><span class="mask-line"><span style="--d:110ms">written to be</span></span><span class="mask-line"><span style="--d:220ms"><span class="accent">acted on</span>.</span></span></h1>
+        <div class="hero-kicker"><span class="eyebrow">Research · Projects · About</span></div><div class="wordmark" aria-label="Arthsome"><span class="wm-name">ARTHSOME</span><span class="wm-reg">®</span></div>
+        <h1 class="hero-title" aria-label="Investigating the boundaries of systems."><span class="mask-line"><span style="--d:0ms">Investigating</span></span><span class="mask-line"><span style="--d:110ms">the <span class="accent">boundaries</span></span></span><span class="mask-line"><span style="--d:220ms">of systems.</span></span></h1>
         <p class="hero-desc">Independent vulnerability analysis, reverse engineering, and incident response documentation. Every analysis is published after a vendor patch or responsible disclosure, with detection artefacts and mitigation steps defenders can use on day one.</p>
         <div class="hero-actions">
           <a href="posts/index.html" class="btn btn-primary">Read the research <span class="arrow" aria-hidden="true">&rarr;</span></a>
@@ -52,6 +52,36 @@
       </div>
     </section>
 
+    <section class="hero-meta reveal" aria-label="Research metadata">
+      <span class="hm-item">Independent security researcher</span><span class="hm-sep">/</span>
+      <span class="hm-item">CVE analysis</span><span class="hm-sep">/</span>
+      <span class="hm-item">Vulnerability research</span><span class="hm-sep">/</span>
+      <span class="hm-item hm-scroll">Scroll to explore <span aria-hidden="true">↓</span></span>
+    </section>
+
+    <nav class="dock" aria-label="Explore directories">
+      <div class="dock-label reveal">Explore the archive <span aria-hidden="true">· Select a directory</span></div>
+      <div class="dock-rail reveal">
+        <a class="dock-item" href="posts/index.html" data-idx="01" data-name="Research" data-desc="CVE analyses, vulnerability deep-dives, and technical write-ups.">
+          <span class="dock-icon"><svg viewBox="0 0 56 44" aria-hidden="true"><path class="fld-back" d="M6 12h14l5 7h25v20H6z"/><path class="fld-front" d="M6 20h44v19H6z"/><rect class="fld-doc" x="13" y="23" width="30" height="13"/></svg></span>
+          <span class="dock-label-txt">Research</span><span class="dock-idx">01</span>
+        </a>
+        <a class="dock-item" href="categories/cve-reports/index.html" data-idx="02" data-name="Disclosures" data-desc="CVE reports with detection rules, SIEM queries, and remediation.">
+          <span class="dock-icon"><svg viewBox="0 0 56 44" aria-hidden="true"><path class="fld-back" d="M6 12h14l5 7h25v20H6z"/><path class="fld-front" d="M6 20h44v19H6z"/><rect class="fld-doc" x="13" y="23" width="30" height="13"/><path d="M22 30h12M22 34h8" stroke="#141714" stroke-width="2"/></svg></span>
+          <span class="dock-label-txt">Disclosures</span><span class="dock-idx">02</span>
+        </a>
+        <a class="dock-item" href="https://github.com/Arthsome" data-idx="03" data-name="Projects" data-desc="Tools, repositories, and technical explorations.">
+          <span class="dock-icon"><svg viewBox="0 0 56 44" aria-hidden="true"><path class="fld-back" d="M6 12h14l5 7h25v20H6z"/><path class="fld-front" d="M6 20h44v19H6z"/><rect class="fld-doc" x="13" y="23" width="30" height="13"/><path d="M20 29l4 3-4 3M27 35h7" stroke="#141714" stroke-width="2" fill="none"/></svg></span>
+          <span class="dock-label-txt">Projects</span><span class="dock-idx">03</span>
+        </a>
+        <a class="dock-item" href="about/index.html" data-idx="04" data-name="About" data-desc="Researcher profile, interests, and contact.">
+          <span class="dock-icon"><svg viewBox="0 0 56 44" aria-hidden="true"><path class="fld-back" d="M6 12h14l5 7h25v20H6z"/><path class="fld-front" d="M6 20h44v19H6z"/><rect class="fld-doc" x="13" y="23" width="30" height="13"/><circle cx="28" cy="29.5" r="3.2" fill="#141714"/></svg></span>
+          <span class="dock-label-txt">About</span><span class="dock-idx">04</span>
+        </a>
+      </div>
+      <div class="dock-bubble glass" id="dockBubble" hidden><span class="db-idx">01</span><span class="db-name">Research</span><span class="db-desc">—</span><span class="db-go">Explore ↗</span></div>
+    </nav>
+
     <div class="stats-strip reveal" role="list" aria-label="Research snapshot">
       <div class="stat"><div class="stat-value">02<span class="stat-mark">.</span></div><div class="stat-label">Published analyses, from CVE deep dive to evasion technique</div></div>
       <div class="stat"><div class="stat-value">01<span class="stat-mark">.</span></div><div class="stat-label">CVE report with detection rules, SIEM queries, and remediation</div></div>
@@ -59,10 +89,35 @@
       <div class="stat"><div class="stat-value">08<span class="stat-mark">.</span></div><div class="stat-label">Disciplines covered, from vuln research to forensics</div></div>
     </div>
 
+    <section class="section feat-sec">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Selected research</span>
+          <h2 class="section-title">One analysis, complete.</h2>
+          <p class="section-lede">One publication receives full width. Everything else is an index entry. No invented metrics; every claim links to evidence.</p>
+        </div>
+      </div>
+      <a class="featured reveal" href="posts/cve-2025-20281/index.html">
+        <div class="feat-copy">
+          <div class="post-card-meta"><span class="tag-severity critical">Featured</span><span class="tag-type">CVE</span><span class="tag-type">RCE</span><span class="post-date">2026-02-10</span></div>
+          <h3 class="feat-title">CVE-2025-20281 — Unauthenticated RCE in Cisco ISE</h3>
+          <p class="feat-desc">Input validation failure in the Cisco ISE management API allows unauthenticated command execution with elevated privileges. CVSS 10.0.</p>
+          <p class="feat-meta">Classification: Critical · CWE-862 Missing Authorization · Evidence-backed · Disclosure: post-patch only</p>
+          <span class="feat-link">Read the full analysis <span aria-hidden="true">↗</span></span>
+        </div>
+        <div class="feat-visual glass">
+          <div class="fv-label">Admission path</div>
+          <div class="fv-row"><span>01</span><b>Unauth request</b></div>
+          <div class="fv-row"><span>02</span><b>Management API · role check missing</b></div>
+          <div class="fv-row fv-acid"><span>03</span><b>Elevated command execution</b></div>
+          <div class="fv-foot">Evidence-led · Detection rules inside</div>
+        </div>
+      </a>
+    </section>
     <section class="section">
       <div class="section-head reveal">
         <div>
-          <span class="eyebrow">Research areas</span>
+          <span class="eyebrow">Domains</span>
           <h2 class="section-title">What I actually work on</h2>
           <p class="section-lede">Four lanes, one standard: publish only when the finding is verified, the fix is shipped, and a defender can detect the risk without re-running the attack.</p>
         </div>
@@ -139,6 +194,57 @@
       </div>
     </section>
 
+    <section class="section proj-sec">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Projects</span>
+          <h2 class="section-title">Checked-out experiments.</h2>
+          <p class="section-lede">Only real repositories. One featured, the rest as index lines — status included, no invented claims.</p>
+        </div>
+      </div>
+      <a class="proj-feat reveal" href="https://github.com/Arthsome/oh-my-pi">
+        <div class="pf-copy">
+          <div class="post-card-meta"><span class="tag-severity medium">Featured</span><span class="tag-type">Coding agent</span><span class="post-date">2026-10-26</span></div>
+          <h3 class="feat-title">oh-my-pi</h3>
+          <p class="feat-desc">⌥ Coding agent with the IDE wired in. Built by Stencil Labs.</p>
+          <p class="feat-meta">github.com/Arthsome/oh-my-pi ↗</p>
+        </div>
+        <div class="pf-visual glass"><div class="fv-label">repo preview</div><div class="fv-row"><span>↳</span><b>IDE integration</b></div><div class="fv-row fv-acid"><span>●</span><b>Active · public</b></div></div>
+      </a>
+      <div class="proj-list reveal">
+        <a class="proj-row" href="https://github.com/Arthsome/hyp011-live-poc"><span class="pl-idx">01</span><span class="pl-name">hyp011-live-poc</span><span class="pl-lang">PoC fixture · adapter-github write-path</span><span class="pl-date">2026-10-11</span><span aria-hidden="true">↗</span></a>
+        <a class="proj-row" href="https://github.com/Arthsome/turbo-token-exfil"><span class="pl-idx">02</span><span class="pl-name">turbo-token-exfil</span><span class="pl-lang">PoC · remoteCache vs account token</span><span class="pl-date">2026-10-08</span><span aria-hidden="true">↗</span></a>
+        <a class="proj-row" href="https://github.com/Arthsome/skills-deref-poc"><span class="pl-idx">03</span><span class="pl-name">skills-deref-poc</span><span class="pl-lang">PoC · skills symlink-deref in CI</span><span class="pl-date">2026-10-07</span><span aria-hidden="true">↗</span></a>
+        <a class="proj-row" href="https://github.com/Arthsome/chime-health-check"><span class="pl-idx">04</span><span class="pl-name">chime-health-check</span><span class="pl-lang">Python</span><span class="pl-date">2026-03-02</span><span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+    <section class="stage dark reveal" aria-label="Technical stage">
+      <div class="stage-inner">
+        <div class="stage-head">
+          <span class="eyebrow light">Inside the research</span>
+          <h2 class="stage-title">EWHT obfuscation, dissected.<br><span class="dim">Signal processing as an evasion surface.</span></h2>
+        </div>
+        <div class="stage-grid">
+          <div class="stage-code">
+            <div class="sc-label">evidence // spectral permute</div>
+            <pre><code><span class="keyword">void</span> <span class="function">fwht</span>(int *x, int n) {
+  for (int h = 1; h < n; h <<= 1)
+    for (int i = 0; i < n; i += h &lt;&lt; 1)
+      <span class="keyword">for</span> (int j = 0; j < h; j++) {
+        int a = x[i + j], b = x[i + j + h];
+        x[i + j] = a + b; x[i + j + h] = a - b;
+      }
+}</code></pre>
+            <p class="stage-note">Integer-only butterfly. No S-boxes, no crypto constants, no math library. <a href="posts/wht-shellcode-obfuscation/index.html">Full technique note ↗</a></p>
+          </div>
+          <div class="stage-visual">
+            <div class="sv-label">architecture — transform-based obfuscation</div>
+            <svg viewBox="0 0 340 220" aria-hidden="true"><rect x="10" y="90" width="60" height="40" fill="none" stroke="#fff"/><rect x="140" y="20" width="60" height="40" fill="none" stroke="#C4F544"/><rect x="140" y="160" width="60" height="40" fill="none" stroke="#fff"/><rect x="270" y="90" width="60" height="40" fill="none" stroke="#fff"/><path d="M70 110h70M170 60v30M170 160v-30M200 110h70" stroke="#C4F544" stroke-width="1.5" fill="none"/></svg>
+            <div class="sv-grid"><span>shellcode → WHT → permute → bytes</span><span>YARA + Sigma inside</span><span>MITRE T1027 / T1055</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </main>
 
@@ -171,6 +277,7 @@
   </div>
 </footer>
 <script src="assets/js/portrait.js" defer></script>
+<script src="assets/js/dock.js" defer></script>
 <script>
 (function(){
   var t=document.getElementById('nav-toggle'),n=document.getElementById('nav-links');
