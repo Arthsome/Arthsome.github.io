@@ -35,7 +35,7 @@
     <section class="hero">
       <div class="hero-copy reveal">
         <div class="hero-kicker"><span class="eyebrow">Independent security research · v8k2xf</span></div>
-        <h1 class="hero-title">Security research, written to be <span class="accent">acted on</span>.</h1>
+        <h1 class="hero-title" aria-label="Security research, written to be acted on."><span class="mask-line"><span style="--d:0ms">Security research,</span></span><span class="mask-line"><span style="--d:110ms">written to be</span></span><span class="mask-line"><span style="--d:220ms"><span class="accent">acted on</span>.</span></span></h1>
         <p class="hero-desc">Independent vulnerability analysis, reverse engineering, and incident response documentation. Every analysis is published after a vendor patch or responsible disclosure, with detection artefacts and mitigation steps defenders can use on day one.</p>
         <div class="hero-actions">
           <a href="posts/index.html" class="btn btn-primary">Read the research <span class="arrow" aria-hidden="true">&rarr;</span></a>
@@ -48,7 +48,7 @@
           <canvas id="portraitCanvas" width="640" height="800"></canvas>
           <span class="portrait-scan" aria-hidden="true"></span>
         </div>
-        <div class="portrait-meta"><span>Fig. 01 — <span class="pm-acid">Particle crystal</span></span><span>04:05 · Halftone/Corrupt</span></div>
+        <div class="portrait-meta glass"><span>Fig. 01 — <span class="pm-acid">Particle crystal</span></span><span>04:05 · Halftone/Corrupt</span></div>
       </div>
     </section>
 
@@ -177,8 +177,10 @@
   if(t&&n){t.setAttribute('aria-expanded','false');t.setAttribute('aria-controls','nav-links');
   t.addEventListener('click',function(){var o=n.classList.toggle('open');t.setAttribute('aria-expanded',o?'true':'false');});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&n.classList.contains('open')){n.classList.remove('open');t.setAttribute('aria-expanded','false');t.focus();}});}
-  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'}):null;
-  document.querySelectorAll('.reveal').forEach(function(el){if(io){io.observe(el);}else{el.classList.add('is-visible');}});
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.remove('out-view');e.target.classList.add('in-view');}else{e.target.classList.remove('in-view');e.target.classList.add('out-view');}});},{threshold:0.12,rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){if(io){io.observe(el);}else{el.classList.add('in-view');}});
+  // hero title lines: replay with scroll
+  var hero=document.querySelector('.hero'); if(hero){hero.classList.add('in-view');}
   var bar=document.getElementById('reading-progress');
   if(bar){var on=function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;bar.style.width=(m>0?(h.scrollTop/m)*100:0)+'%';};window.addEventListener('scroll',on,{passive:true});on();}
 })();
