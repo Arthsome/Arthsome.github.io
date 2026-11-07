@@ -3,92 +3,139 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Arthsome</title>
+  <meta name="theme-color" content="#ffffff" />
+  <title>Arthsome — Security Research</title>
   <meta name="description" content="Vulnerability analysis, threat research, and incident response by Arthsome." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="assets/css/main.css" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%233b82f6'/><text y='22' x='7' font-size='18' font-family='monospace' font-weight='bold' fill='white'>A</text></svg>" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23c4f544'/><text y='23' x='8' font-size='18' font-family='monospace' font-weight='bold' fill='%23141714'>A</text></svg>" />
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
 <header class="site-header">
   <div class="inner">
-    <a href="index.html" class="brand" style="text-decoration:none">Arthsome <span style="color:var(--text-3);font-weight:400;font-size:12px;margin-left:4px">v8k2xf</span></a>
+    <a href="index.html" class="brand"><span class="brand-mark" aria-hidden="true">A</span>Arthsome<span class="brand-sub">v8k2xf</span></a>
     <ul class="nav-links" id="nav-links">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="posts/index.html">Posts</a></li>
-      <li><a href="categories/index.html">Categories</a></li>
-      <li><a href="about/index.html">About</a></li>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="posts/index.html">Posts</a></li>
+        <li><a href="categories/index.html">Categories</a></li>
+        <li><a href="about/index.html">About</a></li>
     </ul>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
-      <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
-        <rect y="3" width="20" height="2" rx="1"/><rect y="9" width="20" height="2" rx="1"/><rect y="15" width="20" height="2" rx="1"/>
-      </svg>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><rect y="3" width="20" height="2" rx="1"/><rect y="9" width="20" height="2" rx="1"/><rect y="15" width="20" height="2" rx="1"/></svg>
     </button>
   </div>
 </header>
 
-<main>
+<main id="main">
   <div class="page-wrapper">
 
     <section class="hero">
-      <div class="hero-content">
-        <h1 class="hero-title">Security Research <span>& Analysis</span></h1>
-        <p class="hero-desc">
-          Independent vulnerability analysis, reverse engineering, and incident
-          response documentation. Published for defensive purposes only.
-        </p>
+      <div class="hero-copy reveal">
+        <div class="hero-kicker"><span class="eyebrow">Independent security research · v8k2xf</span></div>
+        <h1 class="hero-title">Security research, written to be <span class="accent">acted on</span>.</h1>
+        <p class="hero-desc">Independent vulnerability analysis, reverse engineering, and incident response documentation. Every analysis is published after a vendor patch or responsible disclosure, with detection artefacts and mitigation steps defenders can use on day one.</p>
+        <div class="hero-actions">
+          <a href="posts/index.html" class="btn btn-primary">Read the research <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="about/index.html" class="btn btn-ghost">About the researcher</a>
+        </div>
+      </div>
+      <dl class="hero-aside reveal reveal-delay-1" aria-label="Research summary">
+        <div class="hero-aside-title">Research status <span class="dot-live" title="Active"></span></div>
+        <div class="hero-aside-row"><dt>Published analyses</dt><dd>02</dd></div>
+        <div class="hero-aside-row"><dt>CVE deep dive</dt><dd>CVE-2025-20281</dd></div>
+        <div class="hero-aside-row"><dt>Technique note</dt><dd>Walsh–Hadamard</dd></div>
+        <div class="hero-aside-row"><dt>Disclosure</dt><dd>Post-patch only</dd></div>
+        <div class="hero-aside-row"><dt>Contact</dt><dd>v8k2xf@proton.me</dd></div>
+      </dl>
+    </section>
+
+    <div class="stats-strip reveal" role="list" aria-label="Research snapshot">
+      <div class="stat"><div class="stat-value">02<span class="stat-mark">.</span></div><div class="stat-label">Published analyses, from CVE deep dive to evasion technique</div></div>
+      <div class="stat"><div class="stat-value">01<span class="stat-mark">.</span></div><div class="stat-label">CVE report with detection rules, SIEM queries, and remediation</div></div>
+      <div class="stat"><div class="stat-value">100<span class="stat-mark">%</span></div><div class="stat-label">Defensive purpose. No working payloads, ever</div></div>
+      <div class="stat"><div class="stat-value">08<span class="stat-mark">.</span></div><div class="stat-label">Disciplines covered, from vuln research to forensics</div></div>
+    </div>
+
+    <section class="section">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Research areas</span>
+          <h2 class="section-title">What I actually work on</h2>
+          <p class="section-lede">Four lanes, one standard: publish only when the finding is verified, the fix is shipped, and a defender can detect the risk without re-running the attack.</p>
+        </div>
+      </div>
+      <div class="layers reveal">
+        <div class="layer">
+          <span class="layer-idx">01</span>
+          <span class="layer-name">Vulnerability Analysis</span>
+          <span class="layer-desc">Root-cause writeups for disclosed CVEs: the broken invariant, the exact endpoint or code path, and why the patch holds.</span>
+          <span class="layer-arrow" aria-hidden="true">&#8594;</span>
+        </div>
+        <div class="layer">
+          <span class="layer-idx">02</span>
+          <span class="layer-name">Detection Engineering</span>
+          <span class="layer-desc">Suricata rules, Sigma and SIEM queries, and audit-log checks shipped with every report, so detection lands with the disclosure.</span>
+          <span class="layer-arrow" aria-hidden="true">&#8594;</span>
+        </div>
+        <div class="layer">
+          <span class="layer-idx">03</span>
+          <span class="layer-name">Reverse Engineering</span>
+          <span class="layer-desc">Disassembly and behavioural analysis of binaries and obfuscation techniques, from transform-based evasion to shellcode delivery.</span>
+          <span class="layer-arrow" aria-hidden="true">&#8594;</span>
+        </div>
+        <div class="layer">
+          <span class="layer-idx">04</span>
+          <span class="layer-name">Incident Response</span>
+          <span class="layer-desc">Forensic and threat-intelligence notes that help responders validate scope, hunt for the pattern, and close the loop.</span>
+          <span class="layer-arrow" aria-hidden="true">&#8594;</span>
+        </div>
       </div>
     </section>
 
-    <section>
-      <div class="section-head">
-        <h2 class="section-title">Recent Posts</h2>
-        <a href="posts/index.html" class="view-all">All Posts &rarr;</a>
+    <section class="section">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Index</span>
+          <h2 class="section-title">Recent posts</h2>
+          <p class="section-lede">The two published analyses. Open either for the full writeup, figures, and detection artefacts.</p>
+        </div>
+        <a href="posts/index.html" class="view-all">All posts &rarr;</a>
       </div>
 
-      <div class="post-list">
+      <div class="post-list reveal">
         <a class="post-card" href="posts/wht-shellcode-obfuscation/index.html">
+          <span class="post-card-idx">01</span>
           <div>
             <div class="post-card-meta">
               <span class="tag-severity medium">Technique</span>
               <span class="tag-type">Obfuscation</span>
               <span class="tag-type">Signal Processing</span>
+              <span class="tag-type">Evasion</span>
               <span class="post-date">2026-03-27</span>
             </div>
-            <div class="post-card-title">Payload Obfuscation via Walsh-Hadamard Transform</div>
-            <div class="post-card-excerpt">
-              Using the Fast Walsh-Hadamard Transform with spectral permutation keying to hide shellcode in integer noise. No floating point, no crypto-constants, no math library.
-            </div>
+            <div class="post-card-title">Payload Obfuscation via Walsh&ndash;Hadamard Transform</div>
+            <div class="post-card-excerpt">Using the Fast Walsh&ndash;Hadamard Transform with spectral permutation keying to hide shellcode in integer noise. No floating point, no crypto-constants, no math library.</div>
           </div>
+          <span class="post-card-arrow" aria-hidden="true">&#8594;</span>
         </a>
         <a class="post-card" href="posts/cve-2025-20281/index.html">
+          <span class="post-card-idx">02</span>
           <div>
             <div class="post-card-meta">
               <span class="tag-severity critical">Critical</span>
               <span class="tag-type">CVE</span>
               <span class="tag-type">RCE</span>
+              <span class="tag-type">Cisco ISE</span>
               <span class="post-date">2026-02-10</span>
             </div>
             <div class="post-card-title">CVE-2025-20281 &mdash; Unauthenticated RCE in Cisco ISE</div>
-            <div class="post-card-excerpt">
-              Input validation failure in the Cisco ISE management API allows unauthenticated command execution with elevated privileges. CVSS 10.0.
-            </div>
+            <div class="post-card-excerpt">Input validation failure in the Cisco ISE management API allows unauthenticated command execution with elevated privileges. CVSS 10.0.</div>
           </div>
+          <span class="post-card-arrow" aria-hidden="true">&#8594;</span>
         </a>
-      </div>
-    </section>
-
-    <section style="margin-top:40px">
-      <div class="section-head">
-        <h2 class="section-title">Research Areas</h2>
-      </div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px">
-        <span class="tag-type" style="padding:4px 10px">Vulnerability Analysis</span>
-        <span class="tag-type" style="padding:4px 10px">Network Security</span>
-        <span class="tag-type" style="padding:4px 10px">Incident Response</span>
-        <span class="tag-type" style="padding:4px 10px">Threat Intelligence</span>
-        <span class="tag-type" style="padding:4px 10px">Forensics</span>
-        <span class="tag-type" style="padding:4px 10px">Detection Engineering</span>
       </div>
     </section>
 
@@ -97,20 +144,43 @@
 
 <footer class="site-footer">
   <div class="inner">
-    <span class="footer-copy">&copy; Arthsome. Defensive purposes only.</span>
-    <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="posts/index.html">Posts</a>
-      <a href="categories/index.html">Categories</a>
-      <a href="about/index.html">About</a>
+    <div class="footer-brand-col">
+      <div class="footer-brand-name"><span class="brand-mark">A</span>Arthsome</div>
+      <p class="footer-tagline">Independent vulnerability analysis, reverse engineering, and incident response documentation. Defensive purposes only.</p>
+    </div>
+    <nav aria-label="Primary">
+      <div class="footer-heading">Browse</div>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="posts/index.html">Posts</a></li>
+        <li><a href="categories/index.html">Categories</a></li>
+        <li><a href="about/index.html">About</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Contact">
+      <div class="footer-heading">Contact</div>
+      <ul class="footer-links">
+        <li><a href="mailto:v8k2xf@proton.me">v8k2xf@proton.me</a></li>
+        <li><a href="https://github.com/Arthsome">GitHub</a></li>
+      </ul>
+    </nav>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Arthsome. Defensive purposes only.</span>
+      <span class="footer-copy">Built as static HTML &amp; CSS.</span>
     </div>
   </div>
 </footer>
-
 <script>
-  document.getElementById('nav-toggle').addEventListener('click', function(){
-    document.getElementById('nav-links').classList.toggle('open');
-  });
+(function(){
+  var t=document.getElementById('nav-toggle'),n=document.getElementById('nav-links');
+  if(t&&n){t.setAttribute('aria-expanded','false');t.setAttribute('aria-controls','nav-links');
+  t.addEventListener('click',function(){var o=n.classList.toggle('open');t.setAttribute('aria-expanded',o?'true':'false');});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&n.classList.contains('open')){n.classList.remove('open');t.setAttribute('aria-expanded','false');t.focus();}});}
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){if(io){io.observe(el);}else{el.classList.add('is-visible');}});
+  var bar=document.getElementById('reading-progress');
+  if(bar){var on=function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;bar.style.width=(m>0?(h.scrollTop/m)*100:0)+'%';};window.addEventListener('scroll',on,{passive:true});on();}
+})();
 </script>
 </body>
 </html>

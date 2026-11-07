@@ -75,7 +75,7 @@ Posts follow the pattern `/posts/<slug>/` where `<slug>` is the CVE identifier o
 
 ## Customisation
 
-All design tokens (colors, fonts, spacing) are defined as CSS variables at the top of `assets/css/main.css`. The color scheme is based on [Rosé Pine](https://rosepinetheme.com/). To change the accent color or typography, edit the `:root` block in that file — all pages inherit the change automatically.
+All design tokens (colors, fonts, spacing) are defined as CSS variables at the top of `assets/css/main.css`. The color scheme is a white-first system with an acid-lime identity, adapted from Runware's visual rhythm (see `assets/css/main.css`). To change the accent color or typography, edit the `:root` block in that file — all pages inherit the change automatically.
 
 ## License
 
