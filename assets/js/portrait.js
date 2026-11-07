@@ -27,8 +27,8 @@
     var renderer;
     try { renderer = new THREE.WebGLRenderer({canvas:canvas, alpha:true, antialias:false}); }
     catch(e){ staticFallback(); return; }
-    renderer.setClearColor(0xffffff, 1);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setClearColor(0xffffff, 0);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
     var scene = new THREE.Scene();
     var camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.01, 10);
     camera.position.z = 1;
@@ -38,7 +38,8 @@
       uPointer: { value: new THREE.Vector2(-10, -10) },
       uVel: { value: 0 },
       uTime: { value: 0 },
-      uScroll: { value: 0 }
+      uScroll: { value: 0 },
+      uRes: { value: new THREE.Vector2(4, 5) }
     };
     var mat = new THREE.ShaderMaterial({
       uniforms: uniforms,
@@ -54,11 +55,16 @@
         'float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7))) * 43758.5453123); }',
         'void main(){',
         '  vec2 uv = vUv; uv.y = 1.0 - uv.y;',
+        '  vec3 imgRes = vec3(800.0, 1000.0, 1.0);',
+        '  float imgAsp = imgRes.x / imgRes.y;',
+        '  float scrAsp = uRes.x / uRes.y;',
+        '  if (scrAsp > imgAsp) { uv.x = (uv.x - 0.5) * (imgAsp / scrAsp) + 0.5; } else { uv.y = (uv.y - 0.5) * (scrAsp / imgAsp) + 0.5; }',
         '  float dist = distance(vUv, uPointer);',
         '  float fall = smoothstep(0.55, 0.0, dist);',
         '  float v = clamp(uVel, 0.0, 3.0);',
         '  float n = hash(floor(vUv * 220.0) + vec2(floor(uTime * 18.0), 0.0));',
         '  vec2 disp = vec2(n - 0.5, hash(floor(vUv * 180.0)) - 0.5) * fall * (0.010 + 0.028 * v);',
+        '  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) { gl_FragColor = vec4(1.0); return; }',
         '  vec2 duv = uv + disp;',
         '  float split = fall * (0.004 + 0.010 * v);',
         '  vec4 c;',
@@ -81,7 +87,8 @@
     var mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), mat);
     scene.add(mesh);
 
-    new THREE.TextureLoader().load(imgSrc, function(tex){
+    canvas.style.opacity = '0';
+    new THREE.TextureLoader().load(imgSrc, function(tex){ canvas.style.opacity = '1';
       uniforms.tMap.value = tex;
       resize();
       animate();
@@ -89,7 +96,8 @@
 
     function resize(){
       var rect = frame.getBoundingClientRect();
-      renderer.setSize(Math.max(1, rect.width), Math.max(1, rect.height), false);
+      renderer.setSize(Math.max(1, rect.width), Math.max(1, rect.height), true);
+      uniforms.uRes.value.set(rect.width, rect.height);
       camera.left = -1; camera.right = 1; camera.top = 1; camera.bottom = -1;
       camera.updateProjectionMatrix();
     }
