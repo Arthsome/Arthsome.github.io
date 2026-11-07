@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Onest:wght@300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Serif:ital,wght@0,400;1,400&family=Onest:wght@300..800&display=swap');
 
 /* ─── Arthsome — white-first / acid-lime + controlled glitch system ─────────────
    Runware rhythm (eyebrows, numbered layers, stats row) on a light canvas;
@@ -426,10 +426,13 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .article-body h3 { font-size: 19px; font-weight: 600; margin: 1.8em 0 0.55em; }
 
-.article-body blockquote {
+.article-body blockquote, .post-body blockquote {
   border-left: 3px solid var(--acid); padding: 4px 0 4px 20px;
   margin: 1.4em 0; color: var(--ink-2); font-style: italic;
+  font-family: 'Instrument Serif', 'Iowan Old Style', serif;
+  font-size: 21px; line-height: 1.45; letter-spacing: -0.005em;
 }
+.article-body blockquote p:last-child, .post-body blockquote p:last-child { margin-bottom: 0; }
 
 .article-body a { font-weight: 500; border-bottom: 1px solid var(--acid-soft); }
 .article-body a:hover { border-bottom-color: var(--acid-mid); }
@@ -912,7 +915,8 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 .eyebrow.light::before { background: var(--acid); }
 .stage-title { font-family: var(--font-display); font-size: clamp(32px, 4.5vw, 52px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; margin-top: 14px; }
 .stage-title .dim { color: #9aa392; }
-.stage-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: clamp(20px, 3vw, 40px); margin-top: 40px; background: #101210; border: 1px solid #2b3026; padding: clamp(20px, 3vw, 36px); align-items: start; min-width: 0; }
+.stage-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: clamp(20px, 3vw, 40px); margin-top: 40px; background: #101210; border: 1px solid #2b3026; padding: clamp(20px, 3vw, 36px); align-items: start; min-width: 0; position: relative; }
+.stage-grid::before { content: ""; position: absolute; top: -1px; left: 0; right: 0; height: 2px; background: var(--acid); opacity: 0.85; pointer-events: none; }
 .stage-code, .stage-visual { min-width: 0; max-width: 100%; }
 .stage-code pre { display: block; width: 100%; max-width: 100%; min-width: 0; overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; white-space: pre; -webkit-overflow-scrolling: touch; background: transparent; border: none; padding: 0; margin: 0; }
 .stage-code pre code { font-size: 13px; line-height: 1.6; color: #e6e9dd; background: transparent; border: none; }
@@ -943,7 +947,8 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 .proj-feat { display: grid; grid-template-columns: 1.4fr 1fr; border: 1px solid var(--line); margin-top: 28px; text-decoration: none; color: inherit; }
 .proj-feat:hover { border-color: var(--ink); }
 .pf-copy { padding: 28px 30px 30px; }
-.pf-visual { border-left: 1px solid var(--line); padding: 22px; }
+.pf-visual { border-left: 1px solid var(--line); padding: 22px; transition: border-color 260ms var(--ease), box-shadow 260ms var(--ease); }
+.proj-feat:hover .pf-visual { border-left-color: var(--acid-strong); box-shadow: -18px 0 40px -24px rgba(196,245,68,0.55); }
 .proj-list { border-top: 1px solid var(--line); margin-top: 24px; }
 .proj-row { display: grid; grid-template-columns: 48px 1.2fr 1.6fr 96px 18px; gap: 16px; align-items: baseline; padding: 16px 6px; border-bottom: 1px solid var(--line); text-decoration: none; color: inherit; }
 .proj-row:hover { background: var(--paper); }
