@@ -218,6 +218,8 @@
         <a class="proj-row" href="https://github.com/Arthsome/chime-health-check"><span class="pl-idx">04</span><span class="pl-name">chime-health-check</span><span class="pl-lang">Python</span><span class="pl-date">2026-03-02</span><span aria-hidden="true">↗</span></a>
       </div>
     </section>
+  </div>
+
     <section class="stage dark reveal" aria-label="Technical stage">
       <div class="stage-inner">
         <div class="stage-head">
@@ -239,13 +241,36 @@
           </div>
           <div class="stage-visual">
             <div class="sv-label">architecture — transform-based obfuscation</div>
-            <svg viewBox="0 0 340 220" aria-hidden="true"><rect x="10" y="90" width="60" height="40" fill="none" stroke="#fff"/><rect x="140" y="20" width="60" height="40" fill="none" stroke="#C4F544"/><rect x="140" y="160" width="60" height="40" fill="none" stroke="#fff"/><rect x="270" y="90" width="60" height="40" fill="none" stroke="#fff"/><path d="M70 110h70M170 60v30M170 160v-30M200 110h70" stroke="#C4F544" stroke-width="1.5" fill="none"/></svg>
+            <div class="sv-flow" role="img" aria-label="Four-stage research flow: shellcode bytes enter the transform stage, run through the Walsh-Hadamard transform, receive a spectral permutation key, and are reconstructed into permuted output bytes.">
+              <div class="sv-node">
+                <span class="sv-node-idx">01</span>
+                <span class="sv-node-name">Input</span>
+                <span class="sv-node-sub">shellcode bytes</span>
+              </div>
+              <div class="sv-link" aria-hidden="true">&rarr;</div>
+              <div class="sv-node">
+                <span class="sv-node-idx">02</span>
+                <span class="sv-node-name">Transform</span>
+                <span class="sv-node-sub">Walsh-Hadamard</span>
+              </div>
+              <div class="sv-link" aria-hidden="true">&rarr;</div>
+              <div class="sv-node">
+                <span class="sv-node-idx">03</span>
+                <span class="sv-node-name">Permute</span>
+                <span class="sv-node-sub">spectral key</span>
+              </div>
+              <div class="sv-link" aria-hidden="true">&rarr;</div>
+              <div class="sv-node">
+                <span class="sv-node-idx">04</span>
+                <span class="sv-node-name">Output</span>
+                <span class="sv-node-sub">permuted bytes</span>
+              </div>
+            </div>
             <div class="sv-grid"><span>shellcode → WHT → permute → bytes</span><span>YARA + Sigma inside</span><span>MITRE T1027 / T1055</span></div>
           </div>
         </div>
       </div>
     </section>
-  </div>
 </main>
 
 <footer class="site-footer">
