@@ -1015,13 +1015,6 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 .board-tech { margin-top: 16px; border-top: 1px dashed var(--line); padding-top: 12px; }
 .board-sec .fv-row.show-tech { display: flex; }
 
-/* Liquid chapter · full-width banner at the top of the dark stage */
-.liquid-stage { position: relative; height: clamp(360px, 56vh, 600px); overflow: hidden; background: #0c0d0b; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
-.liquid-fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.liquid-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-.liquid-head { position: absolute; top: clamp(22px, 4vw, 48px); left: clamp(20px, 4vw, 48px); z-index: 2; max-width: 660px; }
-.liquid-frame { position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; gap: 12px; padding: 12px; pointer-events: none; z-index: 3; }
-.liquid-label, .liquid-meta { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; color: var(--acid); background: rgba(12, 13, 11, 0.85); padding: 6px 10px; }
 
 /* Domains · typographic index */
 .dom-index { list-style: none; margin-top: 30px; border-top: 1px solid var(--line); }
@@ -1078,6 +1071,57 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 @media (prefers-reduced-motion: reduce) {
   .hero-fig-ghost { display: none; }
 }
+/* ═══ P0.2 · LIVING FORENSIC EXHIBITION ═══ */
+.hero3d { height: 210vh; padding: 0; border-bottom: 0; }
+.hero3d-sticky { position: sticky; top: 0; height: 100vh; min-height: 560px; overflow: hidden; }
+.hero3d-scene { position: absolute; inset: 0; }
+.hero3d-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 1; transition: opacity 700ms ease; }
+.hero3d-scene canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity 700ms ease; cursor: grab; touch-action: pan-y; }
+.hero3d-scene canvas:active { cursor: grabbing; }
+.h3d-note { position: absolute; top: clamp(18px, 3vw, 36px); left: clamp(18px, 3vw, 36px); z-index: 2; display: flex; flex-direction: column; gap: 4px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; transition: opacity 400ms ease; }
+.h3d-note span:last-child { color: var(--ink-3); letter-spacing: 0.08em; }
+.h3d-hint { position: absolute; right: clamp(18px, 3vw, 36px); bottom: clamp(18px, 3vw, 36px); z-index: 2; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-2); transition: opacity 400ms ease; }
+.hero3d-scene.approached .h3d-note, .hero3d-scene.approached .h3d-hint { opacity: 0.35; }
+.hero3d-copy { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: center; padding: clamp(20px, 4vw, 56px); pointer-events: none; }
+.hero3d-copy > * { pointer-events: auto; }
+.hero3d .hero-masthead { max-width: 560px; }
+.hero3d .hero-wordmark { margin-top: 8px; }
+.hero3d .hero-wm-name { font-size: clamp(64px, 9.5vw, 148px); text-shadow: 0 1px 0 rgba(250,250,247,0.35); }
+.hero3d .hero-title { max-width: 12ch; }
+.hero3d .line-lg { font-size: clamp(44px, 5.2vw, 76px); }
+.hero3d .line-md { font-size: clamp(28px, 3.2vw, 46px); }
+.hero3d .line-xl { font-size: clamp(38px, 4.6vw, 66px); }
+.hero3d .hero-desc { max-width: 46ch; background: rgba(250,250,247,0.72); backdrop-filter: blur(2px); padding: 8px 10px; margin-left: -10px; }
+.hero3d .hero-footnote { max-width: 560px; }
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .hero3d { height: auto; }
+  .hero3d-sticky { position: relative; height: 92svh; min-height: 540px; }
+  .hero3d .hero-wm-name { font-size: clamp(56px, 14vw, 120px); }
+}
+
+/* Film chapter · full-bleed moving macro footage */
+.film { position: relative; height: 74vh; min-height: 460px; overflow: hidden; background: #0c0d0b; }
+.film video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.film-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12,13,11,0.08) 0%, rgba(12,13,11,0.55) 78%, rgba(12,13,11,0.72) 100%); }
+.film-copy { position: absolute; left: clamp(20px, 4vw, 56px); bottom: clamp(24px, 4vw, 52px); z-index: 2; max-width: 640px; color: #f2f4ea; }
+.film-copy .eyebrow.light { color: var(--acid); }
+.film-title { font-family: var(--font-display); font-weight: 800; font-size: clamp(40px, 6vw, 84px); letter-spacing: -0.04em; line-height: 0.98; margin-top: 14px; }
+.film-desc { margin-top: 16px; font-size: 15.5px; line-height: 1.65; color: rgba(242,244,234,0.85); max-width: 52ch; }
+.film-meta { position: absolute; right: clamp(18px, 3vw, 36px); bottom: clamp(18px, 3vw, 36px); z-index: 2; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(242,244,234,0.75); }
+
+/* Technical immersion · macro footage band over the dark stage */
+.tech-film { position: relative; height: clamp(220px, 34vh, 380px); overflow: hidden; background: #0c0d0b; border-bottom: 1px solid #2b3026; }
+.tech-film video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.liquid-frame { position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; gap: 12px; padding: 12px; pointer-events: none; z-index: 3; }
+.liquid-label, .liquid-meta { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; color: var(--acid); background: rgba(12, 13, 11, 0.85); padding: 6px 10px; }
+
+/* Research spread · figure as the page, text in open columns */
+.board-title { font-size: clamp(40px, 5.6vw, 72px); }
+.board { grid-template-columns: 340px minmax(0, 1fr); }
+.board-panel { border: 0; border-top: 2px solid var(--ink); position: static; }
+.board-fig { aspect-ratio: 16 / 8.0; border-bottom: 1px solid var(--ink); }
+.board-fig-rail { border-bottom: 1px solid var(--ink); }
+
 /* ─── View transitions: smooth same-origin page changes ──────────────── */
 @view-transition { navigation: auto; }
 ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation-duration: 0.24s; }

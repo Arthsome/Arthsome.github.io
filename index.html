@@ -10,6 +10,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="assets/css/main.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='0' fill='%23c4f544'/><text y='23' x='8' font-size='18' font-family='monospace' font-weight='bold' fill='%23141714'>A</text></svg>" />
+  <script type="importmap">
+  {"imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }}
+  </script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -33,16 +39,21 @@
   <div class="page-wrapper">
 
     <!-- ═══ FORENSIC HERO · asymmetric, viewport-dominant ═══ -->
-    <section class="hero hero--forensic">
-      <div class="hero-masthead reveal">
-        <span class="hm-strip">Independent research log</span>
-        <span class="hm-strip">Vol. 01 — Field notes</span>
-        <span class="hm-strip">Defensive purpose only</span>
-      </div>
-      <div class="hero-wordmark reveal" aria-label="Arthsome"><span class="hero-wm-name">ARTHSOME</span><span class="hero-wm-reg">®</span></div>
-      <div class="hero-grid">
-        <div class="hero-copy reveal">
-          <div class="hero-kicker"><span class="eyebrow">Research · Projects · About</span></div>
+    <section class="hero hero--forensic hero3d" aria-label="Arthsome — interactive hardware object">
+      <div class="hero3d-sticky">
+        <div class="hero3d-scene" data-hero3d>
+          <img class="hero3d-poster" src="assets/video/circuit-a-poster.jpg" alt="Macro detail of a printed circuit board" fetchpriority="high" />
+          <canvas aria-hidden="true"></canvas>
+          <span class="h3d-note">OBJECT 01 — MOTHERBOARD<span>glb · cc0 · single mesh</span></span>
+          <span class="h3d-hint">DRAG TO ROTATE · SCROLL TO APPROACH</span>
+        </div>
+        <div class="hero3d-copy">
+          <div class="hero-masthead">
+            <span class="hm-strip">Independent research log</span>
+            <span class="hm-strip">Vol. 01 — Field notes</span>
+            <span class="hm-strip">Defensive purpose only</span>
+          </div>
+          <div class="hero-wordmark" aria-label="Arthsome"><span class="hero-wm-name">ARTHSOME</span><span class="hero-wm-reg">®</span></div>
           <h1 class="hero-title" aria-label="Investigating the boundaries of systems.">
             <span class="mask-line line-lg"><span style="--d:0ms">Investigating</span></span><span class="mask-line line-md"><span style="--d:110ms">the <span class="accent">boundaries</span></span></span><span class="mask-line line-xl"><span style="--d:220ms">of systems.</span></span>
           </h1>
@@ -55,15 +66,6 @@
             <span>EST. 2026</span><span aria-hidden="true">·</span><span>ACTIVE RECORD: 02 ANALYSES</span><span aria-hidden="true">·</span><span>SCROLL TO EXPLORE ↓</span>
           </div>
         </div>
-        <figure class="hero-figure reveal reveal-delay-1">
-          <div class="hero-fig-acid" aria-hidden="true"></div>
-          <img class="hero-fig-img" src="assets/img/wht-shellcode/03-spectral-analysis.png" alt="Walsh spectrum analysis from the WHT obfuscation technique note" width="2394" height="1267" fetchpriority="high" />
-          <img class="hero-fig-ghost" src="assets/img/wht-shellcode/03-spectral-analysis.png" alt="" aria-hidden="true" />
-          <figcaption class="hero-fig-cap">
-            <span>FIG. 01 — SPECTRAL ANALYSIS</span>
-            <span>EWHT · N = 1024 · INTEGER ONLY</span>
-          </figcaption>
-        </figure>
       </div>
     </section>
 
@@ -167,14 +169,30 @@
     </section>
 
     <!-- ═══ SIGNATURE CHAPTER · liquid evidence banner + inside the research ═══ -->
+    <!-- FILM CHAPTER · full-bleed moving macro footage -->
+    <section class="film" aria-label="The machine is alive">
+      <video data-film autoplay muted loop playsinline preload="none" poster="assets/video/circuit-a-poster.jpg">
+        <source src="assets/video/circuit-a.mp4" type="video/mp4" />
+      </video>
+      <div class="film-scrim" aria-hidden="true"></div>
+      <div class="film-copy">
+        <span class="eyebrow light">The machine is alive</span>
+        <h2 class="film-title">Hardware remembers<br>every trace.</h2>
+        <p class="film-desc">Macro footage of a printed circuit board — recorded detail, not a render. What looks like architecture is evidence: every pad, via, and fracture arrived here through a process someone has to answer for.</p>
+      </div>
+      <span class="film-meta">macro · recorded · pexels</span>
+    </section>
+
     <section class="stage dark reveal" aria-label="Inside the research">
-      <div class="liquid-stage" data-liquid>
-        <img class="liquid-fallback" src="assets/img/wht-shellcode/01-hexdump-comparison.png" alt="WHT research figures — hex dump comparison, pipeline flow, and key sensitivity — with liquid distortion as you scroll." />
-        <canvas class="liquid-canvas" aria-hidden="true"></canvas>
-        <div class="liquid-head">
-          <span class="eyebrow light">Inside the research</span>
-          <h2 class="stage-title">Evidence, processed.<br><span class="dim">Signal processing as an evasion surface.</span></h2>
+      <div class="tech-film">
+        <video data-film autoplay muted loop playsinline preload="none" poster="assets/video/circuit-b-poster.jpg">
+          <source src="assets/video/circuit-b.mp4" type="video/mp4" />
+        </video>
+        <div class="liquid-frame">
+          <span class="liquid-label">macro — recorded detail</span>
+          <span class="liquid-meta">transform analysis · live footage</span>
         </div>
+      </div>
         <div class="liquid-frame">
           <span class="liquid-label">chapter 01 — hex dump comparison</span>
           <span class="liquid-meta">scroll-linked displacement · webgl</span>
@@ -336,6 +354,7 @@
   if(bar){var on=function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;bar.style.width=(m>0?(h.scrollTop/m)*100:0)+'%';};window.addEventListener('scroll',on,{passive:true});on();}
 })();
 </script>
-<script src="assets/js/liquid-stage.js" defer></script>
+<script src="assets/js/hero-3d.js" defer></script>
+<script src="assets/js/film.js" defer></script>
 </body>
 </html>
