@@ -316,7 +316,7 @@ img { max-width: 100%; height: auto; display: block; }
 .post-list { border-top: 1px solid var(--line); margin-top: 28px; display: flex; flex-direction: column; }
 
 .post-card {
-  display: grid; grid-template-columns: 72px 1fr 24px; gap: 20px;
+  display: grid; grid-template-columns: 72px minmax(0, 1fr) 24px; gap: 20px;
   padding: 26px 10px; text-decoration: none; color: inherit;
   border-bottom: 1px solid var(--line);
   transition: background 200ms var(--ease);
@@ -335,6 +335,11 @@ img { max-width: 100%; height: auto; display: block; }
 .post-card-arrow { color: var(--ink-4); font-size: 18px; text-align: right; padding-top: 2px; transition: transform 200ms var(--ease), color 200ms var(--ease); }
 .post-card:hover .post-card-arrow { color: var(--ink); transform: translateX(3px); }
 .post-card:hover .post-card-title { color: var(--ink); }
+@media (max-width: 320px) {
+  .post-card { grid-template-columns: minmax(0, 1fr) 20px; gap: 12px; padding: 18px 6px; }
+  .post-card-idx { display: none; }
+  .post-card-arrow { font-size: 15px; }
+}
 
 .post-card-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
 .post-date { font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); margin-left: auto; white-space: nowrap; }
@@ -763,7 +768,7 @@ sup a { font-family: var(--font-mono); font-size: 0.75em; font-weight: 600; }
   .section-title { font-size: 26px; }
   .section-head { flex-direction: column; align-items: flex-start; gap: 14px; }
 
-  .post-card { grid-template-columns: 1fr 22px; gap: 12px; padding: 22px 4px; }
+  .post-card { grid-template-columns: minmax(0, 1fr) 22px; gap: 12px; padding: 22px 4px; }
   .post-card-idx { display: none; }
   .post-date { margin-left: 0; }
   .post-card-title { font-size: 18px; }
@@ -993,6 +998,17 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 }
 @media (pointer: coarse) { .dock-item { min-height: 132px; } }
 @media (prefers-reduced-motion: reduce) { .dock-item, .fld-doc { transition: none; } }
+/* ─── P3 · Custom INSPECT cursor (research preview surfaces) ───────────────────────────────── */
+.inspector-dot, .inspector-ring, .inspector-label {
+  position: fixed; top: 0; left: 0; pointer-events: none; opacity: 0; z-index: 400;
+}
+.inspector-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--acid); }
+.inspector-ring { width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--acid-strong); }
+.inspector-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; background: var(--ink); color: var(--acid); padding: 4px 8px; white-space: nowrap; }
+.inspector-dot.on, .inspector-ring.on, .inspector-label.on { opacity: 1; }
+.inspector-ring.on { width: 30px; height: 30px; border-color: var(--acid); }
+body.inspector-hover, body.inspector-hover * { cursor: none; }
+
 /* ─── View transitions: smooth same-origin page changes ──────────────── */
 @view-transition { navigation: auto; }
 ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation-duration: 0.24s; }
