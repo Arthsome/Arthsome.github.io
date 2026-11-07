@@ -248,6 +248,7 @@ img { max-width: 100%; height: auto; display: block; }
   display: grid; grid-template-columns: repeat(4, 1fr);
   gap: 0; padding: 0; margin: 0 0 8px;
   border-bottom: 1px solid var(--line);
+  background: var(--paper);
 }
 .stat { padding: 28px 24px 28px 0; }
 .stat + .stat { border-left: 1px solid var(--line); padding-left: 24px; }
@@ -277,6 +278,10 @@ img { max-width: 100%; height: auto; display: block; }
   border-bottom: 1px solid var(--line-strong);
 }
 .view-all:hover { color: var(--acid-ink); border-bottom-color: var(--acid-mid); text-decoration: none; }
+
+/* ─── Section rhythm: distinct separators ─────────────────────────────────── */
+.section + .section { border-top: 4px solid var(--ink); }
+.section + .section + .section { border-top: 1px solid var(--line); }
 
 /* Research layers — Runware's 01–04 layer rows */
 .layers { border-top: 1px solid var(--line); margin-top: 28px; }
