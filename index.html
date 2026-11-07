@@ -38,7 +38,7 @@
         <h1 class="hero-title" aria-label="Investigating the boundaries of systems."><span class="mask-line"><span style="--d:0ms">Investigating</span></span><span class="mask-line"><span style="--d:110ms">the <span class="accent">boundaries</span></span></span><span class="mask-line"><span style="--d:220ms">of systems.</span></span></h1>
         <p class="hero-desc">Independent vulnerability analysis, reverse engineering, and incident response documentation. Every analysis is published after a vendor patch or responsible disclosure, with detection artefacts and mitigation steps defenders can use on day one.</p>
         <div class="hero-actions">
-          <a href="posts/index.html" class="btn btn-primary">Read the research <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="posts/index.html" class="btn btn-primary">Read the research <span class="arrow ui-ico" aria-hidden="true"><svg width="16" height="16"><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></span></a>
           <a href="about/index.html" class="btn btn-ghost">About the researcher</a>
         </div>
       </div>
@@ -79,7 +79,7 @@
           <span class="dock-label-txt">About</span><span class="dock-idx">04</span>
         </a>
       </div>
-      <div class="dock-bubble glass" id="dockBubble" hidden><span class="db-idx">01</span><span class="db-name">Research</span><span class="db-desc">—</span><span class="db-go">Explore ↗</span></div>
+      <div class="dock-bubble glass" id="dockBubble" hidden><span class="db-idx">01</span><span class="db-name">Research</span><span class="db-desc">—</span><span class="db-go ui-ico">Explore <svg><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></span></div>
     </nav>
 
     <div class="stats-strip reveal" role="list" aria-label="Research snapshot">
@@ -103,19 +103,25 @@
           <h3 class="feat-title">CVE-2025-20281 — Unauthenticated RCE in Cisco ISE</h3>
           <p class="feat-desc">Input validation failure in the Cisco ISE management API allows unauthenticated command execution with elevated privileges. CVSS 10.0.</p>
           <p class="feat-meta">Classification: Critical · CWE-862 Missing Authorization · Evidence-backed · Disclosure: post-patch only</p>
-          <span class="feat-link">Read the full analysis <span aria-hidden="true">↗</span></span>
+          <span class="feat-link">Read the full analysis <span class="ui-ico" aria-hidden="true"><svg><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></span></span>
         </div>
         <div class="feat-visual glass glass--media">
-          <div class="fv-label">Admission path</div>
-          <div class="fv-row"><span>01</span><b>Unauth request</b></div>
-          <div class="fv-row"><span>02</span><b>Management API · role check missing</b></div>
-          <div class="fv-row fv-acid"><span>03</span><b>Elevated command execution</b></div>
-          <div class="fv-foot">Evidence-led · Detection rules inside</div>
-          <div class="fv-tech" hidden>
-            <div class="fv-label">Technical thread</div>
-            <div class="fv-row"><span>CWE</span><b>862 · Missing Authorization</b></div>
-            <div class="fv-row"><span>Fix</span><b>RBAC enforcement on management API</b></div>
-            <div class="fv-row"><span>Detect</span><b>Detection rules · SIEM queries</b></div>
+          <div class="fv-media">
+            <img class="fv-photo" src="assets/img/research/pcb-circuit.webp" alt="Dusty circuit board macro — research evidence surface" width="960" height="1440" loading="lazy" />
+            <span class="fv-chip">Fig. 01 · evidence surface</span>
+          </div>
+          <div class="fv-body">
+            <div class="fv-label">Admission path</div>
+            <div class="fv-row"><span>01</span><b>Unauth request</b></div>
+            <div class="fv-row"><span>02</span><b>Management API · role check missing</b></div>
+            <div class="fv-row fv-acid"><span>03</span><b>Elevated command execution</b></div>
+            <div class="fv-foot">Evidence-led · Detection rules inside</div>
+            <div class="fv-tech" hidden>
+              <div class="fv-label">Technical thread</div>
+              <div class="fv-row"><span>CWE</span><b>862 · Missing Authorization</b></div>
+              <div class="fv-row"><span>Fix</span><b>RBAC enforcement on management API</b></div>
+              <div class="fv-row"><span>Detect</span><b>Detection rules · SIEM queries</b></div>
+            </div>
           </div>
         </div>
       </a>
@@ -133,25 +139,25 @@
           <span class="layer-idx">01</span>
           <span class="layer-name">Vulnerability Analysis</span>
           <span class="layer-desc">Root-cause writeups for disclosed CVEs: the broken invariant, the exact endpoint or code path, and why the patch holds.</span>
-          <span class="layer-arrow" aria-hidden="true">&#8594;</span>
+          <span class="layer-arrow ui-ico" aria-hidden="true"><svg><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></span>
         </div>
         <div class="layer">
           <span class="layer-idx">02</span>
           <span class="layer-name">Detection Engineering</span>
           <span class="layer-desc">Suricata rules, Sigma and SIEM queries, and audit-log checks shipped with every report, so detection lands with the disclosure.</span>
-          <span class="layer-arrow" aria-hidden="true">&#8594;</span>
+          <span class="layer-arrow ui-ico" aria-hidden="true"><svg><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></span>
         </div>
         <div class="layer">
           <span class="layer-idx">03</span>
           <span class="layer-name">Reverse Engineering</span>
           <span class="layer-desc">Disassembly and behavioural analysis of binaries and obfuscation techniques, from transform-based evasion to shellcode delivery.</span>
-          <span class="layer-arrow" aria-hidden="true">&#8594;</span>
+          <span class="layer-arrow ui-ico" aria-hidden="true"><svg><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></span>
         </div>
         <div class="layer">
           <span class="layer-idx">04</span>
           <span class="layer-name">Incident Response</span>
           <span class="layer-desc">Forensic and threat-intelligence notes that help responders validate scope, hunt for the pattern, and close the loop.</span>
-          <span class="layer-arrow" aria-hidden="true">&#8594;</span>
+          <span class="layer-arrow ui-ico" aria-hidden="true"><svg><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></span>
         </div>
       </div>
     </section>
@@ -180,7 +186,7 @@
             <div class="post-card-title">Payload Obfuscation via Walsh&ndash;Hadamard Transform</div>
             <div class="post-card-excerpt">Using the Fast Walsh&ndash;Hadamard Transform with spectral permutation keying to hide shellcode in integer noise. No floating point, no crypto-constants, no math library.</div>
           </div>
-          <span class="post-card-arrow" aria-hidden="true">&#8594;</span>
+          <span class="post-card-arrow ui-ico" aria-hidden="true"><svg><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></span>
         </a>
         <a class="post-card" href="posts/cve-2025-20281/index.html">
           <span class="post-card-idx">02</span>
@@ -195,7 +201,7 @@
             <div class="post-card-title">CVE-2025-20281 &mdash; Unauthenticated RCE in Cisco ISE</div>
             <div class="post-card-excerpt">Input validation failure in the Cisco ISE management API allows unauthenticated command execution with elevated privileges. CVSS 10.0.</div>
           </div>
-          <span class="post-card-arrow" aria-hidden="true">&#8594;</span>
+          <span class="post-card-arrow ui-ico" aria-hidden="true"><svg><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></span>
         </a>
       </div>
     </section>
@@ -233,6 +239,14 @@
           <h2 class="stage-title">EWHT obfuscation, dissected.<br><span class="dim">Signal processing as an evasion surface.</span></h2>
         </div>
         <div class="stage-grid">
+          <div class="liquid-stage" data-liquid>
+            <img class="liquid-fallback" src="assets/img/research/pcb-circuit.webp" alt="Research evidence imagery: a dusty circuit board, industrial mesh, and server infrastructure crossfade with liquid distortion as you scroll." loading="lazy" />
+            <canvas class="liquid-canvas" aria-hidden="true"></canvas>
+            <div class="liquid-frame">
+              <span class="liquid-label">chapter 01 — circuit board · evidence surface</span>
+              <span class="liquid-meta">scroll-linked displacement · webgl</span>
+            </div>
+          </div>
           <div class="stage-code">
             <div class="sc-label">evidence // spectral permute</div>
             <pre><code><span class="keyword">void</span> <span class="function">fwht</span>(int *x, int n) {
@@ -253,19 +267,19 @@
                 <span class="sv-node-name">Input</span>
                 <span class="sv-node-sub">shellcode bytes</span>
               </div>
-              <div class="sv-link" aria-hidden="true">&rarr;</div>
+              <div class="sv-link ui-ico" aria-hidden="true"><svg><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></div>
               <div class="sv-node">
                 <span class="sv-node-idx">02</span>
                 <span class="sv-node-name">Transform</span>
                 <span class="sv-node-sub">Walsh-Hadamard</span>
               </div>
-              <div class="sv-link" aria-hidden="true">&rarr;</div>
+              <div class="sv-link ui-ico" aria-hidden="true"><svg><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></div>
               <div class="sv-node">
                 <span class="sv-node-idx">03</span>
                 <span class="sv-node-name">Permute</span>
                 <span class="sv-node-sub">spectral key</span>
               </div>
-              <div class="sv-link" aria-hidden="true">&rarr;</div>
+              <div class="sv-link ui-ico" aria-hidden="true"><svg><use href="assets/img/ui/sprite.svg#icon-arrow-right"></use></svg></div>
               <div class="sv-node">
                 <span class="sv-node-idx">04</span>
                 <span class="sv-node-name">Output</span>
@@ -280,6 +294,10 @@
 </main>
 
 <footer class="site-footer">
+  <div class="footer-ending" role="img" aria-label="Arthsome — wordmark ending">
+    <span class="fe-word">ARTHSOME<span class="fe-reg">®</span></span>
+    <span class="fe-tag">Investigating the boundaries of systems.</span>
+  </div>
   <div class="inner">
     <div class="footer-brand-col">
       <div class="footer-brand-name"><span class="brand-mark">A</span>Arthsome</div>
@@ -325,5 +343,6 @@
 })();
 </script>
 <script src="assets/js/inspect-cursor.js" defer></script>
+<script src="assets/js/liquid-stage.js" defer></script>
 </body>
 </html>

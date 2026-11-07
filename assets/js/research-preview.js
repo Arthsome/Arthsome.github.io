@@ -7,6 +7,10 @@
   if (!feats) return;
   var vis = feats.querySelector(".feat-visual");
   if (!vis) return;
+  var body = vis.querySelector(".fv-body");
+  var photo = vis.querySelector(".fv-photo");
+  var chip = vis.querySelector(".fv-chip");
+  if (!body || !photo || !chip) return;
 
   var variants = {
     cve: {
@@ -20,6 +24,8 @@
       foot: "Evidence-led · Detection rules inside",
       techLabel: "Technical thread",
       tech: [["CWE", "862 · Missing Authorization"]],
+      img: "assets/img/research/pcb-circuit.webp",
+      chip: "Fig. 01 · evidence surface", 
     },
     wht: {
       label: "Mechanism",
@@ -33,6 +39,8 @@
       foot: "Full technique note ↗",
       techLabel: "Implementation",
       tech: [["Integer-only", "Butterfly · no S-boxes, no crypto constants, no math library"]],
+      img: "assets/img/research/mesh-industrial.webp",
+      chip: "Fig. 02 · mechanism surface", 
     },
   };
 
@@ -54,7 +62,9 @@
       html += rowHtml(t[0], t[1], false);
     });
     html += "</div>";
-    vis.innerHTML = html;
+    body.innerHTML = html;
+    photo.src = v.img;
+    chip.textContent = v.chip;
   }
 
   function keyFor(target) {
