@@ -1,10 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=JetBrains+Mono:ital,wght@0,400..800;1,400..800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Onest:wght@300..800&display=swap');
 
-/* ─── Arthsome — white-first / acid-lime system ──────────────────────────────────
-   Adapted from Runware's rhythm (Coxx/Figtree/JetBrains Mono trio, 11px mono
-   eyebrows, numbered layers, hairline sectioning, 7px geometry, display
-   leading ~1.0) onto a light canvas. Runware's shipped theme is dark; this
-   site stays white and carries lime as the identity, not as decoration. */
+/* ─── Arthsome — white-first / acid-lime + controlled glitch system ─────────────
+   Runware rhythm (eyebrows, numbered layers, stats row) on a light canvas;
+   Bricolage/Onest/IBM Plex Mono trio; strict 0px geometry. */
 
 :root {
   /* Canvas + ink */
@@ -50,14 +48,14 @@
   --code-yellow: #ffe08f;
 
   /* Type */
-  --font-display: 'Space Grotesk', 'Figtree', -apple-system, sans-serif;
-  --font-sans: 'Figtree', -apple-system, 'Segoe UI', sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-display: 'Bricolage Grotesque', 'Onest', -apple-system, sans-serif;
+  --font-sans: 'Onest', -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 
   --measure: 1120px;
   --measure-article: 760px;
-  --radius: 8px;
-  --radius-sm: 6px;
+  --radius: 0px;
+  --radius-sm: 0px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --header-h: 64px;
 
@@ -84,14 +82,14 @@ body {
 
 a { color: var(--acid-deep); text-decoration: none; transition: color 180ms var(--ease); }
 a:hover { color: var(--acid-ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
-a:focus-visible, button:focus-visible { outline: 2px solid var(--acid-mid); outline-offset: 2px; border-radius: 4px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--acid-mid); outline-offset: 2px; border-radius: 0; }
 
 img { max-width: 100%; height: auto; display: block; }
 ::selection { background: var(--acid); color: var(--ink); }
 
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: var(--paper); }
-::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 999px; border: 2px solid var(--paper); }
+::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 0; border: 2px solid var(--paper); }
 ::-webkit-scrollbar-thumb:hover { background: var(--acid-mid); }
 
 .skip-link {
@@ -130,7 +128,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .brand:hover { color: var(--ink); text-decoration: none; }
 .brand-mark {
-  width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0;
+  width: 28px; height: 28px; border-radius: 0; flex-shrink: 0;
   background: var(--acid); color: var(--ink);
   display: grid; place-items: center;
   font-family: var(--font-display); font-weight: 700; font-size: 15px; line-height: 1;
@@ -144,7 +142,7 @@ img { max-width: 100%; height: auto; display: block; }
 .nav-links { display: flex; align-items: center; gap: 2px; list-style: none; }
 .nav-links a {
   font-size: 14px; font-weight: 500; color: var(--ink-3);
-  padding: 7px 12px; border-radius: 999px;
+  padding: 7px 12px; border-radius: 0;
   transition: color 180ms var(--ease), background 180ms var(--ease);
 }
 .nav-links a:hover { color: var(--ink); background: var(--paper); text-decoration: none; }
@@ -158,7 +156,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 .nav-toggle {
   display: none; background: none; border: 1px solid var(--line);
-  border-radius: 8px; color: var(--ink); cursor: pointer; padding: 8px;
+  border-radius: 0; color: var(--ink); cursor: pointer; padding: 8px;
 }
 
 /* ─── Layout ────────────────────────────────────────────────────────────────── */
@@ -210,7 +208,7 @@ img { max-width: 100%; height: auto; display: block; }
 .btn {
   display: inline-flex; align-items: center; gap: 8px;
   font-weight: 600; font-size: 14.5px; line-height: 1;
-  padding: 13px 20px; border-radius: 999px;
+  padding: 13px 20px; border-radius: 0;
   transition: transform 180ms var(--ease), background 180ms var(--ease), box-shadow 180ms var(--ease);
   cursor: pointer;
 }
@@ -235,7 +233,7 @@ img { max-width: 100%; height: auto; display: block; }
   border-bottom: 1px solid var(--line);
   display: flex; justify-content: space-between; align-items: center;
 }
-.hero-aside-title .dot-live { width: 7px; height: 7px; border-radius: 999px; background: var(--acid-mid); }
+.hero-aside-title .dot-live { width: 7px; height: 7px; border-radius: 0; background: var(--acid-mid); }
 .hero-aside-row {
   display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
   padding: 9px 0; font-size: 13.5px;
@@ -332,7 +330,7 @@ img { max-width: 100%; height: auto; display: block; }
 .tag-severity, .tag-type {
   font-family: var(--font-mono); font-size: 10.5px; font-weight: 600;
   letter-spacing: 0.06em; text-transform: uppercase;
-  padding: 4px 8px; border-radius: 5px; line-height: 1; white-space: nowrap;
+  padding: 4px 8px; border-radius: 0; line-height: 1; white-space: nowrap;
 }
 .tag-severity { background: var(--ink); color: var(--acid); }
 .tag-severity.critical { background: var(--ink); color: var(--acid); }
@@ -443,7 +441,7 @@ img { max-width: 100%; height: auto; display: block; }
 .meta .tag, .meta .severity {
   font-family: var(--font-mono); font-size: 10.5px; font-weight: 600;
   letter-spacing: 0.05em; text-transform: uppercase;
-  padding: 4px 9px; border-radius: 5px; line-height: 1;
+  padding: 4px 9px; border-radius: 0; line-height: 1;
 }
 .meta .tag { background: var(--paper); color: var(--ink-2); border: 1px solid var(--line); }
 .meta .severity { background: var(--ink); color: var(--acid); }
@@ -474,7 +472,7 @@ header h1 { }
 .article-body code, .post-body code {
   font-family: var(--font-mono); font-size: 0.85em; font-weight: 500;
   background: var(--acid-tint); color: var(--acid-ink);
-  padding: 2px 6px; border-radius: 4px; border: 1px solid var(--acid-soft);
+  padding: 2px 6px; border-radius: 0; border: 1px solid var(--acid-soft);
   white-space: nowrap;
 }
 .article-body pre, .post-body pre {
@@ -627,7 +625,7 @@ sup a { font-family: var(--font-mono); font-size: 0.75em; font-weight: 600; }
   padding: 0 0 34px; border-bottom: 1px solid var(--line); margin-bottom: 12px;
 }
 .avatar {
-  width: 72px; height: 72px; border-radius: 12px;
+  width: 72px; height: 72px; border-radius: 0;
   background: var(--acid); color: var(--ink);
   border: 1px solid rgba(20, 23, 20, 0.14);
   display: grid; place-items: center;
@@ -659,7 +657,7 @@ sup a { font-family: var(--font-mono); font-size: 0.75em; font-weight: 600; }
 .skill-tag {
   font-family: var(--font-mono); font-size: 12px; font-weight: 500;
   color: var(--ink-2); background: var(--paper);
-  border: 1px solid var(--line); padding: 7px 12px; border-radius: 999px;
+  border: 1px solid var(--line); padding: 7px 12px; border-radius: 0;
   transition: border-color 180ms var(--ease), background 180ms var(--ease);
 }
 .skill-tag:hover { border-color: var(--acid-mid); background: var(--acid-tint); }
@@ -767,3 +765,45 @@ sup a { font-family: var(--font-mono); font-size: 0.75em; font-weight: 600; }
   .img-row { flex-direction: column; }
   .site-footer .inner { grid-template-columns: 1fr; gap: 28px; padding: 36px 18px 44px; }
 }
+/* ─── Particle portrait (hero) ─────────────────────────────────────────── */
+.hero-portrait { display: flex; flex-direction: column; gap: 0; align-self: start; }
+.portrait-frame {
+  position: relative; aspect-ratio: 4 / 5; overflow: hidden;
+  border: 1px solid var(--ink); background: #fff;
+  cursor: crosshair; touch-action: pan-y;
+}
+.portrait-frame canvas, .portrait-frame img.portrait-fallback {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  display: block; object-fit: cover;
+}
+.portrait-meta {
+  display: flex; justify-content: space-between; gap: 12px;
+  border: 1px solid var(--ink); border-top: none; padding: 10px 12px;
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em;
+  text-transform: uppercase; background: var(--ink); color: #fff;
+}
+.portrait-meta .pm-acid { color: var(--acid); }
+.portrait-scan {
+  position: absolute; left: 0; right: 0; height: 2px; top: 42%;
+  background: var(--acid); opacity: 0.85; pointer-events: none;
+  mix-blend-mode: multiply;
+}
+@media (prefers-reduced-motion: reduce) { .portrait-scan { display: none; } }
+
+/* ─── Controlled glitch language (selective, never over content) ─────── */
+.glitch-wrap { position: relative; }
+.glitch-tick {
+  display: inline-block; background: var(--acid); color: var(--ink);
+  padding: 0 6px; margin: 0 2px; font-weight: 700;
+}
+.section-title { text-wrap: balance; }
+.hero-title { text-wrap: balance; letter-spacing: -0.02em; }
+/* ─── Sticky TOC (articles, wide screens) ─────────────────────────────── */
+.toc-rail { position: sticky; top: 84px; max-height: calc(100vh - 120px); overflow: auto; }
+.article-layout { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 48px; align-items: start; }
+@media (max-width: 960px) { .article-layout { grid-template-columns: 1fr; } .toc-rail { position: static; max-height: none; } }
+.toc-title { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 10px; }
+.toc-list { display: flex; flex-direction: column; gap: 2px; list-style: none; }
+.toc-list a { display: block; font-size: 13px; line-height: 1.5; color: var(--ink-3); padding: 4px 8px; border-left: 2px solid var(--line); }
+.toc-list a:hover { color: var(--ink); border-left-color: var(--acid-mid); }
+

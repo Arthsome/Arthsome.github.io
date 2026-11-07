@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="../assets/css/main.css" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23c4f544'/><text y='23' x='8' font-size='18' font-family='monospace' font-weight='bold' fill='%23141714'>A</text></svg>" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='0' fill='%23c4f544'/><text y='23' x='8' font-size='18' font-family='monospace' font-weight='bold' fill='%23141714'>A</text></svg>" />
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -38,7 +38,8 @@
     </div>
 
     <div class="profile-card reveal">
-      <div class="avatar" aria-hidden="true">A</div>
+      <div class="portrait-frame" id="portraitFrame" data-portrait="../assets/img/portrait/portrait.png" aria-label="Particle portrait of Arthsome"><img class="portrait-fallback" src="../assets/img/portrait/portrait.png" alt="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+          <canvas id="portraitCanvas" width="640" height="800"></canvas></div>
       <div>
         <div class="profile-name">Arthsome <span class="brand-sub" style="font-size:13px">v8k2xf</span></div>
         <div class="profile-handle">Cybersecurity enthusiast · independent researcher</div>
@@ -100,6 +101,7 @@
     </div>
   </div>
 </footer>
+<script src="../assets/js/portrait.js" defer></script>
 <script>
 (function(){
   var t=document.getElementById('nav-toggle'),n=document.getElementById('nav-links');

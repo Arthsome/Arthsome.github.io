@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="assets/css/main.css" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23c4f544'/><text y='23' x='8' font-size='18' font-family='monospace' font-weight='bold' fill='%23141714'>A</text></svg>" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='0' fill='%23c4f544'/><text y='23' x='8' font-size='18' font-family='monospace' font-weight='bold' fill='%23141714'>A</text></svg>" />
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -42,14 +42,14 @@
           <a href="about/index.html" class="btn btn-ghost">About the researcher</a>
         </div>
       </div>
-      <dl class="hero-aside reveal reveal-delay-1" aria-label="Research summary">
-        <div class="hero-aside-title">Research status <span class="dot-live" title="Active"></span></div>
-        <div class="hero-aside-row"><dt>Published analyses</dt><dd>02</dd></div>
-        <div class="hero-aside-row"><dt>CVE deep dive</dt><dd>CVE-2025-20281</dd></div>
-        <div class="hero-aside-row"><dt>Technique note</dt><dd>Walsh–Hadamard</dd></div>
-        <div class="hero-aside-row"><dt>Disclosure</dt><dd>Post-patch only</dd></div>
-        <div class="hero-aside-row"><dt>Contact</dt><dd>v8k2xf@proton.me</dd></div>
-      </dl>
+      <div class="hero-portrait reveal reveal-delay-1">
+        <div class="portrait-frame" id="portraitFrame" data-portrait="assets/img/portrait/portrait.png" aria-label="Particle portrait of Arthsome. Move pointer or drag across it.">
+          <img class="portrait-fallback" src="assets/img/portrait/portrait.png" alt="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+          <canvas id="portraitCanvas" width="640" height="800"></canvas>
+          <span class="portrait-scan" aria-hidden="true"></span>
+        </div>
+        <div class="portrait-meta"><span>Fig. 01 — <span class="pm-acid">Particle portrait</span></span><span>04:05 · Halftone/Corrupt</span></div>
+      </div>
     </section>
 
     <div class="stats-strip reveal" role="list" aria-label="Research snapshot">
@@ -170,6 +170,7 @@
     </div>
   </div>
 </footer>
+<script src="assets/js/portrait.js" defer></script>
 <script>
 (function(){
   var t=document.getElementById('nav-toggle'),n=document.getElementById('nav-links');
