@@ -1,0 +1,37 @@
+:root{--bg:#09090a;--fg:#ededea;--mut:#8a8a85;--line:#1f1f1d;--acid:#c4f544;--e:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box;margin:0}html{background:var(--bg);scroll-behavior:smooth}
+body{color:var(--fg);font:400 16px/1.55 'Inter Tight',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.mono{font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.wrap{max-width:1200px;margin:auto;padding:0 24px}
+nav{position:fixed;inset:0 0 auto;z-index:10;padding:calc(env(safe-area-inset-top,0px) + 18px) 24px 18px;display:flex;justify-content:space-between;backdrop-filter:blur(14px);background:#09090acc;border-bottom:1px solid var(--line)}
+nav div{display:flex;gap:28px}nav a:hover{color:var(--acid)}
+.hero{min-height:100svh;display:grid;align-content:center;padding:120px 24px 60px;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;width:70vmax;height:70vmax;right:-25vmax;top:-20vmax;background:radial-gradient(closest-side,#c4f54426,transparent);pointer-events:none}
+h1{font:400 clamp(48px,10.5vw,148px)/.92 'Instrument Serif',serif;letter-spacing:-.03em;margin:24px 0 32px}
+h1 span{display:block;overflow:hidden;padding-bottom:.06em}h1 i{display:inline-block}.a{color:var(--acid)}
+.lede{max-width:520px;color:var(--mut);font-size:18px}
+.cta{display:inline-flex;margin-top:32px;padding:14px 22px;background:var(--acid);color:#0a0a0a;font-weight:600;border-radius:99px;transition:transform .4s var(--e)}.cta:hover{transform:translateY(-3px)}
+.cards{position:absolute;right:24px;bottom:12vh;display:grid;gap:14px;width:min(300px,70vw)}
+.card{padding:18px;border:1px solid #ffffff1a;border-radius:16px;background:#ffffff0a;backdrop-filter:blur(18px)}
+.card b{display:block;font:400 28px/1.1 'Instrument Serif',serif;margin-top:10px}
+.mq{border-block:1px solid var(--line);overflow:hidden;white-space:nowrap;padding:18px 0}
+.mq div{display:inline-flex;gap:56px;padding-right:56px;animation:m 30s linear infinite}
+@keyframes m{to{transform:translateX(-50%)}}
+section{padding:120px 0}
+h2{font:400 clamp(36px,6vw,80px)/1 'Instrument Serif',serif;letter-spacing:-.02em;margin:16px 0 56px}
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.cell{grid-column:span 3;position:relative;padding:32px;min-height:260px;border:1px solid var(--line);border-radius:20px;background:#0f0f0e;overflow:hidden}
+.cell:nth-child(1),.cell:nth-child(4){grid-column:span 4}.cell:nth-child(2),.cell:nth-child(3){grid-column:span 2}
+.cell:before{content:"";position:absolute;inset:0;background:radial-gradient(400px circle at var(--x,50%) var(--y,0),#c4f5441f,transparent 60%);opacity:0;transition:opacity .4s}.cell:hover:before{opacity:1}
+.cell h3{font:400 32px/1.1 'Instrument Serif',serif;margin:44px 0 10px;position:relative}.cell p{color:var(--mut);max-width:420px;position:relative}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-block:1px solid var(--line)}
+.stat{padding:40px 24px;border-right:1px solid var(--line)}.stat:last-child{border:0}
+.stat b{font:400 64px/1 'Instrument Serif',serif;display:block;margin-bottom:8px}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:28px 0;border-top:1px solid var(--line);transition:padding .5s var(--e),color .3s}
+.row:last-child{border-bottom:1px solid var(--line)}.row:hover{padding-left:20px;color:var(--acid)}
+.row strong{font:400 clamp(28px,4vw,52px)/1.1 'Instrument Serif',serif}
+footer{padding:80px 0 0;overflow:hidden}.fl{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.wm{font:400 22vw/.8 'Instrument Serif',serif;letter-spacing:-.04em;text-align:center;color:#ffffff0d;margin-top:60px;user-select:none}
+@media(max-width:800px){.cards{position:static;margin-top:40px;width:100%}.bento{grid-template-columns:1fr}.cell,.cell:nth-child(n){grid-column:auto}.stats{grid-template-columns:1fr 1fr}.stat:nth-child(2){border-right:0}nav div{gap:16px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}

@@ -1,0 +1,36 @@
+---
+import '../styles/g.css';
+const dom=[['Vulnerability analysis','Root-cause writeups for disclosed CVEs: the broken invariant, the code path, why the patch holds.'],['Detection engineering','Sigma, Suricata and SIEM queries shipped with every report.'],['Reverse engineering','Disassembly and behavioural analysis of binaries and obfuscation.'],['Incident response','Forensic notes that help responders validate scope and hunt the pattern.']];
+const work=[['Unauthenticated RCE in Cisco ISE','CVE-2025-20281 · 2026','/posts/cve-2025-20281/index.html'],['Payload obfuscation via Walsh–Hadamard transform','Technique · 2026','/posts/wht-shellcode-obfuscation/index.html']];
+const proj=[['oh-my-pi','Coding agent with the IDE wired in','https://github.com/Arthsome/oh-my-pi'],['chime-health-check','Python','https://github.com/Arthsome/chime-health-check']];
+const stats=[[2,'analyses published'],[1,'CVE with detection rules'],[10,'CVSS, Cisco ISE'],[8,'disciplines']];
+---
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Arthsome — Security Research</title><meta name="description" content="Independent vulnerability analysis, reverse engineering and incident response."><meta name="theme-color" content="#09090a">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600&family=Instrument+Serif&family=JetBrains+Mono:wght@500&display=swap"></head>
+<body>
+<nav><a href="/" class="mono" style="color:var(--fg)">Arthsome®</a><div class="mono"><a href="#work">Work</a><a href="/posts/index.html">Writing</a><a href="/about/index.html">About</a><a href="#contact">Contact</a></div></nav>
+<header class="hero"><div class="mono">Independent research · Vol. 01</div>
+<h1><span><i>investigating</i></span><span><i>the boundaries</i></span><span><i class="a">of systems.</i></span></h1>
+<p class="lede">Vulnerability analysis, reverse engineering and incident response. Published after the patch, with detections defenders can use on day one.</p>
+<a class="cta" href="#work">Read the research →</a>
+<div class="cards"><div class="card"><span class="mono">Critical · CVSS 10.0</span><b>CVE-2025-20281</b></div><div class="card"><span class="mono">Technique · T1027</span><b>Walsh–Hadamard obfuscation</b></div></div></header>
+<div class="mq mono"><div>{[0,1].map(()=>dom.map(d=><span>{d[0]}</span>))}</div></div>
+<section id="work"><div class="wrap"><div class="mono">Selected research</div><h2>The evidence board.</h2>
+{work.map(w=><a class="row" href={w[2]}><strong>{w[0]}</strong><span class="mono">{w[1]}</span></a>)}</div></section>
+<section style="padding-top:0"><div class="wrap"><div class="mono">Domains</div><h2>Four lanes, one standard.</h2>
+<div class="bento">{dom.map((d,i)=><div class="cell"><span class="mono">0{i+1}</span><h3>{d[0]}</h3><p>{d[1]}</p></div>)}</div></div></section>
+<div class="wrap"><div class="stats">{stats.map(s=><div class="stat"><b data-n={s[0]}>00</b><span class="mono">{s[1]}</span></div>)}</div></div>
+<section><div class="wrap"><div class="mono">Projects</div><h2>Checked-out experiments.</h2>
+{proj.map(p=><a class="row" href={p[2]}><strong>{p[0]}</strong><span class="mono">{p[1]}</span></a>)}</div></section>
+<footer id="contact"><div class="wrap"><div class="fl mono"><a href="mailto:v8k2xf@proton.me">v8k2xf@proton.me</a><a href="https://github.com/Arthsome">GitHub ↗</a><span>© 2026 · Defensive purposes only</span></div></div><div class="wm" aria-hidden="true">ARTHSOME</div></footer>
+<script>
+import {gsap} from 'gsap';import {ScrollTrigger} from 'gsap/ScrollTrigger';gsap.registerPlugin(ScrollTrigger);
+gsap.from('h1 i',{yPercent:110,duration:1.3,ease:'expo.out',stagger:.12});
+gsap.from('.hero .mono,.lede,.cta,.card',{opacity:0,y:24,duration:1,ease:'expo.out',stagger:.08,delay:.5});
+gsap.utils.toArray('.cell,.row').forEach(e=>gsap.from(e,{opacity:0,y:40,duration:1,ease:'expo.out',scrollTrigger:{trigger:e,start:'top 90%'}}));
+document.querySelectorAll('.stat b').forEach(b=>{const o={v:0};gsap.to(o,{v:+b.dataset.n,duration:1.6,ease:'power3.out',scrollTrigger:{trigger:b,start:'top 92%'},onUpdate:()=>{b.textContent=String(Math.round(o.v)).padStart(2,'0')}})});
+document.querySelectorAll('.cell').forEach(c=>c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--x',e.clientX-r.left+'px');c.style.setProperty('--y',e.clientY-r.top+'px')}));
+if(matchMedia('(pointer:fine)').matches)addEventListener('pointermove',e=>gsap.to('.cards',{x:(e.clientX/innerWidth-.5)*-24,y:(e.clientY/innerHeight-.5)*-24,duration:1.2,ease:'power3.out'}));
+</script></body></html>

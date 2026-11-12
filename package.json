@@ -1,0 +1,1 @@
+{"name":"arthsome","type":"module","private":true,"scripts":{"dev":"astro dev","build":"astro build"},"dependencies":{"astro":"^5.0.0","gsap":"^3.12.5"}}
