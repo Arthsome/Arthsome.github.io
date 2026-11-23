@@ -1,1 +1,1 @@
-export default {site:'https://arthsome.github.io',outDir:'./docs'};
+export default {site:'https://vance.github.io',outDir:'./docs'};

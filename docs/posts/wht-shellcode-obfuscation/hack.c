@@ -2,8 +2,8 @@
  * hack.c
  * payload obfuscation via Fast Walsh-Hadamard Transform (FWHT)
  * with spectral permutation keying
- * author: @arthsome
- * https://arthsome.github.io/posts/wht-shellcode-obfuscation/
+ * author: @vance
+ * https://vance.github.io/posts/wht-shellcode-obfuscation/
  *
  * WHT advantages over classical crypto for obfuscation:
  *   - integer-only arithmetic (no sin/cos/exp, no floating point)

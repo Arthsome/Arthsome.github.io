@@ -1,4 +1,4 @@
-/* Particle portrait — image-driven halftone (Arthsome)
+/* Particle portrait — image-driven halftone (Vance)
    Source-independent: sample the source image on an offscreen canvas and
    place one particle per sampled cell. Replacing the source file (crystal
    today, real portrait later) requires no logic change.
@@ -34,7 +34,7 @@
     canvas.style.display = "none";
     var f = frame.querySelector(".portrait-fallback");
     if (f) f.style.display = "block";
-    else { var i = document.createElement("img"); i.src = CONFIG.portraitSource; i.className = "portrait-fallback"; i.alt = "Arthsome crystal — static fallback"; frame.appendChild(i); }
+    else { var i = document.createElement("img"); i.src = CONFIG.portraitSource; i.className = "portrait-fallback"; i.alt = "Vance crystal — static fallback"; frame.appendChild(i); }
   }
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { staticFallback(); return; }
 
