@@ -106,7 +106,7 @@ const stats=[[2,'Public analyses'],[1,'CVE with detection rules'],[10,'Top CVSS 
 </div></section>
 
 <section id="work"><div class="wrap">
-  <div class="sec-head"><div><p class="sec-label">02 / Selected work</p><h2 class="rh">Research, published after the patch.</h2></div><p class="sub">Root-cause analysis, working proof and detections — released once the fix is live.</p></div>
+  <div class="sec-head"><span class="sec-no" aria-hidden="true">02</span><div><p class="sec-label">02 / Selected work</p><h2 class="rh">Research, published after the patch.</h2></div><p class="sub">Root-cause analysis, working proof and detections — released once the fix is live.</p></div>
   <div class="stack">{work.map((w,i)=>
    <article class="wc glass" style={`--g:${w.g}`} data-spot>
     <div class="wc-top"><span class="chip">{String(i+1).padStart(2,'0')} / {w.m}</span><span class={'chip'+(i===0?' hot':'')}>{w.s}</span></div>
@@ -119,12 +119,12 @@ const stats=[[2,'Public analyses'],[1,'CVE with detection rules'],[10,'Top CVSS 
 </div></section>
 
 <section id="services"><div class="wrap">
-  <div class="sec-head"><div><p class="sec-label">03 / Services</p><h2 class="rh">Where I can help.</h2></div><p class="sub">Hands-on work, scoped clearly, reported so your team can reproduce and fix it.</p></div>
+  <div class="sec-head"><span class="sec-no" aria-hidden="true">03</span><div><p class="sec-label">03 / Services</p><h2 class="rh">Where I can help.</h2></div><p class="sub">Hands-on work, scoped clearly, reported so your team can reproduce and fix it.</p></div>
   <div class="ledger">{svc.map((s,i)=><div class="sv" data-spot><span class="sv-n"><i class="sv-node"></i>{String(i+1).padStart(2,'0')}</span><h3>{s[0]}</h3><p>{s[1]}</p><span class="sv-arrow" set:html={I.up}></span></div>)}</div>
 </div></section>
 
 <section id="approach"><div class="wrap">
-  <div class="sec-head"><div><p class="sec-label">04 / Approach</p><h2 class="rh">How the work runs.</h2></div><p class="sub">The same sequence on every engagement, from the first scope call to the published write-up.</p></div>
+  <div class="sec-head"><span class="sec-no" aria-hidden="true">04</span><div><p class="sec-label">04 / Approach</p><h2 class="rh">How the work runs.</h2></div><p class="sub">The same sequence on every engagement, from the first scope call to the published write-up.</p></div>
   <div class="steps">{approach.map(a=><div class="step"><span class="step-n">{a[0]}</span><h3>{a[1]}</h3><p>{a[2]}</p></div>)}</div>
   <div class="credentials"><span>CVE-2025-20281</span><b></b><span>MITRE ATT&amp;CK T1027</span><b></b><span>HackerOne</span><b></b><span>Bugcrowd</span><b></b><span>Cisco ISE</span></div>
 </div></section>
@@ -132,7 +132,7 @@ const stats=[[2,'Public analyses'],[1,'CVE with detection rules'],[10,'Top CVSS 
 <div class="wrap"><div class="stats">{stats.map(s=><div class="stat"><b data-n={s[0]}>0</b><span>{s[1]}</span></div>)}</div></div>
 
 <section id="projects"><div class="wrap">
-  <div class="sec-head"><div><p class="sec-label">05 / Projects</p><h2 class="rh">Side experiments.</h2></div></div>
+  <div class="sec-head"><span class="sec-no" aria-hidden="true">05</span><div><p class="sec-label">05 / Projects</p><h2 class="rh">Side experiments.</h2></div></div>
   <div>{proj.map((p,i)=><a class="pj" href={p[2]} target="_blank" rel="noopener"><span class="pj-n">{String(i+1).padStart(2,'0')}</span><strong>{p[0]}</strong><span class="d">{p[1]}</span><span class="arr" set:html={I.up}></span></a>)}</div>
 </div></section>
 
