@@ -148,11 +148,11 @@ function initChoreography(){
   /* velocity marquee + pause control */
   const track=document.querySelector('.marquee-track'), toggle=document.querySelector('.marquee-toggle');
   if(track){
-    let x=0,boost=0,paused=false;
+    let x=0,boost=0,paused=false,half=track.scrollWidth/2;
+    addEventListener('resize',()=>{half=track.scrollWidth/2;},{passive:true});
     lenis?.on('scroll',({velocity})=>{if(!paused)boost=Math.min(8,Math.abs(velocity)*.12);});
     gsap.ticker.add(()=>{
       if(paused)return;
-      const half=track.scrollWidth/2;
       if(half<=0)return;
       x-=0.55+boost; boost*=0.92;
       if(Math.abs(x)>=half)x=0;
@@ -277,35 +277,40 @@ function initInteractions(lenis){
   requestAnimationFrame(raf);
 }
 
-/* ---------- text reaction: chars lean away from the cursor ---------- */
+/* ---------- text reaction: event-driven, no per-frame layout reads ---------- */
 function initTextReaction(){
   if(matchMedia('(pointer:coarse)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const title=document.querySelector('.hero-title');
   const chars=[...document.querySelectorAll('.hero-title .tr-char')];
-  if(!chars.length)return;
+  if(!title||!chars.length)return;
   const ring=document.querySelector('.cursor-ring');
-  let mx=-9999,my=-9999;
-  addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;},{passive:true});
-  function loop(){
+  let centers=[];
+  const measure=()=>{ centers=chars.map(c=>{const r=c.getBoundingClientRect();return [r.left+r.width/2,r.top+r.height/2];}); };
+  const reset=()=>{ chars.forEach(c=>{c.style.transform='';c.style.opacity='';}); if(ring)ring.classList.remove('is-text'); };
+  // measure once after fonts settle, then on resize — never inside rAF
+  (document.fonts?.ready||Promise.resolve()).then(()=>requestAnimationFrame(measure));
+  addEventListener('resize',()=>{reset();requestAnimationFrame(measure);},{passive:true});
+  let queued=false,mx=0,my=0;
+  const apply=()=>{
+    queued=false;
     let touched=false;
-    for(const c of chars){
-      const r=c.getBoundingClientRect();
-      const dx=(mx-(r.left+r.width/2)), dy=(my-(r.top+r.height/2));
+    for(let i=0;i<chars.length;i++){
+      const [cx,cy]=centers[i];
+      const dx=mx-cx, dy=my-cy;
       const dist=Math.hypot(dx,dy);
-      const radius=140;
-      if(dist<radius&&dist>0.001){
-        const f=(1-dist/radius);
-        c.style.transform=`translate3d(${-dx*0.18*f}px,${-dy*0.18*f}px,0)`;
-        c.style.opacity=String(1-f*0.45);
+      if(dist<140&&dist>0.001){
+        const f=1-dist/140;
+        chars[i].style.transform=`translate3d(${-dx*0.18*f}px,${-dy*0.18*f}px,0)`;
+        chars[i].style.opacity=String(1-f*0.45);
         touched=true;
-      }else{
-        c.style.transform='translate3d(0,0,0)';
-        c.style.opacity='1';
+      }else if(chars[i].style.transform){
+        chars[i].style.transform='';chars[i].style.opacity='';
       }
     }
     if(ring)ring.classList.toggle('is-text',touched);
-    requestAnimationFrame(loop);
-  }
-  requestAnimationFrame(loop);
+  };
+  addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;if(!queued){queued=true;requestAnimationFrame(apply);}},{passive:true});
+  addEventListener('pointerleave',reset);
 }
 
 window.addEventListener('DOMContentLoaded',()=>{
