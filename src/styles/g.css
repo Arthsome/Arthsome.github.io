@@ -359,6 +359,10 @@ h2{font:400 clamp(40px,6.2vw,92px)/.98 var(--fd);letter-spacing:-.02em;text-wrap
 .wc-bot{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:22px}
 .wc-bot p{max-width:52ch;color:var(--ink-2)}
 .wc .big{position:absolute;right:clamp(20px,2.6vw,42px);bottom:-.08em;z-index:0!important;font:400 clamp(90px,13vw,200px)/.8 var(--fd);letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1px rgba(18,23,18,.13);pointer-events:none;user-select:none}
+/* case-file outcome line — the result next to the evidence, once */
+.wc-out{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px 20px;padding:14px 0;border-block:1px solid var(--line);max-width:78ch}
+.wc-out span{font:500 10px/1 var(--fm);letter-spacing:.14em;color:var(--acid-deep);flex:none}
+.wc-out p{color:var(--ink);font-weight:500;max-width:62ch;font-size:15px}
 .wc .btn{white-space:nowrap}
 
 /* services — numbered ledger, no icon bullets, no feature grid */
@@ -371,6 +375,21 @@ h2{font:400 clamp(40px,6.2vw,92px)/.98 var(--fd);letter-spacing:-.02em;text-wrap
 .sv-arrow{width:26px;height:26px;color:var(--ink-3);opacity:.4;transition:transform .5s var(--e),opacity .5s var(--e),color .5s var(--e)}
 .sv:hover .sv-arrow{transform:translate(3px,-3px);opacity:1;color:var(--acid-deep)}
 @media(max-width:900px){.sv{grid-template-columns:40px 1fr 26px}.sv p{grid-column:2/3}}
+
+/* approach — a process strip, not a feature grid */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line-2)}
+.step{position:relative;padding:clamp(24px,3vw,42px) clamp(16px,2vw,30px) clamp(28px,3vw,44px) 0;border-right:1px solid var(--line)}
+.step:last-child{border-right:0}
+.step-n{display:block;font:500 11px/1 var(--fm);letter-spacing:.14em;color:var(--acid-deep);margin-bottom:20px}
+.step h3{font:400 clamp(26px,3vw,42px)/1.05 var(--fd);letter-spacing:-.02em;margin-bottom:14px}
+.step p{color:var(--ink-2);font-size:14px;max-width:30ch}
+.step::before{content:"";position:absolute;left:0;right:0;top:-1px;height:2px;background:var(--acid);transform:scaleX(0);transform-origin:0 50%;transition:transform .8s var(--e)}
+.steps.is-in .step::before{transform:scaleX(1)}
+@media(max-width:860px){.steps{grid-template-columns:1fr 1fr;gap:0}.step:nth-child(2n){border-right:0}.step:nth-child(n+3){border-top:1px solid var(--line)}}
+@media(max-width:520px){.steps{grid-template-columns:1fr}.step{border-right:0;border-top:1px solid var(--line)}.step:first-child{border-top:0}}
+/* credentials, stated as facts rather than a fake logo wall */
+.credentials{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:clamp(28px,3.4vw,48px);padding-top:18px;border-top:1px solid var(--line);font:500 11px/1 var(--fm);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.credentials b{width:4px;height:4px;border-radius:50%;background:var(--acid-deep)}
 
 /* numbers */
 .numbers{padding-block:clamp(56px,6vw,96px);border-bottom:1px solid var(--line)}

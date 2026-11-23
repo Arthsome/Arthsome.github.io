@@ -19,9 +19,15 @@ const MARK=`<svg class="vmark" viewBox="0 0 64 64" aria-hidden="true" focusable=
 const EMAIL='vancxe@aster.cx',X='https://x.com/vancxef',IG='https://instagram.com/thepersonarya';
 const disc=['Penetration testing','Bug bounty','Vulnerability analysis','Reverse engineering','Detection engineering','Incident response'];
 const work=[
-  {m:'CVE-2025-20281',s:'CVSS 10.0',t:'Unauthenticated RCE in Cisco ISE',d:'Root-cause analysis of a critical pre-auth remote code execution: the broken invariant, the code path, why the patch holds, and detections defenders can deploy on day one.',h:'/posts/cve-2025-20281/index.html',big:'10.0',g:'#C6F440'},
-  {m:'MITRE T1027',s:'Technique',t:'Walsh–Hadamard payload obfuscation',d:'How a Walsh–Hadamard transform hides shellcode from static analysis, with spectral analysis, key sensitivity and a working pipeline.',h:'/posts/wht-shellcode-obfuscation/index.html',big:'WHT',g:'#B6F13B'},
-  {m:'HackerOne',s:'Bugcrowd',t:'Bug bounty hunting',d:'Web, mobile, AI and Web3 targets. Findings stay private until the vendor ships the fix.',h:null,big:'H1',g:'#97EA1E'}
+  {m:'CVE-2025-20281',s:'CVSS 10.0',t:'Unauthenticated RCE in Cisco ISE',d:'Root-cause analysis of a critical pre-auth remote code execution: the broken invariant, the code path, why the patch holds, and detections defenders can deploy on day one.',o:'Root cause, patch analysis, and detections defenders can deploy on day one.',h:'/posts/cve-2025-20281/index.html',big:'10.0',g:'#C6F440'},
+  {m:'MITRE T1027',s:'Technique',t:'Walsh–Hadamard payload obfuscation',d:'How a Walsh–Hadamard transform hides shellcode from static analysis, with spectral analysis, key sensitivity and a working pipeline.',o:'Spectral analysis, key sensitivity, and a working obfuscation pipeline.',h:'/posts/wht-shellcode-obfuscation/index.html',big:'WHT',g:'#B6F13B'},
+  {m:'HackerOne',s:'Bugcrowd',t:'Bug bounty hunting',d:'Web, mobile, AI and Web3 targets. Findings stay private until the vendor ships the fix.',o:'Findings stay private until the vendor ships the fix.',h:null,big:'H1',g:'#97EA1E'}
+];
+const approach=[
+  ['01','Scope','Testing starts with a clear scope. You know what is in bounds before work begins.'],
+  ['02','Test','Web apps, APIs and mobile apps, tested manually. No scanner output passed off as findings.'],
+  ['03','Reproduce','Every finding comes with steps your team can run and verify.'],
+  ['04','Publish','Write-ups and detections ship after the patch is live.']
 ];
 const svc=[
   ['Penetration testing','Scoped, manual testing of web apps, APIs and mobile apps. You get reproducible findings with a fix path, not scanner output.'],
@@ -105,6 +111,7 @@ const stats=[[2,'Public analyses'],[1,'CVE with detection rules'],[10,'Top CVSS 
    <article class="wc glass" style={`--g:${w.g}`} data-spot>
     <div class="wc-top"><span class="chip">{String(i+1).padStart(2,'0')} / {w.m}</span><span class={'chip'+(i===0?' hot':'')}>{w.s}</span></div>
     <h3>{w.t}</h3>
+    <div class="wc-out"><span>OUTCOME</span><p>{w.o}</p></div>
     <div class="wc-bot"><p>{w.d}</p>{w.h?<a class="btn" data-mag href={w.h}>Read the analysis<Fragment set:html={I.up}/></a>:<span class="chip">Private until fixed</span>}</div>
     <span class="wc-stamp" aria-hidden="true">FILE / 0{i+1}<b></b>VERIFIED</span>
     <span class="big" aria-hidden="true">{w.big}</span>
@@ -116,10 +123,16 @@ const stats=[[2,'Public analyses'],[1,'CVE with detection rules'],[10,'Top CVSS 
   <div class="ledger">{svc.map((s,i)=><div class="sv" data-spot><span class="sv-n"><i class="sv-node"></i>{String(i+1).padStart(2,'0')}</span><h3>{s[0]}</h3><p>{s[1]}</p><span class="sv-arrow" set:html={I.up}></span></div>)}</div>
 </div></section>
 
+<section id="approach"><div class="wrap">
+  <div class="sec-head"><div><p class="sec-label">04 / Approach</p><h2 class="rh">How the work runs.</h2></div><p class="sub">The same sequence on every engagement, from the first scope call to the published write-up.</p></div>
+  <div class="steps">{approach.map(a=><div class="step"><span class="step-n">{a[0]}</span><h3>{a[1]}</h3><p>{a[2]}</p></div>)}</div>
+  <div class="credentials"><span>CVE-2025-20281</span><b></b><span>MITRE ATT&amp;CK T1027</span><b></b><span>HackerOne</span><b></b><span>Bugcrowd</span><b></b><span>Cisco ISE</span></div>
+</div></section>
+
 <div class="wrap"><div class="stats">{stats.map(s=><div class="stat"><b data-n={s[0]}>0</b><span>{s[1]}</span></div>)}</div></div>
 
 <section id="projects"><div class="wrap">
-  <div class="sec-head"><div><p class="sec-label">04 / Projects</p><h2 class="rh">Side experiments.</h2></div></div>
+  <div class="sec-head"><div><p class="sec-label">05 / Projects</p><h2 class="rh">Side experiments.</h2></div></div>
   <div>{proj.map((p,i)=><a class="pj" href={p[2]} target="_blank" rel="noopener"><span class="pj-n">{String(i+1).padStart(2,'0')}</span><strong>{p[0]}</strong><span class="d">{p[1]}</span><span class="arr" set:html={I.up}></span></a>)}</div>
 </div></section>
 
@@ -127,10 +140,10 @@ const stats=[[2,'Public analyses'],[1,'CVE with detection rules'],[10,'Top CVSS 
   <div class="contact-panel glass glass--shimmer" data-spot>
     <span class="contact-mark" aria-hidden="true" set:html={MARK}></span>
     <div class="contact-grid">
-      <div><p class="sec-label">05 / Contact</p><h2 class="rh">Have something worth testing?</h2><a class="mail" data-mag href={`mailto:${EMAIL}`}>{EMAIL}</a>
+      <div><p class="sec-label">06 / Contact</p><h2 class="rh">Have something worth testing?</h2><a class="mail" data-mag href={`mailto:${EMAIL}`}>{EMAIL}</a>
         <div class="soc"><a class="btn" data-mag href={`mailto:${EMAIL}`}>Business inquiries<Fragment set:html={I.up}/></a><a class="btn ghost" data-mag href={X} target="_blank" rel="noopener"><Fragment set:html={I.x}/>@vancxef</a><a class="btn ghost" data-mag href={IG} target="_blank" rel="noopener"><Fragment set:html={I.ig}/>@thepersonarya</a><a class="btn ghost" data-mag href="https://github.com/Vance" target="_blank" rel="noopener"><Fragment set:html={I.gh}/>GitHub</a></div>
       </div>
-      <p class="contact-note">Research published for defensive purposes. Findings stay private until the vendor ships the fix.</p>
+      <p class="contact-note">Work is scoped clearly and reported so your team can reproduce and fix it. Findings stay private until the vendor ships the fix.</p>
     </div>
   </div>
 </div></section>
@@ -223,7 +236,7 @@ if(fine){
  });
 }
 
-if(reduce){$$('.stat b').forEach(b=>b.textContent=b.dataset.n);$('.stats').classList.add('is-in');$$('.sv').forEach(el=>el.classList.add('is-in'))}
+if(reduce){$$('.stat b').forEach(b=>b.textContent=b.dataset.n);$('.stats').classList.add('is-in');$$('.sv').forEach(el=>el.classList.add('is-in'));$('.steps').classList.add('is-in')}
 else{
   gsap.to('.prog',{scaleX:1,ease:'none',scrollTrigger:{start:0,end:'max',scrub:.2}});
 
@@ -259,6 +272,7 @@ else{
   $$('.stat b').forEach(b=>{const o={v:0},n=+b.dataset.n;gsap.to(o,{v:n,duration:1.8,ease:'power3.out',scrollTrigger:{trigger:b,start:'top 92%',once:true},onUpdate:()=>b.textContent=Math.round(o.v)})});
   ScrollTrigger.create({trigger:'.stats',start:'top 88%',once:true,onEnter:()=>$('.stats').classList.add('is-in')});
   $$('.sv').forEach(el=>ScrollTrigger.create({trigger:el,start:'top 88%',once:true,onEnter:()=>el.classList.add('is-in')}));
+  ScrollTrigger.create({trigger:'.steps',start:'top 88%',once:true,onEnter:()=>$('.steps').classList.add('is-in')});
 
   /* the discipline band borrows scroll velocity, then settles */
   const ticker=$('.ticker');
