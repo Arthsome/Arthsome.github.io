@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AXON..</title>
+<meta name="description" content="AXON is a motion research studio: an open logbook of real-time rendering studies in particles, fluids and signed surfaces.">
+<link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+
+<div class="ui">
+  <div class="brand">
+    <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
+      <circle cx="20" cy="20" r="18.5" fill="none" stroke="#fff" stroke-width="1.6"/>
+      <polygon points="20,7 22.6,16.3 31.9,13.7 25.2,20 31.9,26.3 22.6,23.7 20,33 17.4,23.7 8.1,26.3 14.8,20 8.1,13.7 17.4,16.3" fill="#fff"/>
+    </svg>
+    <div class="brand-txt"><div class="brand-name">AXON</div><div class="brand-sub">Motion research</div></div>
+  </div>
+
+  <div class="counter"><span>07</span></div>
+
+  <div class="tags" id="tags"></div>
+
+  <div class="list" id="list"></div>
+
+  <div class="about">
+    <section class="block">
+      <h2>[info]</h2>
+      <p>Studies are published as they are built and may not run on every device.</p>
+    </section>
+    <section class="block">
+      <h2>[aims]</h2>
+      <p>An open logbook of real-time rendering research: surfaces, fluids, fields, and the little tools we build to shape them.
+It is here to keep the work in view and to give each new project a place to grow.</p>
+    </section>
+    <section class="block">
+      <h2>[exploring]</h2>
+      <ul><li>Signed surfaces</li><li>Cursor turbulence</li><li>Compute passes</li><li>Type in 3D space</li></ul>
+    </section>
+    <section class="block">
+      <h2>[connect]</h2>
+      <a href="#">Index -&gt; AXON</a>
+      <a href="mailto:hello@axonlab.dev">Mail -&gt; hello@axonlab.dev</a>
+    </section>
+  </div>
+</div>
+
+<script src="./js/vendor/three.min.js"></script>
+<script type="module" src="./js/main.js"></script>
+</body>
+</html>
