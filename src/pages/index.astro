@@ -76,7 +76,7 @@ const stats=[[2,'Public analyses'],[1,'CVE with detection rules'],[10,'Top CVSS 
   <div class="hero-grid wrap">
     <div class="hero-copy">
       <p class="eyebrow rv"><span class="pulse"></span>Independent security research · 2026</p>
-      <h1 id="h1"><span class="line">Finding what</span><span class="line"><span class="mark">breaks</span> before</span><span class="line">it does.</span></h1>
+      <h1 id="h1"><span class="line"><span>Finding what</span></span><span class="line"><span><span class="mark">breaks</span> before</span></span><span class="line"><span>it does.</span></span></h1>
       <p class="lede rv"><strong>I'm Vance, an independent security researcher.</strong> Penetration testing, bug bounty and vulnerability research, with write-ups and detections published after the patch.</p>
       <div class="cta-row rv"><a class="btn" data-mag href={`mailto:${EMAIL}`}>Start a conversation<Fragment set:html={I.up}/></a><a class="btn ghost" data-mag href="#work">See the research<Fragment set:html={I.down}/></a></div>
       <div class="indexline rv"><span>00 / Introduction</span><span>Scroll to explore</span></div>
@@ -98,7 +98,10 @@ const stats=[[2,'Public analyses'],[1,'CVE with detection rules'],[10,'Top CVSS 
   </div></div>
 </section>
 
-<div class="ticker" aria-hidden="true"><div class="ticker-t">{[0,1].map(()=><div class="ticker-g">{disc.map(d=><><span>{d}</span><b></b></>)}</div>)}</div></div>
+<div class="ticker-wrap">
+ <button class="ticker-toggle" aria-label="Pause the discipline ticker" aria-pressed="false"><span class="tt-ico" aria-hidden="true"></span><span class="tt-label">Pause</span></button>
+ <div class="ticker" aria-hidden="true"><div class="ticker-t">{[0,1].map(()=><div class="ticker-g">{disc.map(d=><><span>{d}</span><b></b></>)}</div>)}</div></div>
+</div>
 
 <section class="position"><div class="wrap position-inner">
   <p class="tag">01 / Position</p>
@@ -158,7 +161,9 @@ gsap.registerPlugin(ScrollTrigger,SplitText,CustomEase);
 CustomEase.create('vance-out','0.22,1,0.36,1');
 ScrollTrigger.config({ignoreMobileResize:true});
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
-const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,fine=matchMedia('(pointer:fine)').matches;
+const motionMQ=matchMedia('(prefers-reduced-motion: reduce)'),reduce=motionMQ.matches,fine=matchMedia('(pointer:fine)').matches;
+/* OS preference can change without a reload — rebuild the motion tree when it does */
+motionMQ.addEventListener?.('change',()=>location.reload());
 /* one shared throttle: every pointermove pass-through runs at most ~16ms,
    so ambient light, glass highlights and magnetic followers don't race */
 let lastMove=0;const onMove=fn=>e=>{const t=e.timeStamp||performance.now();if(t-lastMove<15)return;lastMove=t;fn(e)};
@@ -173,9 +178,9 @@ document.addEventListener('pointermove',onMove(e=>{const t=e.target.closest&&e.t
 const ambient=$('.ambient');
 if(!reduce&&fine){
  const dot=$('.cur-dot'),ring=$('.cur-ring');
- const dx=gsap.quickTo(dot,'x',{duration:.12,ease:'power3'}),dy=gsap.quickTo(dot,'y',{duration:.12,ease:'power3'});
- const rx=gsap.quickTo(ring,'x',{duration:.5,ease:'power3'}),ry=gsap.quickTo(ring,'y',{duration:.5,ease:'power3'});
- const ax=gsap.quickTo(ambient,'x',{duration:1.4,ease:'power3'}),ay=gsap.quickTo(ambient,'y',{duration:1.4,ease:'power3'});
+ const dx=gsap.quickTo(dot,'x',{duration:.12,ease:'vance-out'}),dy=gsap.quickTo(dot,'y',{duration:.12,ease:'vance-out'});
+ const rx=gsap.quickTo(ring,'x',{duration:.35,ease:'vance-out'}),ry=gsap.quickTo(ring,'y',{duration:.35,ease:'vance-out'});
+ const ax=gsap.quickTo(ambient,'x',{duration:1.4,ease:'vance-out'}),ay=gsap.quickTo(ambient,'y',{duration:1.4,ease:'vance-out'});
  let seen=false;
  addEventListener('pointermove',onMove(e=>{
   dx(e.clientX);dy(e.clientY);rx(e.clientX);ry(e.clientY);ax(e.clientX);ay(e.clientY);
@@ -188,7 +193,7 @@ if(!reduce&&fine){
 /* nav: a glass pill that travels to the hovered/focused link */
 const links=$('.links'),pill=$('.nav-pill');
 if(links&&pill){
- const px=gsap.quickTo(pill,'x',{duration:.5,ease:'power3'}),pw=gsap.quickTo(pill,'width',{duration:.5,ease:'power3'});
+ const px=gsap.quickTo(pill,'x',{duration:.35,ease:'vance-out'}),pw=gsap.quickTo(pill,'width',{duration:.35,ease:'vance-out'});
  const travel=el=>{if(!el)return;const a=el.getBoundingClientRect(),b=links.getBoundingClientRect();px(a.left-b.left);pw(a.width);gsap.to(pill,{opacity:1,duration:.3})};
  $$('.links a').forEach(a=>{a.addEventListener('pointerenter',()=>travel(a));a.addEventListener('focus',()=>travel(a))});
  links.addEventListener('pointerleave',()=>gsap.to(pill,{opacity:0,duration:.35}));
@@ -216,7 +221,7 @@ const tabs=$$('[data-tab]'),drop=$('.tab-drop'),bar=$('.tabbar');
 function moveDrop(el,instant){
  if(!drop||!bar||!el||getComputedStyle(bar).display==='none')return;
  const b=bar.getBoundingClientRect(),a=el.getBoundingClientRect();
- animate(drop,{x:a.left-b.left,width:a.width,opacity:1},instant||reduce?{duration:0}:{type:'spring',stiffness:260,damping:22,mass:.7});
+ animate(drop,{x:a.left-b.left,width:a.width,opacity:1},instant||reduce?{duration:0}:{type:'spring',stiffness:260,damping:28,mass:.7});
 }
 function setActive(id){
  tabs.forEach(a=>a.classList.toggle('is-active',a.dataset.tab===id));
@@ -233,14 +238,15 @@ if(fine&&!reduce){document.addEventListener('pointerdown',e=>{const b=e.target.c
 
 /* Motion owns interruptible UI: springs start from the live value, so a
    gesture can be reversed mid-flight. GSAP stays on scroll choreography. */
-const soft={type:'spring',stiffness:210,damping:24,mass:.9};
-const tilt={type:'spring',stiffness:190,damping:24,mass:.8,transformPerspective:1100};
+/* critically damped: damping ≈ 2·√(stiffness·mass) — no overshoot, no bounce */
+const soft={type:'spring',stiffness:300,damping:34,mass:1};
+const tilt={type:'spring',stiffness:260,damping:30,mass:.8,transformPerspective:1100};
 /* one press model: no Android blue flash, a quick spring-back scale instead */
 let isPressed=false;
 const pressTarget=e=>e.target.closest&&e.target.closest('a,button,.btn,.sv,.wc,.tabbar a,.pj,.step,.stats,.tab-drop');
-document.addEventListener('pointerdown',e=>{const t=pressTarget(e);if(!t)return;isPressed=true;animate(t,{scale:.955},{type:'spring',stiffness:320,damping:20})},{passive:true});
-document.addEventListener('pointerup',e=>{if(!isPressed)return;isPressed=false;animate(pressTarget(e)||document.body,{scale:1},{type:'spring',stiffness:420,damping:16})},{passive:true});
-document.addEventListener('pointercancel',e=>{if(!isPressed)return;isPressed=false;animate(pressTarget(e)||document.body,{scale:1},{type:'spring',stiffness:420,damping:16})},{passive:true});
+document.addEventListener('pointerdown',e=>{const t=pressTarget(e);if(!t)return;isPressed=true;animate(t,{scale:.96},{type:'spring',stiffness:420,damping:40,mass:1})},{passive:true});
+document.addEventListener('pointerup',e=>{if(!isPressed)return;isPressed=false;animate(pressTarget(e)||document.body,{scale:1},{type:'spring',stiffness:360,damping:34,mass:1})},{passive:true});
+document.addEventListener('pointercancel',e=>{if(!isPressed)return;isPressed=false;animate(pressTarget(e)||document.body,{scale:1},{type:'spring',stiffness:360,damping:34,mass:1})},{passive:true});
 if(fine&&!reduce){
  $$('[data-mag]').forEach(el=>{
   el.addEventListener('pointermove',onMove(e=>{const r=el.getBoundingClientRect();animate(el,{x:(e.clientX-r.left-r.width/2)*.22,y:(e.clientY-r.top-r.height/2)*.3},soft)}));
@@ -261,67 +267,76 @@ if(fine&&!reduce){
  });
 }
 
-if(reduce){$$('.stat b').forEach(b=>b.textContent=b.dataset.n);$('.stats').classList.add('is-in');$$('.sv').forEach(el=>el.classList.add('is-in'));$('.steps').classList.add('is-in')}
-else{
+if(reduce){
+  /* Tier 3: keep only opacity/colour feedback, no spatial motion */
+  $$('.stat b').forEach(b=>b.textContent=b.dataset.n);
+  $('.stats').classList.add('is-in');$$('.sv').forEach(el=>el.classList.add('is-in'));$('.steps').classList.add('is-in');
+  gsap.from('.hero .lede, .hero .eyebrow',{opacity:0,duration:.15,ease:'none'});
+} else {
   gsap.to('.prog',{scaleX:1,ease:'none',scrollTrigger:{start:0,end:'max',scrub:.2}});
 
-  /* one orchestrated hero entrance */
-  const tl=gsap.timeline({defaults:{ease:'expo.out'}});
-  tl.from('.eyebrow',{opacity:0,y:16,duration:1},.1)
-   .from('.line',{yPercent:112,opacity:0,filter:'blur(12px)',duration:1.5,stagger:.09},.18)
-   .from('.hero .lede, .hero .cta-row, .hero .indexline',{opacity:0,y:22,duration:1.1,stagger:.09},.62)
-   .from('.plate',{opacity:0,y:38,scale:.97,duration:1.5},.4)
-   .from('.dock .dk',{opacity:0,y:26,duration:1.1,stagger:.09},.9)
-   .from('.nav .bar',{yPercent:-150,opacity:0,duration:1.2},.2)
-   .from('.tabbar',{yPercent:140,opacity:0,duration:1.2},.6);
+  /* ONE orchestrated entrance. Mask reveal, 0.7s, premium decel — no blur filter. */
+  const lines=$$('.line>span');
+  lines.forEach(el=>el.style.willChange='transform');
+  const tl=gsap.timeline({defaults:{ease:'vance-out'},onComplete:()=>lines.forEach(el=>el.style.willChange='')});
+  tl.from('.eyebrow',{opacity:0,y:12,duration:.5},.05)
+   .from('.line>span',{yPercent:100,duration:.7,stagger:.08},.12)
+   .from('.hero .lede, .hero .cta-row, .hero .indexline',{opacity:0,y:16,duration:.5,stagger:.06},.45)
+   .from('.plate',{opacity:0,scale:.97,duration:.7},.3)
+   .from('.dock .dk',{opacity:0,y:16,duration:.5,stagger:.06},.55)
+   .from('.nav .bar',{yPercent:-120,opacity:0,duration:.6},.1)
+   .from('.tabbar',{yPercent:120,opacity:0,duration:.6},.35);
 
-  /* every heading is split after the font loads: one masked word lands per
-     slice of scroll progress, so the title assembles as you move down */
-  const buildWordReveals=()=>{
-   $$('.rh,.wc h3,.sv h3,.pj strong,.step h3').forEach(el=>{
-    if(el.dataset.split)return;
-    el.dataset.split='1';
-    const parts=SplitText.create(el,{type:'words',mask:'words',wordsClass:'gs-word'});
-    gsap.from(parts.words,{
-     yPercent:112,opacity:0,ease:'none',
-     stagger:{each:.42,from:'start'},
-     scrollTrigger:{trigger:el,start:'top 92%',end:'bottom 45%',scrub:1}
-    });
+  /* headings: a single quiet line-level arrival, not a word-by-word scrub storm.
+     SplitText runs after fonts load so masked baselines never clip descenders. */
+  const buildReveals=()=>{
+   $$('.rh').forEach(el=>{
+    if(el.dataset.split)return;el.dataset.split='1';
+    const text=el.textContent.trim();
+    el.setAttribute('aria-label',text);
+    const parts=SplitText.create(el,{type:'lines',mask:'lines',linesClass:'gs-line'});
+    parts.lines.forEach(l=>l.setAttribute('aria-hidden','true'));
+    gsap.from(parts.lines,{yPercent:100,opacity:0,duration:.6,ease:'vance-out',stagger:.06,
+      scrollTrigger:{trigger:el,start:'top 92%',once:true}});
    });
    ScrollTrigger.refresh();
   };
-  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(buildWordReveals);
-  else buildWordReveals();
-  $$('.sec-label,.sub,.contact-note').forEach(el=>gsap.from(el,{autoAlpha:0,y:18,duration:.9,ease:'expo.out',scrollTrigger:{trigger:el,start:'top 92%',once:true}}));
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(buildReveals);
+  else buildReveals();
 
+  $$('.sec-label,.sub,.contact-note').forEach(el=>gsap.from(el,{autoAlpha:0,y:14,duration:.5,ease:'vance-out',scrollTrigger:{trigger:el,start:'top 92%',once:true}}));
   gsap.to(stmtWords,{color:'#121712',ease:'none',stagger:.2,scrollTrigger:{trigger:'#stmt',start:'top 82%',end:'bottom 48%',scrub:true}});
 
-  /* glass materializes — blur condenses into place on arrival */
-  $$('.wc,.contact-panel').forEach(el=>gsap.from(el,{backdropFilter:'blur(0px) saturate(100%)',duration:.8,ease:'expo.out',scrollTrigger:{trigger:el,start:'top 90%',once:true}}));
-
-  /* scroll-linked material: the glass breathes — scale + optical blur follow the scroll */
+  /* glass keeps its frost — only transform/opacity move. Blur radius is never animated. */
   gsap.timeline({scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1}})
-   .to('.plate',{y:-64,scale:.9,'--glass-blur':'40px',ease:'none'},0);
-  gsap.fromTo('.contact-panel',{scale:.93,'--glass-blur':'14px'},{scale:1,'--glass-blur':'32px',ease:'none',scrollTrigger:{trigger:'.contact-panel',start:'top bottom',end:'center center',scrub:1}});
-  gsap.to('.contact-panel',{scale:.97,'--glass-blur':'20px',ease:'none',scrollTrigger:{trigger:'.contact-panel',start:'center center',end:'bottom top',scrub:1}});
+   .to('.plate',{y:-48,scale:.94,ease:'none'},0);
+  gsap.fromTo('.contact-panel',{scale:.97},{scale:1,ease:'none',scrollTrigger:{trigger:'.contact-panel',start:'top bottom',end:'center center',scrub:1}});
   gsap.to('.wc .big',{x:-34,ease:'none',scrollTrigger:{trigger:'.stack',start:'top bottom',end:'bottom top',scrub:1}});
   gsap.to('.wm',{xPercent:-2,yPercent:26,ease:'none',scrollTrigger:{trigger:'footer',start:'top bottom',end:'bottom bottom',scrub:1}});
-  gsap.from('.wm',{opacity:0,duration:1.2,ease:'expo.out',scrollTrigger:{trigger:'footer',start:'top 92%',once:true}});
+  gsap.from('.wm',{opacity:0,duration:1,ease:'vance-out',scrollTrigger:{trigger:'footer',start:'top 92%',once:true}});
 
-  $$('.stat b').forEach(b=>{const o={v:0},n=+b.dataset.n;gsap.to(o,{v:n,duration:1.8,ease:'power3.out',scrollTrigger:{trigger:b,start:'top 92%',once:true},onUpdate:()=>b.textContent=Math.round(o.v)})});
+  $$('.stat b').forEach(b=>{const o={v:0},n=+b.dataset.n;gsap.to(o,{v:n,duration:1.1,ease:'vance-out',scrollTrigger:{trigger:b,start:'top 92%',once:true},onUpdate:()=>b.textContent=Math.round(o.v)})});
   ScrollTrigger.create({trigger:'.stats',start:'top 88%',once:true,onEnter:()=>$('.stats').classList.add('is-in')});
   $$('.sv').forEach(el=>ScrollTrigger.create({trigger:el,start:'top 88%',once:true,onEnter:()=>el.classList.add('is-in')}));
   ScrollTrigger.create({trigger:'.steps',start:'top 88%',once:true,onEnter:()=>$('.steps').classList.add('is-in')});
 
-  /* the discipline band borrows scroll velocity, then settles */
-  const ticker=$('.ticker');
+  /* continuous marquee: pauseable (WCAG 2.2.2) and velocity-linked while playing */
+  const ticker=$('.ticker'),toggle=$('.ticker-toggle');
   if(ticker){
    ticker.classList.add('is-js');
    const loop=gsap.to('.ticker-t',{xPercent:-50,duration:58,ease:'none',repeat:-1});
    let idle;
    if(lenis)lenis.on('scroll',({velocity})=>{
-    gsap.to(loop,{timeScale:1+Math.min(Math.abs(velocity)*.06,3),duration:.25,ease:'power2.out',overwrite:true});
-    idle&&idle.kill();idle=gsap.delayedCall(.18,()=>gsap.to(loop,{timeScale:1,duration:1.1,ease:'power2.out'}));
+    if(loop.paused())return;
+    gsap.to(loop,{timeScale:1+Math.min(Math.abs(velocity)*.06,3),duration:.25,ease:'vance-out',overwrite:true});
+    idle&&idle.kill();idle=gsap.delayedCall(.18,()=>gsap.to(loop,{timeScale:1,duration:1.1,ease:'vance-out'}));
+   });
+   if(toggle)toggle.addEventListener('click',()=>{
+    const wasPlaying=toggle.getAttribute('aria-pressed')!=='true';
+    toggle.setAttribute('aria-pressed',String(wasPlaying));
+    $('.tt-label',toggle).textContent=wasPlaying?'Play':'Pause';
+    toggle.setAttribute('aria-label',wasPlaying?'Play the discipline ticker':'Pause the discipline ticker');
+    wasPlaying?loop.pause():loop.resume();
    });
   }
 }

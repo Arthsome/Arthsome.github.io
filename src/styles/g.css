@@ -43,7 +43,7 @@
   /* button: lime signal flowing into mint and sea-glass — matching, not flat */
   --btn-grad:linear-gradient(115deg,#D6FB54 0%,#A6EC5E 36%,#6AD9B0 72%,#59CFD6 100%);
   --btn-grad-hover:linear-gradient(115deg,#E2FF7E 0%,#B8F56C 34%,#7CE8C2 70%,#65DDE6 100%);
-  --spring:cubic-bezier(.34,1.56,.64,1);
+  --spring:cubic-bezier(.22,1,.36,1);
 
   --fd:'Gloock',Georgia,serif;
   --fb:'Onest',sans-serif;
@@ -259,7 +259,9 @@ h1{
   font:400 clamp(64px,9.8vw,178px)/0.94 var(--fd);
   letter-spacing:-.025em;max-width:10.4em;text-wrap:balance;
 }
-.line{display:block}
+/* mask reveal: the inner span rises from a clipped baseline, no blur filter */
+.line{display:block;overflow:hidden}
+.line>span{display:block}
 .mark{position:relative;isolation:isolate;white-space:nowrap}
 .mark::before{content:"";position:absolute;z-index:-1;left:-.03em;right:-.05em;bottom:.07em;height:.26em;background:var(--acid);border-radius:2px;transform-origin:0 50%;animation:mark-swipe .9s var(--e) 1.15s forwards}
 @keyframes mark-swipe{from{transform:scaleX(0) rotate(-1.1deg)}to{transform:scaleX(1) rotate(-1.1deg)}}
@@ -316,7 +318,12 @@ h1{
 /* ==========================================================================
    Discipline ticker — quiet, monospaced, hairline-bounded
    ========================================================================== */
-.ticker{border-block:1px solid var(--line);overflow:hidden;padding:clamp(15px,1.7vw,22px) 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.ticker-wrap{position:relative;border-block:1px solid var(--line)}
+.ticker-toggle{position:absolute;z-index:2;left:var(--px);top:50%;transform:translateY(-50%);display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border:1px solid var(--line-2);background:var(--paper-hi);font:500 10px/1 var(--fm);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);cursor:pointer;transition:background .3s var(--e),color .3s var(--e)}
+.ticker-toggle:hover{background:var(--acid);color:var(--acid-ink);border-color:transparent}
+.tt-ico{width:8px;height:9px;border-left:2px solid currentColor;border-right:2px solid currentColor}
+.ticker-toggle[aria-pressed="true"] .tt-ico{border:0;width:0;height:0;border-left:8px solid currentColor;border-top:5px solid transparent;border-bottom:5px solid transparent}
+.ticker{border-block:0;overflow:hidden;padding:clamp(15px,1.7vw,22px) 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
 .ticker-t{display:flex;width:max-content;animation:ticker 58s linear infinite}
 .ticker:hover .ticker-t{animation-play-state:paused}
 .ticker.is-js .ticker-t{animation:none}
@@ -498,8 +505,13 @@ footer{border-top:1px solid var(--line);padding:30px 0 clamp(34px,4vw,56px)}
 @media(max-width:520px){.hero-watermark{width:82vw;right:-18%;top:6%}}
 
 @media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  /* 0.01ms (not 0s) so animationend/transitionend still fire; kill loop count.
+     Tier 3 — opacity/colour feedback — is re-enabled below, by design. */
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
   .ticker-t{animation:none}
   .scanline{display:none}
   .mk-body,.mk-dot{animation:none}
+  .scroll-cue,.sw,.gs-word{animation:none!important;opacity:1!important;transform:none!important}
+  .wc,.contact-panel,.glass--shimmer{animation:none!important}
+  .ticker-toggle{display:none}
 }
