@@ -45,7 +45,7 @@ export const PORTFOLIO_DATA = {
       title: 'Bug bounty hunting',
       scope: 'HackerOne / Bugcrowd', year: '2026',
       role: 'Independent hunter', stack: 'Web · Mobile · AI · Web3',
-      link: 'https://github.com/Vance',
+      link: 'https://github.com/vancxe',
       summary: 'Continuous independent testing across web, mobile, AI and Web3 targets. Findings stay private until the vendor ships the fix; the work is the proof.',
       highlights: [
         'Clear impact statements with working proof of concept.',
@@ -58,7 +58,7 @@ export const PORTFOLIO_DATA = {
       title: 'oh-my-pi',
       scope: 'Tooling / Coding agent', year: '2025',
       role: 'Author', stack: 'TypeScript · IDE integration',
-      link: 'https://github.com/Vance/oh-my-pi',
+      link: 'https://github.com/vancxe/oh-my-pi',
       summary: 'A coding agent with the IDE wired in — a practical experiment in tool-driven engineering and agent–editor workflows.',
       highlights: [
         'IDE-native agent loop with direct editor state access.',
@@ -94,7 +94,7 @@ export const PORTFOLIO_DATA = {
   disciplines: ['Penetration testing', 'Bug bounty', 'Vulnerability analysis', 'Reverse engineering', 'Detection engineering', 'Incident response'],
 
   socials: [
-    { label: 'GitHub ↗', url: 'https://github.com/Vance' },
+    { label: 'GitHub ↗', url: 'https://github.com/vancxe' },
     { label: 'X ↗', url: 'https://x.com/vancxef' },
     { label: 'Instagram ↗', url: 'https://instagram.com/thepersonarya' }
   ]
