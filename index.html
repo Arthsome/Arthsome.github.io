@@ -66,6 +66,11 @@
   <main id="top">
     <!-- 01 — HERO -->
     <section class="hero section-pad">
+      <!-- static wash gives the glass something to refract; no per-frame shader -->
+      <div class="hero-wash" aria-hidden="true"></div>
+      <div class="glass-shards" aria-hidden="true">
+        <span class="shard s1"></span><span class="shard s2"></span><span class="shard s3"></span>
+      </div>
       <div class="hero-top-meta">
         <div class="meta-pill"><span class="status-pulse"></span><span class="mono-tag" id="hero-availability">OPEN FOR SELECT COMMISSIONS</span></div>
         <div class="mono-tag hero-coords"><span>IDN // UTC+7</span><span class="separator">/</span><span class="live-clock">00:00:00</span></div>
@@ -148,6 +153,16 @@
           <span class="footer-cta-line">Let's find what</span>
           <span class="footer-cta-line"><em class="serif-italic accent-text">breaks next.</em></span>
         </a>
+        <!-- animated, copyable email in a liquid-glass channel -->
+        <div class="email-glass glass" data-spot>
+          <span class="eg-pulse" aria-hidden="true"></span>
+          <span class="eg-label mono-tag">DIRECT LINE</span>
+          <button class="eg-address" data-copy="vancxe@aster.cx" aria-label="Copy email address">
+            <span class="eg-text" id="eg-text">vancxe@aster.cx</span><span class="eg-caret" aria-hidden="true"></span>
+          </button>
+          <span class="eg-hint mono-tag" id="eg-hint">COPY ↗</span>
+          <span class="eg-sheen" aria-hidden="true"></span>
+        </div>
       </div>
       <div class="footer-bottom">
         <div class="footer-col"><span class="mono-tag">IDENTITY</span><p class="footer-val">Vance — independent security research</p></div>

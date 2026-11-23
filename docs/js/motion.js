@@ -277,6 +277,28 @@ function initInteractions(lenis){
   requestAnimationFrame(raf);
 }
 
+/* ---------- glass email: copy + event-driven light ---------- */
+function initGlassEmail(){
+  const box=document.querySelector('.email-glass');
+  if(!box)return;
+  const btn=box.querySelector('.eg-address'), hint=box.querySelector('#eg-hint');
+  btn?.addEventListener('click',async()=>{
+    const email=btn.dataset.copy;
+    try{await navigator.clipboard.writeText(email);}catch(_){
+      const t=document.createElement('textarea');t.value=email;document.body.append(t);t.select();document.execCommand('copy');t.remove();
+    }
+    if(hint)hint.textContent='COPIED ✓';
+    box.classList.add('is-copied');
+    setTimeout(()=>{if(hint)hint.textContent='COPY ↗';box.classList.remove('is-copied');},1600);
+  });
+  if(matchMedia('(pointer:coarse)').matches)return;
+  box.addEventListener('pointermove',e=>{
+    const r=box.getBoundingClientRect();
+    box.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
+    box.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');
+  },{passive:true});
+}
+
 /* ---------- text reaction: event-driven, no per-frame layout reads ---------- */
 function initTextReaction(){
   if(matchMedia('(pointer:coarse)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
@@ -319,4 +341,5 @@ window.addEventListener('DOMContentLoaded',()=>{
   initNavPill();
   initInteractions(lenis);
   initTextReaction();
+  initGlassEmail();
 });
