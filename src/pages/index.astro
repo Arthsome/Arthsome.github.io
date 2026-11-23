@@ -235,6 +235,12 @@ if(fine&&!reduce){document.addEventListener('pointerdown',e=>{const b=e.target.c
    gesture can be reversed mid-flight. GSAP stays on scroll choreography. */
 const soft={type:'spring',stiffness:210,damping:24,mass:.9};
 const tilt={type:'spring',stiffness:190,damping:24,mass:.8,transformPerspective:1100};
+/* one press model: no Android blue flash, a quick spring-back scale instead */
+let isPressed=false;
+const pressTarget=e=>e.target.closest&&e.target.closest('a,button,.btn,.sv,.wc,.tabbar a,.pj,.step,.stats,.tab-drop');
+document.addEventListener('pointerdown',e=>{const t=pressTarget(e);if(!t)return;isPressed=true;animate(t,{scale:.955},{type:'spring',stiffness:320,damping:20})},{passive:true});
+document.addEventListener('pointerup',e=>{if(!isPressed)return;isPressed=false;animate(pressTarget(e)||document.body,{scale:1},{type:'spring',stiffness:420,damping:16})},{passive:true});
+document.addEventListener('pointercancel',e=>{if(!isPressed)return;isPressed=false;animate(pressTarget(e)||document.body,{scale:1},{type:'spring',stiffness:420,damping:16})},{passive:true});
 if(fine&&!reduce){
  $$('[data-mag]').forEach(el=>{
   el.addEventListener('pointermove',onMove(e=>{const r=el.getBoundingClientRect();animate(el,{x:(e.clientX-r.left-r.width/2)*.22,y:(e.clientY-r.top-r.height/2)*.3},soft)}));
