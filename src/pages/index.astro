@@ -1,36 +1,178 @@
 ---
 import '../styles/g.css';
-const dom=[['Vulnerability analysis','Root-cause writeups for disclosed CVEs: the broken invariant, the code path, why the patch holds.'],['Detection engineering','Sigma, Suricata and SIEM queries shipped with every report.'],['Reverse engineering','Disassembly and behavioural analysis of binaries and obfuscation.'],['Incident response','Forensic notes that help responders validate scope and hunt the pattern.']];
-const work=[['Unauthenticated RCE in Cisco ISE','CVE-2025-20281 · 2026','/posts/cve-2025-20281/index.html'],['Payload obfuscation via Walsh–Hadamard transform','Technique · 2026','/posts/wht-shellcode-obfuscation/index.html']];
-const proj=[['oh-my-pi','Coding agent with the IDE wired in','https://github.com/Arthsome/oh-my-pi'],['chime-health-check','Python','https://github.com/Arthsome/chime-health-check']];
-const stats=[[2,'analyses published'],[1,'CVE with detection rules'],[10,'CVSS, Cisco ISE'],[8,'disciplines']];
+const svg=(p,f)=>`<svg viewBox="0 0 24 24" width="20" height="20" fill="${f?'currentColor':'none'}" stroke="${f?'none':'currentColor'}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+const I={
+ mail:svg('<rect x="2" y="4" width="20" height="16" rx="3"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>'),
+ x:svg('<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>',1),
+ ig:svg('<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/>'),
+ gh:svg('<path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.7 5.4-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/>',1),
+ up:svg('<path d="M7 17 17 7M8 7h9v9"/>'),
+ copy:svg('<rect x="9" y="9" width="13" height="13" rx="2.5"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>')
+};
+const EMAIL='vancxe@aster.cx',X='https://x.com/vancxef',IG='https://instagram.com/thepersonarya';
+const disc=['Penetration testing','Bug bounty','Vulnerability analysis','Reverse engineering','Detection engineering','Incident response'];
+const work=[
+ {m:'CVE-2025-20281',s:'CVSS 10.0',t:'Unauthenticated RCE in Cisco ISE',d:'Root-cause analysis of a critical pre-auth remote code execution: the broken invariant, the code path, why the patch holds, and detections defenders can deploy on day one.',h:'/posts/cve-2025-20281/index.html',big:'10.0',g:'#7C5CFF'},
+ {m:'MITRE T1027',s:'Technique',t:'Walsh–Hadamard payload obfuscation',d:'How a Walsh–Hadamard transform hides shellcode from static analysis, with spectral analysis, key sensitivity and a working pipeline.',h:'/posts/wht-shellcode-obfuscation/index.html',big:'WHT',g:'#FF4D8D'},
+ {m:'HackerOne',s:'Bugcrowd',t:'Bug bounty hunting',d:'Web, mobile, AI and Web3 targets. Findings stay private until the vendor ships the fix.',h:null,big:'H1',g:'#FF7A45'}
+];
+const svc=[
+ ['Penetration testing','Scoped, manual testing of web apps, APIs and mobile apps. You get reproducible findings with a fix path, not scanner output.'],
+ ['Bug bounty','Independent hunting on HackerOne and Bugcrowd, reported with clear impact and working proof.'],
+ ['Vulnerability analysis','Root-cause write-ups for disclosed CVEs: what broke, where in the code, and why the patch works.'],
+ ['Reverse engineering','Disassembly and behavioural analysis of binaries, obfuscation and malware techniques.'],
+ ['Detection engineering','Sigma, Suricata and SIEM queries shipped alongside every report.'],
+ ['Incident response','Forensic notes that help responders validate scope and hunt the pattern.']
+];
+const proj=[['oh-my-pi','Coding agent with the IDE wired in','https://github.com/Arthsome/oh-my-pi'],['chime-health-check','Python health-check tooling','https://github.com/Arthsome/chime-health-check']];
+const stats=[[2,'Public analyses'],[1,'CVE with detection rules'],[10,'Top CVSS score'],[6,'Disciplines']];
 ---
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Arthsome — Security Research</title><meta name="description" content="Independent vulnerability analysis, reverse engineering and incident response."><meta name="theme-color" content="#09090a">
+<title>Arthsome | Security researcher</title>
+<meta name="description" content="Arthsome is an independent security researcher: penetration testing, bug bounty, vulnerability analysis and reverse engineering. Business inquiries: vancxe@aster.cx">
+<meta name="theme-color" content="#0B0A1A"><meta property="og:title" content="Arthsome | Security researcher"><meta property="og:description" content="Finding what breaks before it does. Penetration testing, bug bounty and vulnerability research."><meta property="og:type" content="website"><meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%237C5CFF'/%3E%3Ctext x='32' y='46' font-size='40' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='700'%3EA%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600&family=Instrument+Serif&family=JetBrains+Mono:wght@500&display=swap"></head>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Geist:wght@300..700&display=swap"></head>
 <body>
-<nav><a href="/" class="mono" style="color:var(--fg)">Arthsome®</a><div class="mono"><a href="#work">Work</a><a href="/posts/index.html">Writing</a><a href="/about/index.html">About</a><a href="#contact">Contact</a></div></nav>
-<header class="hero"><div class="mono">Independent research · Vol. 01</div>
-<h1><span><i>investigating</i></span><span><i>the boundaries</i></span><span><i class="a">of systems.</i></span></h1>
-<p class="lede">Vulnerability analysis, reverse engineering and incident response. Published after the patch, with detections defenders can use on day one.</p>
-<a class="cta" href="#work">Read the research →</a>
-<div class="cards"><div class="card"><span class="mono">Critical · CVSS 10.0</span><b>CVE-2025-20281</b></div><div class="card"><span class="mono">Technique · T1027</span><b>Walsh–Hadamard obfuscation</b></div></div></header>
-<div class="mq mono"><div>{[0,1].map(()=>dom.map(d=><span>{d[0]}</span>))}</div></div>
-<section id="work"><div class="wrap"><div class="mono">Selected research</div><h2>The evidence board.</h2>
-{work.map(w=><a class="row" href={w[2]}><strong>{w[0]}</strong><span class="mono">{w[1]}</span></a>)}</div></section>
-<section style="padding-top:0"><div class="wrap"><div class="mono">Domains</div><h2>Four lanes, one standard.</h2>
-<div class="bento">{dom.map((d,i)=><div class="cell"><span class="mono">0{i+1}</span><h3>{d[0]}</h3><p>{d[1]}</p></div>)}</div></div></section>
-<div class="wrap"><div class="stats">{stats.map(s=><div class="stat"><b data-n={s[0]}>00</b><span class="mono">{s[1]}</span></div>)}</div></div>
-<section><div class="wrap"><div class="mono">Projects</div><h2>Checked-out experiments.</h2>
-{proj.map(p=><a class="row" href={p[2]}><strong>{p[0]}</strong><span class="mono">{p[1]}</span></a>)}</div></section>
-<footer id="contact"><div class="wrap"><div class="fl mono"><a href="mailto:v8k2xf@proton.me">v8k2xf@proton.me</a><a href="https://github.com/Arthsome">GitHub ↗</a><span>© 2026 · Defensive purposes only</span></div></div><div class="wm" aria-hidden="true">ARTHSOME</div></footer>
+<div class="prog" aria-hidden="true"></div><div class="cur" aria-hidden="true"></div>
+
+<header class="nav"><div class="bar">
+ <a class="logo" href="#top" aria-label="Arthsome, back to top"><span></span>Arthsome</a>
+ <nav class="links" aria-label="Main"><a href="#work">Work</a><a href="#services">Services</a><a href="#projects">Projects</a><a class="btn sm" data-mag href={`mailto:${EMAIL}`}>Hire me<Fragment set:html={I.up}/></a></nav>
+ <button class="burger" aria-label="Open menu" aria-expanded="false"><i></i><i></i></button>
+</div></header>
+<div class="menu" id="menu"><a class="big" href="#work">Work</a><a class="big" href="#services">Services</a><a class="big" href="#projects">Projects</a><a class="big" href="#contact">Contact</a>
+ <div class="mini"><span>Business inquiries</span><a href={`mailto:${EMAIL}`}>{EMAIL}</a></div></div>
+
+<main id="top">
+<section class="hero" style="padding-block-end:clamp(20px,3.5vw,44px)">
+ <div class="aur" aria-hidden="true"><span></span><span></span><span></span></div>
+ <div class="orb" aria-hidden="true"><div class="sp"></div><div class="gl"></div></div>
+ <div class="hero-main">
+  <div class="status rv"><b></b>Open for business inquiries</div>
+  <h1 id="h1">Finding what breaks before it does.</h1>
+  <p class="lede rv"><strong>I'm Vance, an independent security researcher working as Arthsome.</strong> Penetration testing, bug bounty and vulnerability research, with write-ups and detections published after the patch.</p>
+  <div class="cta-row rv"><a class="btn" data-mag href={`mailto:${EMAIL}`}>Start a conversation<Fragment set:html={I.up}/></a><a class="btn ghost" data-mag href="#work">See the research</a></div>
+ </div>
+ <div class="dock">
+  <div class="dk dk-main" data-spot><span class="ic" set:html={I.mail}></span><a class="dk-t" href={`mailto:${EMAIL}`}><span class="dk-l">Business inquiries</span><span class="dk-v">{EMAIL}</span></a><button class="copy" data-copy={EMAIL} aria-label="Copy email address" set:html={I.copy}></button></div>
+  <a class="dk" data-spot href={X} target="_blank" rel="noopener"><span class="ic" set:html={I.x}></span><span class="dk-t"><span class="dk-l">X</span><span class="dk-v">@vancxef</span></span></a>
+  <a class="dk" data-spot href={IG} target="_blank" rel="noopener"><span class="ic" set:html={I.ig}></span><span class="dk-t"><span class="dk-l">Instagram</span><span class="dk-v">@thepersonarya</span></span></a>
+ </div>
+</section>
+
+<div class="mq" aria-hidden="true"><div class="mq-t">{[0,1].map(()=><div class="mq-g">{disc.map(d=><><span>{d}</span><b></b></>)}</div>)}</div></div>
+
+<section><div class="wrap"><p class="stmt" id="stmt">I take systems apart to find the flaw that breaks them, then write it up so the people who defend them can find it too.</p></div></section>
+
+<section id="work" style="padding-top:0"><div class="wrap">
+ <div class="head"><h2 class="rh">Research, published after the patch.</h2></div>
+ <div class="stack">{work.map((w,i)=>
+  <article class="wc" style={`--i:${i};--g:${w.g}`} data-spot>
+   <div class="wc-top"><span class="chip">{w.m}</span><span class={'chip'+(i===0?' hot':'')}>{w.s}</span></div>
+   <h3>{w.t}</h3>
+   <div class="wc-bot"><p>{w.d}</p>{w.h?<a class="btn" data-mag href={w.h}>Read the analysis<Fragment set:html={I.up}/></a>:<span class="chip">Private until fixed</span>}</div>
+   <span class="big" aria-hidden="true">{w.big}</span>
+  </article>)}</div>
+</div></section>
+
+<section id="services" style="padding-top:0"><div class="wrap">
+ <div class="head"><h2 class="rh">Where I can help.</h2><p class="sub">Hands-on work, scoped clearly, reported so your team can reproduce and fix it.</p></div>
+ <div class="svc">{svc.map(s=><div class="sv" data-spot><h3>{s[0]}</h3><p>{s[1]}</p></div>)}</div>
+</div></section>
+
+<div class="wrap"><div class="stats">{stats.map(s=><div class="stat"><b data-n={s[0]}>0</b><span>{s[1]}</span></div>)}</div></div>
+
+<section id="projects"><div class="wrap">
+ <div class="head"><h2 class="rh">Side experiments.</h2></div>
+ <div>{proj.map(p=><a class="pj" href={p[2]} target="_blank" rel="noopener"><strong>{p[0]}</strong><span class="d">{p[1]}</span><span class="arr" set:html={I.up}></span></a>)}</div>
+</div></section>
+
+<section id="contact" class="cta"><div class="wrap">
+ <h2 class="rh">Have something worth testing?</h2>
+ <a class="mail" data-mag href={`mailto:${EMAIL}`}>{EMAIL}</a>
+ <div class="soc"><a class="btn" data-mag href={`mailto:${EMAIL}`}>Business inquiries<Fragment set:html={I.up}/></a><a class="btn ghost" data-mag href={X} target="_blank" rel="noopener"><Fragment set:html={I.x}/>@vancxef</a><a class="btn ghost" data-mag href={IG} target="_blank" rel="noopener"><Fragment set:html={I.ig}/>@thepersonarya</a><a class="btn ghost" data-mag href="https://github.com/Arthsome" target="_blank" rel="noopener"><Fragment set:html={I.gh}/>GitHub</a></div>
+</div></section>
+</main>
+
+<footer><div class="wrap"><div class="fl"><span>© 2026 Arthsome</span><span>Research published for defensive purposes.</span></div></div><div class="wm" aria-hidden="true">Arthsome</div></footer>
+
 <script>
-import {gsap} from 'gsap';import {ScrollTrigger} from 'gsap/ScrollTrigger';gsap.registerPlugin(ScrollTrigger);
-gsap.from('h1 i',{yPercent:110,duration:1.3,ease:'expo.out',stagger:.12});
-gsap.from('.hero .mono,.lede,.cta,.card',{opacity:0,y:24,duration:1,ease:'expo.out',stagger:.08,delay:.5});
-gsap.utils.toArray('.cell,.row').forEach(e=>gsap.from(e,{opacity:0,y:40,duration:1,ease:'expo.out',scrollTrigger:{trigger:e,start:'top 90%'}}));
-document.querySelectorAll('.stat b').forEach(b=>{const o={v:0};gsap.to(o,{v:+b.dataset.n,duration:1.6,ease:'power3.out',scrollTrigger:{trigger:b,start:'top 92%'},onUpdate:()=>{b.textContent=String(Math.round(o.v)).padStart(2,'0')}})});
-document.querySelectorAll('.cell').forEach(c=>c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--x',e.clientX-r.left+'px');c.style.setProperty('--y',e.clientY-r.top+'px')}));
-if(matchMedia('(pointer:fine)').matches)addEventListener('pointermove',e=>gsap.to('.cards',{x:(e.clientX/innerWidth-.5)*-24,y:(e.clientY/innerHeight-.5)*-24,duration:1.2,ease:'power3.out'}));
+import {gsap} from 'gsap';import {ScrollTrigger} from 'gsap/ScrollTrigger';import Lenis from 'lenis';
+gsap.registerPlugin(ScrollTrigger);
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,fine=matchMedia('(pointer:fine)').matches;
+
+/* menu */
+const burger=$('.burger'),setMenu=o=>{document.body.classList.toggle('menu-open',o);burger.setAttribute('aria-expanded',o);burger.setAttribute('aria-label',o?'Close menu':'Open menu')};
+burger.addEventListener('click',()=>setMenu(!document.body.classList.contains('menu-open')));
+addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false)});
+addEventListener('resize',()=>{if(innerWidth>860)setMenu(false)});
+
+/* copy email */
+$$('.copy').forEach(b=>b.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(b.dataset.copy)}catch(_){const t=document.createElement('textarea');t.value=b.dataset.copy;document.body.append(t);t.select();document.execCommand('copy');t.remove()}b.setAttribute('data-ok','');setTimeout(()=>b.removeAttribute('data-ok'),1600)}));
+
+/* spotlight (works on touch too, cheap) */
+document.addEventListener('pointermove',e=>{const t=e.target.closest&&e.target.closest('[data-spot]');if(t){const r=t.getBoundingClientRect();t.style.setProperty('--x',e.clientX-r.left+'px');t.style.setProperty('--y',e.clientY-r.top+'px')}},{passive:true});
+
+/* text split */
+function split(el,mode){const txt=el.textContent.trim();el.setAttribute('aria-label',txt);el.textContent='';const out=[],words=txt.split(/\s+/);words.forEach((w,i)=>{const ws=document.createElement('span');ws.className=mode==='word'?'w sw':'w';ws.setAttribute('aria-hidden','true');if(mode==='word'){ws.textContent=w;out.push(ws)}else{[...w].forEach(ch=>{const c=document.createElement('span');c.className='c';c.textContent=ch;ws.append(c);out.push(c)})}el.append(ws);if(i<words.length-1)el.append(' ')});return out}
+
+/* smooth scroll + anchors */
+let lenis=null;
+if(!reduce){lenis=new Lenis({lerp:.09,wheelMultiplier:1,smoothWheel:true});lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0)}
+$$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const id=a.getAttribute('href');const t=id==='#top'?document.body:$(id);if(!t)return;e.preventDefault();setMenu(false);setTimeout(()=>{lenis?lenis.scrollTo(id==='#top'?0:t,{offset:id==='#top'?0:-24,duration:1.4}):t.scrollIntoView({behavior:'smooth'})},document.body.classList.contains('menu-open')?0:0)}));
+
+const stmtWords=split($('#stmt'),'word');
+const h1Chars=split($('#h1'),'char');
+const rhs=$$('.rh').map(h=>split(h,'word'));
+
+if(reduce){$$('.stat b').forEach(b=>b.textContent=b.dataset.n)}
+else{
+ /* progress */
+ gsap.to('.prog',{scaleX:1,ease:'none',scrollTrigger:{start:0,end:'max',scrub:.2}});
+
+ /* hero: the one orchestrated moment */
+ const tl=gsap.timeline({defaults:{ease:'expo.out'}});
+ tl.from(h1Chars,{yPercent:70,opacity:0,filter:'blur(16px)',duration:1.5,stagger:.028},.1)
+   .from('.orb',{scale:.55,opacity:0,duration:2.2},0)
+   .from('.hero .rv',{opacity:0,y:26,duration:1.1,stagger:.1},.5)
+   .from('.dock .dk',{opacity:0,y:36,duration:1.1,stagger:.1},.95)
+   .from('.nav .bar',{yPercent:-140,opacity:0,duration:1.2},.4);
+
+ /* headings */
+ rhs.forEach(ws=>gsap.from(ws,{yPercent:45,opacity:0,duration:1.1,ease:'expo.out',stagger:.07,scrollTrigger:{trigger:ws[0].parentElement,start:'top 88%',once:true}}));
+
+ /* statement lights up with scroll */
+ gsap.to(stmtWords,{color:'#F2F0FF',ease:'none',stagger:.2,scrollTrigger:{trigger:'#stmt',start:'top 82%',end:'bottom 48%',scrub:true}});
+
+ /* stacked work cards sink back as the next one lands */
+ const cards=$$('.wc');
+ cards.forEach((c,i)=>{const n=cards[i+1];if(!n)return;gsap.to(c,{scale:.94,filter:'brightness(.55)',ease:'none',scrollTrigger:{trigger:n,start:'top 85%',end:'top 20%',scrub:true}})});
+
+ /* counters */
+ $$('.stat b').forEach(b=>{const o={v:0},n=+b.dataset.n;gsap.to(o,{v:n,duration:1.8,ease:'power3.out',scrollTrigger:{trigger:b,start:'top 92%',once:true},onUpdate:()=>b.textContent=Math.round(o.v)})});
+
+ /* footer wordmark */
+ gsap.from('.wm',{yPercent:30,opacity:0,duration:1.6,ease:'expo.out',scrollTrigger:{trigger:'footer',start:'top 85%',once:true}});
+
+ if(fine){
+  /* cursor ring */
+  const cur=$('.cur'),qx=gsap.quickTo(cur,'x',{duration:.5,ease:'power3'}),qy=gsap.quickTo(cur,'y',{duration:.5,ease:'power3'});
+  addEventListener('pointermove',e=>{cur.classList.add('on');qx(e.clientX);qy(e.clientY)},{passive:true});
+  document.addEventListener('pointerleave',()=>cur.classList.remove('on'));
+  document.addEventListener('pointerover',e=>{const hit=e.target.closest&&e.target.closest('a,button,.sv');gsap.to(cur,{scale:hit?1.7:1,duration:.4,ease:'power3'})});
+
+  /* magnetic buttons */
+  $$('[data-mag]').forEach(el=>{const qx=gsap.quickTo(el,'x',{duration:.6,ease:'power3'}),qy=gsap.quickTo(el,'y',{duration:.6,ease:'power3'});
+   el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();qx((e.clientX-r.left-r.width/2)*.28);qy((e.clientY-r.top-r.height/2)*.4)});
+   el.addEventListener('pointerleave',()=>{qx(0);qy(0)})});
+
+  /* hero parallax */
+  const orbX=gsap.quickTo('.orb','x',{duration:1.6,ease:'power3'}),orbY=gsap.quickTo('.orb','y',{duration:1.6,ease:'power3'});
+  const aur=$$('.aur span').map((s,i)=>[gsap.quickTo(s,'x',{duration:2.2,ease:'power3'}),gsap.quickTo(s,'y',{duration:2.2,ease:'power3'}),(i+1)*14]);
+  addEventListener('pointermove',e=>{const nx=e.clientX/innerWidth-.5,ny=e.clientY/innerHeight-.5;orbX(nx*-46);orbY(ny*-46);aur.forEach(([ax,ay,k])=>{ax(nx*k);ay(ny*k)})},{passive:true});
+ }
+}
 </script></body></html>
