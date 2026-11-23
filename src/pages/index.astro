@@ -38,7 +38,6 @@ const svc=[
   ['Incident response','Forensic notes that help responders validate scope and hunt the pattern.']
 ];
 const proj=[['oh-my-pi','Coding agent with the IDE wired in','https://github.com/Vance/oh-my-pi'],['chime-health-check','Python health-check tooling','https://github.com/Vance/chime-health-check']];
-const stats=[[2,'Public analyses'],[1,'CVE with detection rules'],[10,'Top CVSS score'],[6,'Disciplines']];
 ---
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Vance | Security researcher</title>
@@ -70,26 +69,25 @@ const stats=[[2,'Public analyses'],[1,'CVE with detection rules'],[10,'Top CVSS 
 
 <main id="main">
 <section class="hero" id="top">
-  <div class="hero-watermark" aria-hidden="true" set:html={MARK}></div>
-  <div class="scanline" aria-hidden="true"></div>
-  <div class="hero-rail" aria-hidden="true"><span>VANCE — INDEPENDENT SECURITY RESEARCH — EST. 2026</span><i></i></div>
-  <div class="hero-grid wrap">
-    <div class="hero-copy">
-      <p class="eyebrow rv"><span class="pulse"></span>Independent security research · 2026</p>
-      <h1 id="h1"><span class="line"><span>Finding what</span></span><span class="line"><span><span class="mark">breaks</span> before</span></span><span class="line"><span>it does.</span></span></h1>
-      <p class="lede rv"><strong>I'm Vance, an independent security researcher.</strong> Penetration testing, bug bounty and vulnerability research, with write-ups and detections published after the patch.</p>
-      <div class="cta-row rv"><a class="btn" data-mag href={`mailto:${EMAIL}`}>Start a conversation<Fragment set:html={I.up}/></a><a class="btn ghost" data-mag href="#work">See the research<Fragment set:html={I.down}/></a></div>
-      <div class="indexline rv"><span>00 / Introduction</span><span>Scroll to explore</span></div>
-    </div>
-    <aside class="plate glass glass--shimmer" data-spot aria-label="Profile summary">
-      <span class="plate-no">V—01</span>
-      <figure class="plate-fig"><img src="/assets/img/portrait/crystal.png" alt="Vance crystal mark: a faceted form intersected by acid-lime traces"><figcaption>Fig. 01 — Structure under load</figcaption></figure>
-      <div class="plate-meta">
-        <div><span class="k">Focus</span><span class="v">Offensive security</span></div>
-        <div><span class="k">Method</span><span class="v">Manual &amp; reproducible</span></div>
-        <div><span class="k">Status</span><span class="v"><i></i>Open for inquiries</span></div>
+  <div class="hero-mast wrap">
+    <div class="hero-head"><p class="eyebrow rv"><span class="pulse"></span>Independent security research · 2026</p><span class="hero-idx">V—01 / 06</span></div>
+    <h1 id="h1"><span class="line"><span>Finding what</span></span><span class="line"><span><span class="mark">breaks</span> before</span></span><span class="line"><span>it does.</span></span></h1>
+    <div class="hero-floor">
+      <div class="hero-floor-l">
+        <p class="lede rv"><strong>I'm Vance.</strong> I take systems apart, find the flaw, and publish the analysis once the fix is live.</p>
+        <div class="cta-row rv"><a class="btn" data-mag href={`mailto:${EMAIL}`}>Start a conversation<Fragment set:html={I.up}/></a><a class="btn ghost" data-mag href="#work">See the research<Fragment set:html={I.down}/></a></div>
       </div>
-    </aside>
+      <aside class="plate glass" data-spot aria-label="Profile summary">
+        <span class="plate-no">V—01</span>
+        <figure class="plate-fig"><img src="/assets/img/portrait/crystal.png" alt="Vance crystal mark"><figcaption>Fig. 01 — Structure under load</figcaption></figure>
+        <div class="plate-meta">
+          <div><span class="k">Focus</span><span class="v">Offensive security</span></div>
+          <div><span class="k">Method</span><span class="v">Manual &amp; reproducible</span></div>
+          <div><span class="k">Status</span><span class="v"><i></i>Open for inquiries</span></div>
+        </div>
+      </aside>
+    </div>
+    <div class="indexline rv"><span>00 / Introduction</span><span>Scroll to explore</span></div>
   </div>
   <div class="dock wrap"><div class="dock-inner glass">
     <div class="dk dk-main" data-spot><span class="ic" set:html={I.mail}></span><span class="dk-t"><span class="dk-l">Business inquiries</span><span class="dk-v">{EMAIL}</span></span><button class="copy" data-copy={EMAIL} aria-label="Copy email address" set:html={I.copy}></button></div>
@@ -109,33 +107,30 @@ const stats=[[2,'Public analyses'],[1,'CVE with detection rules'],[10,'Top CVSS 
 </div></section>
 
 <section id="work"><div class="wrap">
-  <div class="sec-head"><span class="sec-no" aria-hidden="true">02</span><div><p class="sec-label">02 / Selected work</p><h2 class="rh">Research, published after the patch.</h2></div><p class="sub">Root-cause analysis, working proof and detections — released once the fix is live.</p></div>
+  <div class="sec-head"><div><p class="sec-label">02 / Selected work</p><h2 class="rh">Research, published after the patch.</h2></div><p class="sub">Root-cause analysis, working proof and detections — released once the fix is live.</p></div>
   <div class="stack">{work.map((w,i)=>
    <article class="wc glass" style={`--g:${w.g}`} data-spot>
     <div class="wc-top"><span class="chip">{String(i+1).padStart(2,'0')} / {w.m}</span><span class={'chip'+(i===0?' hot':'')}>{w.s}</span></div>
     <h3>{w.t}</h3>
     <div class="wc-out"><span>OUTCOME</span><p>{w.o}</p></div>
     <div class="wc-bot"><p>{w.d}</p>{w.h?<a class="btn" data-mag href={w.h}>Read the analysis<Fragment set:html={I.up}/></a>:<span class="chip">Private until fixed</span>}</div>
-    <span class="wc-stamp" aria-hidden="true">FILE / 0{i+1}<b></b>VERIFIED</span>
     <span class="big" aria-hidden="true">{w.big}</span>
    </article>)}</div>
 </div></section>
 
 <section id="services"><div class="wrap">
-  <div class="sec-head"><span class="sec-no" aria-hidden="true">03</span><div><p class="sec-label">03 / Services</p><h2 class="rh">Where I can help.</h2></div><p class="sub">Hands-on work, scoped clearly, reported so your team can reproduce and fix it.</p></div>
+  <div class="sec-head"><div><p class="sec-label">03 / Services</p><h2 class="rh">Where I can help.</h2></div><p class="sub">Hands-on work, scoped clearly, reported so your team can reproduce and fix it.</p></div>
   <div class="ledger">{svc.map((s,i)=><div class="sv" data-spot><span class="sv-n"><i class="sv-node"></i>{String(i+1).padStart(2,'0')}</span><h3>{s[0]}</h3><p>{s[1]}</p><span class="sv-arrow" set:html={I.up}></span></div>)}</div>
 </div></section>
 
 <section id="approach"><div class="wrap">
-  <div class="sec-head"><span class="sec-no" aria-hidden="true">04</span><div><p class="sec-label">04 / Approach</p><h2 class="rh">How the work runs.</h2></div><p class="sub">The same sequence on every engagement, from the first scope call to the published write-up.</p></div>
+  <div class="sec-head"><div><p class="sec-label">04 / Approach</p><h2 class="rh">How the work runs.</h2></div><p class="sub">The same sequence on every engagement, from the first scope call to the published write-up.</p></div>
   <div class="steps">{approach.map(a=><div class="step"><span class="step-n">{a[0]}</span><h3>{a[1]}</h3><p>{a[2]}</p></div>)}</div>
   <div class="credentials"><span>CVE-2025-20281</span><b></b><span>MITRE ATT&amp;CK T1027</span><b></b><span>HackerOne</span><b></b><span>Bugcrowd</span><b></b><span>Cisco ISE</span></div>
 </div></section>
 
-<div class="wrap"><div class="stats">{stats.map(s=><div class="stat"><b data-n={s[0]}>0</b><span>{s[1]}</span></div>)}</div></div>
-
 <section id="projects"><div class="wrap">
-  <div class="sec-head"><span class="sec-no" aria-hidden="true">05</span><div><p class="sec-label">05 / Projects</p><h2 class="rh">Side experiments.</h2></div></div>
+  <div class="sec-head"><div><p class="sec-label">05 / Projects</p><h2 class="rh">Side experiments.</h2></div></div>
   <div>{proj.map((p,i)=><a class="pj" href={p[2]} target="_blank" rel="noopener"><span class="pj-n">{String(i+1).padStart(2,'0')}</span><strong>{p[0]}</strong><span class="d">{p[1]}</span><span class="arr" set:html={I.up}></span></a>)}</div>
 </div></section>
 
@@ -269,8 +264,7 @@ if(fine&&!reduce){
 
 if(reduce){
   /* Tier 3: keep only opacity/colour feedback, no spatial motion */
-  $$('.stat b').forEach(b=>b.textContent=b.dataset.n);
-  $('.stats').classList.add('is-in');$$('.sv').forEach(el=>el.classList.add('is-in'));$('.steps').classList.add('is-in');
+  $$('.sv').forEach(el=>el.classList.add('is-in'));$('.steps').classList.add('is-in');
   gsap.from('.hero .lede, .hero .eyebrow',{opacity:0,duration:.15,ease:'none'});
 } else {
   gsap.to('.prog',{scaleX:1,ease:'none',scrollTrigger:{start:0,end:'max',scrub:.2}});
@@ -315,8 +309,6 @@ if(reduce){
   gsap.to('.wm',{xPercent:-2,yPercent:26,ease:'none',scrollTrigger:{trigger:'footer',start:'top bottom',end:'bottom bottom',scrub:1}});
   gsap.from('.wm',{opacity:0,duration:1,ease:'vance-out',scrollTrigger:{trigger:'footer',start:'top 92%',once:true}});
 
-  $$('.stat b').forEach(b=>{const o={v:0},n=+b.dataset.n;gsap.to(o,{v:n,duration:1.1,ease:'vance-out',scrollTrigger:{trigger:b,start:'top 92%',once:true},onUpdate:()=>b.textContent=Math.round(o.v)})});
-  ScrollTrigger.create({trigger:'.stats',start:'top 88%',once:true,onEnter:()=>$('.stats').classList.add('is-in')});
   $$('.sv').forEach(el=>ScrollTrigger.create({trigger:el,start:'top 88%',once:true,onEnter:()=>el.classList.add('is-in')}));
   ScrollTrigger.create({trigger:'.steps',start:'top 88%',once:true,onEnter:()=>$('.steps').classList.add('is-in')});
 
