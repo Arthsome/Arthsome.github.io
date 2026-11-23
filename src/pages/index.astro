@@ -159,12 +159,15 @@ CustomEase.create('vance-out','0.22,1,0.36,1');
 ScrollTrigger.config({ignoreMobileResize:true});
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,fine=matchMedia('(pointer:fine)').matches;
+/* one shared throttle: every pointermove pass-through runs at most ~16ms,
+   so ambient light, glass highlights and magnetic followers don't race */
+let lastMove=0;const onMove=fn=>e=>{const t=e.timeStamp||performance.now();if(t-lastMove<15)return;lastMove=t;fn(e)};
 
 /* copy email */
 $$('.copy').forEach(b=>b.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(b.dataset.copy)}catch(_){const t=document.createElement('textarea');t.value=b.dataset.copy;document.body.append(t);t.select();document.execCommand('copy');t.remove()}b.setAttribute('data-ok','');setTimeout(()=>b.removeAttribute('data-ok'),1600)}));
 
 /* glass specular follows the pointer */
-document.addEventListener('pointermove',e=>{const t=e.target.closest&&e.target.closest('[data-spot]');if(t){const r=t.getBoundingClientRect();t.style.setProperty('--x',e.clientX-r.left+'px');t.style.setProperty('--y',e.clientY-r.top+'px')}},{passive:true});
+document.addEventListener('pointermove',onMove(e=>{const t=e.target.closest&&e.target.closest('[data-spot]');if(t){const r=t.getBoundingClientRect();t.style.setProperty('--x',e.clientX-r.left+'px');t.style.setProperty('--y',e.clientY-r.top+'px')}}),{passive:true});
 
 /* ambient light + cursor lens: one pointer stream, three independent followers */
 const ambient=$('.ambient');
@@ -174,10 +177,10 @@ if(!reduce&&fine){
  const rx=gsap.quickTo(ring,'x',{duration:.5,ease:'power3'}),ry=gsap.quickTo(ring,'y',{duration:.5,ease:'power3'});
  const ax=gsap.quickTo(ambient,'x',{duration:1.4,ease:'power3'}),ay=gsap.quickTo(ambient,'y',{duration:1.4,ease:'power3'});
  let seen=false;
- addEventListener('pointermove',e=>{
+ addEventListener('pointermove',onMove(e=>{
   dx(e.clientX);dy(e.clientY);rx(e.clientX);ry(e.clientY);ax(e.clientX);ay(e.clientY);
   if(!seen){seen=true;dot.classList.add('on');ring.classList.add('on')}
- },{passive:true});
+ }),{passive:true});
  document.addEventListener('pointerover',e=>{ring.classList.toggle('is-wide',!!(e.target.closest&&e.target.closest('a,button,.wc,.sv')))});
  document.addEventListener('pointerleave',()=>{dot.classList.remove('on');ring.classList.remove('on')});
 }else if(ambient){ambient.style.opacity='.4'}
@@ -234,11 +237,11 @@ const soft={type:'spring',stiffness:210,damping:24,mass:.9};
 const tilt={type:'spring',stiffness:190,damping:24,mass:.8,transformPerspective:1100};
 if(fine&&!reduce){
  $$('[data-mag]').forEach(el=>{
-  el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();animate(el,{x:(e.clientX-r.left-r.width/2)*.22,y:(e.clientY-r.top-r.height/2)*.3},soft)});
-  el.addEventListener('pointerleave',()=>animate(el,{x:0,y:0},{type:soft}));
+  el.addEventListener('pointermove',onMove(e=>{const r=el.getBoundingClientRect();animate(el,{x:(e.clientX-r.left-r.width/2)*.22,y:(e.clientY-r.top-r.height/2)*.3},soft)}));
+  el.addEventListener('pointerleave',()=>animate(el,{x:0,y:0},soft));
  });
  $$('.wc').forEach(c=>{
-  c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();animate(c,{rotateX:-(e.clientY-r.top-r.height/2)/r.height*6,rotateY:(e.clientX-r.left-r.width/2)/r.width*7},tilt)});
+  c.addEventListener('pointermove',onMove(e=>{const r=c.getBoundingClientRect();animate(c,{rotateX:-(e.clientY-r.top-r.height/2)/r.height*6,rotateY:(e.clientX-r.left-r.width/2)/r.width*7},tilt)}));
   c.addEventListener('pointerenter',()=>animate(c,{y:-7},soft));
   c.addEventListener('pointerleave',()=>animate(c,{y:0,rotateX:0,rotateY:0},tilt));
  });

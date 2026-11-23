@@ -31,8 +31,8 @@
 
   --glass-tint:linear-gradient(155deg,rgba(255,255,255,.84),rgba(255,255,255,.58));
   --glass-tint-strong:linear-gradient(155deg,rgba(255,255,255,.94),rgba(255,255,255,.76));
-  --glass-blur:26px;
-  --glass-sat:190%;
+  --glass-blur:22px;
+  --glass-sat:178%;
   --glass-scale:1;
   --shadow-glass:0 26px 60px -32px rgba(30,45,20,.32),0 4px 14px -9px rgba(30,45,20,.14);
 
@@ -60,14 +60,14 @@
 @property --sheen-angle{syntax:'<angle>';initial-value:0deg;inherits:false}
 
 *,*::before,*::after{box-sizing:border-box;margin:0}
-html{background:var(--paper);-webkit-text-size-adjust:100%}
+html{background:var(--paper);-webkit-text-size-adjust:100%;overscroll-behavior:contain}
 @media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis.lenis-stopped{overflow:hidden}
 body{
   color:var(--ink);background:var(--paper);
   font:400 17px/1.62 var(--fb);
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
-  overflow-x:hidden;min-height:100svh;
+  overflow-x:hidden;overscroll-behavior-y:contain;min-height:100svh;
 }
 body::before{
   content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
@@ -76,7 +76,7 @@ body::before{
 }
 /* fine print grain — SVG turbulence, not a gradient */
 body::after{
-  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.036;
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.026;
   mix-blend-mode:multiply;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
@@ -329,7 +329,7 @@ h1{
 /* ==========================================================================
    Sections & shared heads
    ========================================================================== */
-section{padding-block:clamp(88px,10vw,152px)}
+section{padding-block:clamp(88px,10vw,152px);content-visibility:auto;contain-intrinsic-size:100vh}
 .sec-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.7fr);gap:clamp(24px,4vw,72px);align-items:end;margin-bottom:clamp(40px,5vw,72px)}
 .sec-label{display:flex;align-items:center;gap:12px;margin-bottom:20px;font:500 12px/1 var(--fm);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
 .sec-label::before{content:"";width:24px;height:2px;background:var(--acid-deep)}
@@ -350,7 +350,7 @@ h2{font:400 clamp(40px,6.2vw,92px)/.98 var(--fd);letter-spacing:-.02em;text-wrap
 
 /* work — case files */
 .stack{display:grid;gap:18px}
-.wc{--g:var(--acid);position:relative;display:grid;gap:26px;padding:clamp(26px,3.4vw,48px);border-radius:24px;overflow:hidden;perspective:1100px;transform-style:preserve-3d;will-change:transform;transition:box-shadow .7s var(--e)}
+.wc{--g:var(--acid);position:relative;display:grid;gap:26px;padding:clamp(26px,3.4vw,48px);border-radius:24px;overflow:hidden;perspective:1100px;transform-style:preserve-3d;will-change:transform,opacity;transition:box-shadow .7s var(--e)}
 .wc:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.92),inset 0 0 0 .5px rgba(255,255,255,.34),0 0 0 .5px rgba(18,23,18,.06),0 34px 70px -34px rgba(30,45,20,.4)}
 .wc::after{content:"";position:absolute;width:54%;aspect-ratio:1;right:-18%;top:-52%;border-radius:50%;background:radial-gradient(closest-side,var(--g),transparent);opacity:.2;filter:blur(50px);pointer-events:none}
 .wc>*{z-index:1}
