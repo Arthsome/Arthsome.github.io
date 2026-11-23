@@ -152,8 +152,11 @@ const stats=[[2,'Public analyses'],[1,'CVE with detection rules'],[10,'Top CVSS 
 <footer><div class="wrap"><div class="fl"><span>© 2026 Vance</span><span>Independent security research</span><a href="#top">Back to top ↑</a></div><div class="wm" aria-hidden="true"><span class="wm-mark" set:html={MARK}></span><span>Vance</span></div></div></footer>
 
 <script>
-import {gsap} from 'gsap';import {ScrollTrigger} from 'gsap/ScrollTrigger';import Lenis from 'lenis';
-gsap.registerPlugin(ScrollTrigger);
+import {gsap} from 'gsap';import {ScrollTrigger} from 'gsap/ScrollTrigger';import {SplitText} from 'gsap/SplitText';import {CustomEase} from 'gsap/CustomEase';import Lenis from 'lenis';import '../scripts/motion.js';
+const animate=(...args)=>window.Motion.animate(...args);
+gsap.registerPlugin(ScrollTrigger,SplitText,CustomEase);
+CustomEase.create('vance-out','0.22,1,0.36,1');
+ScrollTrigger.config({ignoreMobileResize:true});
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,fine=matchMedia('(pointer:fine)').matches;
 
@@ -191,11 +194,13 @@ if(links&&pill){
 /* text split — keeps markup intact by splitting only plain-heading elements */
 function split(el,mode){const txt=el.textContent.trim();el.setAttribute('aria-label',txt);el.textContent='';const out=[],words=txt.split(/\s+/);words.forEach((w,i)=>{const ws=document.createElement('span');ws.className=mode==='word'?'w sw':'w';ws.setAttribute('aria-hidden','true');if(mode==='word'){ws.textContent=w;out.push(ws)}else{[...w].forEach(ch=>{const c=document.createElement('span');c.className='c';c.textContent=ch;ws.append(c);out.push(c)})}el.append(ws);if(i<words.length-1)el.append(' ')});return out}
 const stmtWords=split($('#stmt'),'word');
-const rhs=$$('.rh').map(h=>split(h,'word'));
+/* headings are split later with GSAP SplitText, after the display font loads */
 
 /* smooth scroll + anchors */
 let lenis=null;
-if(!reduce){lenis=new Lenis({lerp:.09,wheelMultiplier:1,smoothWheel:true});lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0)}
+/* Lenis drives the scroll position; GSAP's ticker drives Lenis, so both stay
+   on one frame loop instead of competing rAF loops. */
+if(!reduce){lenis=new Lenis({lerp:.085,wheelMultiplier:1,smoothWheel:true,syncTouch:false,autoRaf:false});lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0)}
 $$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const id=a.getAttribute('href');const t=$(id);if(!t)return;e.preventDefault();lenis?lenis.scrollTo(t,{offset:-24,duration:1.4}):t.scrollIntoView({behavior:'smooth'})}));
 
 /* chrome state */
@@ -208,7 +213,7 @@ const tabs=$$('[data-tab]'),drop=$('.tab-drop'),bar=$('.tabbar');
 function moveDrop(el,instant){
  if(!drop||!bar||!el||getComputedStyle(bar).display==='none')return;
  const b=bar.getBoundingClientRect(),a=el.getBoundingClientRect();
- gsap.to(drop,{x:a.left-b.left,width:a.width,opacity:1,duration:instant?0:.55,ease:instant?'none':'back.out(1.3)',overwrite:true});
+ animate(drop,{x:a.left-b.left,width:a.width,opacity:1},instant||reduce?{duration:0}:{type:'spring',stiffness:260,damping:22,mass:.7});
 }
 function setActive(id){
  tabs.forEach(a=>a.classList.toggle('is-active',a.dataset.tab===id));
@@ -223,16 +228,27 @@ if('IntersectionObserver'in window){
 /* button press ripple — feedback starts on pointer-down */
 if(fine&&!reduce){document.addEventListener('pointerdown',e=>{const b=e.target.closest&&e.target.closest('.btn');if(!b)return;const r=b.getBoundingClientRect(),s=document.createElement('span');s.className='ripple';s.style.left=(e.clientX-r.left)+'px';s.style.top=(e.clientY-r.top)+'px';b.append(s);s.addEventListener('animationend',()=>s.remove())});}
 
-/* material interactions: magnetic buttons, 3D-tilt case files */
-if(fine){
- $$('[data-mag]').forEach(el=>{const qx=gsap.quickTo(el,'x',{duration:.6,ease:'power3'}),qy=gsap.quickTo(el,'y',{duration:.6,ease:'power3'});
-  el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();qx((e.clientX-r.left-r.width/2)*.22);qy((e.clientY-r.top-r.height/2)*.3)});
-  el.addEventListener('pointerleave',()=>{qx(0);qy(0)})});
- if(!reduce)$$('.wc').forEach(c=>{
-  const rx=gsap.quickTo(c,'rotationX',{duration:.55,ease:'power3'}),ry=gsap.quickTo(c,'rotationY',{duration:.55,ease:'power3'});
-  c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();ry((e.clientX-r.left-r.width/2)/r.width*7);rx(-(e.clientY-r.top-r.height/2)/r.height*6)});
-  c.addEventListener('pointerenter',()=>gsap.to(c,{y:-6,duration:.5,ease:'power3.out'}));
-  c.addEventListener('pointerleave',()=>{rx(0);ry(0);gsap.to(c,{y:0,duration:.7,ease:'power3.out'})});
+/* Motion owns interruptible UI: springs start from the live value, so a
+   gesture can be reversed mid-flight. GSAP stays on scroll choreography. */
+const soft={type:'spring',stiffness:210,damping:24,mass:.9};
+const tilt={type:'spring',stiffness:190,damping:24,mass:.8,transformPerspective:1100};
+if(fine&&!reduce){
+ $$('[data-mag]').forEach(el=>{
+  el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();animate(el,{x:(e.clientX-r.left-r.width/2)*.22,y:(e.clientY-r.top-r.height/2)*.3},soft)});
+  el.addEventListener('pointerleave',()=>animate(el,{x:0,y:0},{type:soft}));
+ });
+ $$('.wc').forEach(c=>{
+  c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();animate(c,{rotateX:-(e.clientY-r.top-r.height/2)/r.height*6,rotateY:(e.clientX-r.left-r.width/2)/r.width*7},tilt)});
+  c.addEventListener('pointerenter',()=>animate(c,{y:-7},soft));
+  c.addEventListener('pointerleave',()=>animate(c,{y:0,rotateX:0,rotateY:0},tilt));
+ });
+ $$('.sv').forEach(el=>{const h=$('h3',el);
+  el.addEventListener('pointerenter',()=>animate(h,{x:16},soft));
+  el.addEventListener('pointerleave',()=>animate(h,{x:0},soft));
+ });
+ $$('.pj').forEach(el=>{const a=$('.arr',el);
+  el.addEventListener('pointerenter',()=>animate(a,{rotate:45,scale:1.06},soft));
+  el.addEventListener('pointerleave',()=>animate(a,{rotate:0,scale:1},soft));
  });
 }
 
@@ -250,7 +266,23 @@ else{
    .from('.nav .bar',{yPercent:-150,opacity:0,duration:1.2},.2)
    .from('.tabbar',{yPercent:140,opacity:0,duration:1.2},.6);
 
-  rhs.forEach(ws=>gsap.from(ws,{yPercent:45,opacity:0,duration:1.1,ease:'expo.out',stagger:.07,scrollTrigger:{trigger:ws[0].parentElement,start:'top 88%',once:true}}));
+  /* every heading is split after the font loads: one masked word lands per
+     slice of scroll progress, so the title assembles as you move down */
+  const buildWordReveals=()=>{
+   $$('.rh,.wc h3,.sv h3,.pj strong,.step h3').forEach(el=>{
+    if(el.dataset.split)return;
+    el.dataset.split='1';
+    const parts=SplitText.create(el,{type:'words',mask:'words',wordsClass:'gs-word'});
+    gsap.from(parts.words,{
+     yPercent:112,opacity:0,ease:'none',
+     stagger:{each:.42,from:'start'},
+     scrollTrigger:{trigger:el,start:'top 92%',end:'bottom 45%',scrub:1}
+    });
+   });
+   ScrollTrigger.refresh();
+  };
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(buildWordReveals);
+  else buildWordReveals();
   $$('.sec-label,.sub,.contact-note').forEach(el=>gsap.from(el,{autoAlpha:0,y:18,duration:.9,ease:'expo.out',scrollTrigger:{trigger:el,start:'top 92%',once:true}}));
 
   gsap.to(stmtWords,{color:'#121712',ease:'none',stagger:.2,scrollTrigger:{trigger:'#stmt',start:'top 82%',end:'bottom 48%',scrub:true}});
@@ -263,8 +295,6 @@ else{
    .to('.plate',{y:-64,scale:.9,'--glass-blur':'40px',ease:'none'},0);
   gsap.fromTo('.contact-panel',{scale:.93,'--glass-blur':'14px'},{scale:1,'--glass-blur':'32px',ease:'none',scrollTrigger:{trigger:'.contact-panel',start:'top bottom',end:'center center',scrub:1}});
   gsap.to('.contact-panel',{scale:.97,'--glass-blur':'20px',ease:'none',scrollTrigger:{trigger:'.contact-panel',start:'center center',end:'bottom top',scrub:1}});
-  $$('.wc').forEach(c=>gsap.fromTo(c,{scale:.965},{
-   scale:1,ease:'none',scrollTrigger:{trigger:c,start:'top 95%',end:'top 45%',scrub:1}}));
   gsap.to('.wc .big',{x:-34,ease:'none',scrollTrigger:{trigger:'.stack',start:'top bottom',end:'bottom top',scrub:1}});
   gsap.to('.wm',{xPercent:-2,yPercent:26,ease:'none',scrollTrigger:{trigger:'footer',start:'top bottom',end:'bottom bottom',scrub:1}});
   gsap.from('.wm',{opacity:0,duration:1.2,ease:'expo.out',scrollTrigger:{trigger:'footer',start:'top 92%',once:true}});
@@ -285,6 +315,5 @@ else{
     idle&&idle.kill();idle=gsap.delayedCall(.18,()=>gsap.to(loop,{timeScale:1,duration:1.1,ease:'power2.out'}));
    });
   }
-  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>ScrollTrigger.refresh());
 }
 </script></body></html>
